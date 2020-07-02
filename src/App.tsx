@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import LottoIndex from './components/lottoCRUD/lottoIndex';
+import Auth from './components/AuthInfo/Auth';
 import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // const App: React.FunctionComponent = () => {
@@ -12,16 +14,24 @@ import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 //   );
 // };
 
-export default class App extends React.Component {
+export default class App extends React.Component { 
+
   render() {
+
+    const protectedViews = () => {
+      return (sessionToken === localStorage.getItem('token')? <LottoIndex token={sessionToken}/> : <Auth updateToken={updateToken}/>)
+    }
+   
     return (
       <Router>
-        <nav>
+        {/* <nav>
           <Link to="/"></Link>
         </nav>
         <Switch>
           <Route exact path="/" />
-        </Switch>
+        </Switch> */}
+        {protectedViews()}
+
       </Router>
     );
   }
