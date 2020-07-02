@@ -5,16 +5,30 @@ import LottoTable from './lottoTable';
 import LottoEdit from './lottoEdit';
 // import {Container, Row, Col} from 'reactstrap';
 
-export default class LottoIndex extends React.Component {
-    constructor(props){
+type acceptedProps = {
+    token: string | any
+}
+
+type valueTypes = {
+    lottoNum: string,
+    nameOfLotto: string,
+    lottoPot: string,
+    location: string,
+    dataTable: []
+}
+
+
+export default class LottoIndex extends React.Component<acceptedProps, valueTypes> {
+    constructor(props: acceptedProps){
         super(props);
         this.state = {
             lottoNum: '',
             nameOfLotto: '',
             lottoPot: '',
             location: '',
-            owner_id: '',
-            userId: '', //???
+            dataTable: [],
+            //owner_id: '',
+            //userId: '', //???
         }
     }
 
@@ -27,15 +41,15 @@ export default class LottoIndex extends React.Component {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
-                // 'Authorization': this.props.token
+                'Authorization': this.props.token
             })
         }).then(res => res.json())
-        .then(json => {
-            console.log(json);
+        .then(lottoData => {
+            console.log(lottoData);
             this.setState({
-                data: json.data,
+                dataTable: lottoData,
             })
-            console.log(this.state.data);//able to set 'data' for all columns names?
+            console.log(this.state.dataTable);//able to set 'data' for all columns names?
         })
     }
 

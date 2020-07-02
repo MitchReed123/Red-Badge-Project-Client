@@ -2,8 +2,8 @@
 import React, {useState, useEffect} from "react";
 
 //number needs to be generated
-export default class LottoCreate extends React.Component {
-    constructor(props){
+export default class LottoCreate extends React.Component<{}> {
+    constructor(props: {}){
         super(props);
         this.state = {
             lottoNum: '',
