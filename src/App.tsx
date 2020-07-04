@@ -8,6 +8,8 @@ import Sidebar from "./components/router-dom/Sidebar";
 import Auth from "./components/AuthInfo/Auth";
 import Lotto from "./components/lottoCRUD/lottoIndex";
 import Sitebar from "./components/lottoCRUD/Sitebar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Testing from "./components/destinationsCRUD/testSearch";
 
 type valueTypes = {
   setUsername: string | any;
@@ -77,6 +79,7 @@ export default class App extends React.Component<{}, valueTypes> {
     this.setState({ setToken: "" });
     this.setState({ setMessage: "" });
     this.setState({ setUsername: "" });
+    this.setState({ setUserRole: "" });
     sessionStorage.clear();
   };
 
@@ -95,7 +98,12 @@ export default class App extends React.Component<{}, valueTypes> {
 
   protectedViewsTwo = () => {
     return this.state.setToken === localStorage.getItem("token") ? (
-      <DestinationIndex token={this.state.setToken} />
+      <DestinationIndex
+        token={this.state.setToken}
+        updateUsername={this.updateUsername}
+        updateMessage={this.updateMessage}
+        updateUserRole={this.updateUserRole}
+      />
     ) : (
       <Auth
         token={this.updateToken}
@@ -115,7 +123,14 @@ export default class App extends React.Component<{}, valueTypes> {
         updateUserRole={this.updateUserRole}
       />
     ) : (
-      <LottoIndex token={this.state.setToken} />
+      // <LottoIndex token={this.state.setToken} />
+      // setup new route for the user create on admin panel where it doesnt give a new token
+      <Auth
+        token={this.updateToken}
+        updateUsername={this.updateUsername}
+        updateMessage={this.updateMessage}
+        updateUserRole={this.updateUserRole}
+      />
     );
   };
 
@@ -127,7 +142,7 @@ export default class App extends React.Component<{}, valueTypes> {
           <Sidebar
             protectedViews={this.protectViewsOne}
             token={this.state.setToken}
-            protectedViews2={this.protectedViewsTwo}
+            protectedViewsTwo={this.protectedViewsTwo}
             protectViewsThree={this.protectViewsThree}
           />
           {/* {this.adminAccess()} */}
