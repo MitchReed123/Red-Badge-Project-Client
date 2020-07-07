@@ -10,6 +10,8 @@ import Lotto from "./components/lottoCRUD/lottoIndex";
 import Sitebar from "./components/lottoCRUD/Sitebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Testing from "./components/destinationsCRUD/testSearch";
+import UserEdit from "./components/adminCRUD/userEdit";
+// import ResetPass from "../src/components/router-dom/updatePassword";
 
 type valueTypes = {
   setUsername: string | any;
@@ -133,6 +135,19 @@ export default class App extends React.Component<{}, valueTypes> {
       />
     );
   };
+
+  // protectedViewsFour = () => {
+  //   return this.state.setToken === localStorage.getItem("token") ? (
+  //     <UserEdit />
+  //   ) : (
+  //     <Auth
+  //       token={this.updateToken}
+  //       updateUsername={this.updateUsername}
+  //       updateMessage={this.updateMessage}
+  //       updateUserRole={this.updateUserRole}
+  //     />
+  //   );
+  // };
 
   render() {
     return (

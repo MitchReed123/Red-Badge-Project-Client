@@ -158,7 +158,7 @@ export default class Destinations extends React.Component<
           <Container>
             <Col>
               <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                <FormLabel>Testing This</FormLabel>
+                <FormLabel>Add A Lotto Location!</FormLabel>
                 <div>
                   <TextField
                     label="Lotto Location Name"
