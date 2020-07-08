@@ -4,19 +4,29 @@ import React from "react";
 import destinationTable from "../destinationsCRUD/destinationTable";
 import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
 import DestinationCreate from "../destinationsCRUD/destinationCreate";
+import UserEdit from "./userEdit";
+import DestinationEdit from "./destinationEdit";
+import "./adminIndex.css";
+
 
 //Style imports
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-// import Table from "@material-ui/core/Table";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import TableHead from "@material-ui/core/TableHead";
-// import TableRow from "@material-ui/core/TableRow";
-// import Paper from "@material-ui/core/Paper";
-import { Table, Button, Row, Col, Container, Label } from "reactstrap";
-import { userInfo } from "os";
+import { withStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import TablePagination from '@material-ui/core/TablePagination';
+
+import DeleteIcon from '@material-ui/icons/DeleteSharp';
+import EditSharpIcon from '@material-ui/icons/EditSharp';
+
+import Tooltip from '@material-ui/core/Tooltip';
+
+import { Button, Row, Col, Container, Label, Form, Input } from "reactstrap";
 
 type acceptedProps = {
   token: any;
@@ -27,38 +37,123 @@ type acceptedProps = {
 
 type valueTypes = {
   userTable: [];
-  destinationTable: string[];
+  destinationTable: [];
+  setUpdateUser: {};
+  setUpdateLoco: {};
   username: string;
   password: string;
+  setUpdateActive: boolean;
 };
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     "& .MuiTextField-root": {
-//       margin: theme.spacing(1),
-//       width: 200,
-//     },
-//   },
-// }));
-// const StyledTableCell = withStyles((theme) => ({
-//   head: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
+//STYLING 
+const styles = {
+  userRoot: {
+    width: "1000px",
+    backgroundColor: "#f2f2f2",
+    fontFamily: "MOMCAKE-BOLD",
+    border: "10px solid #4536b3"
+  },
 
-// const StyledTableRow = withStyles((theme) => ({
-//   root: {
-//     "&:nth-of-type(odd)": {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//   },
-// }))(TableRow);
+  locationRoot: {
+    width: "1000px",
+    backgroundColor: "#fdb20d"
+  },
+  
+  userContainer: {
+    maxHeight: "500px",
+    backgroundColor: "#f2f2f2",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px"
+  },
 
-export default class Admin extends React.Component<acceptedProps, valueTypes> {
+  locationContainer: {
+    maxHeight: "500px",
+    backgroundColor: "#4536b3"
+  },
+
+  tableHeader: {
+    width: "auto",
+    backgroundColor: "#4536b3",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px",
+    color: "#f2f2f2"
+  },
+
+  newUserForm: {
+    backgroundColor: "#4536b3",
+    width: "50%",
+    height: "300px",
+    marginRight: "30%",
+    marginLeft: "30%", 
+  },
+
+  toolTip: {
+    backgroundColor: "#f2f2f2"
+  }
+
+};
+
+// MATERIAL UI FIXED TABLES
+
+// USER TABLE
+interface userColumn {
+  id: 'username' | 'password' | 'firstName' | 'lastName' | 'userRole' | 'update' | 'delete';
+  label: string;
+  minWidth?: number;
+  align?: 'right';
+  format?: (value: number) => string;
+}
+
+const usercolumns: userColumn[] = [
+  { id: 'username', label: 'Username', minWidth: 150 },
+  // { id: 'password', label: 'Password', minWidth: 100 },
+  { id: 'firstName', label: 'First Name', minWidth: 150 },
+  { id: 'lastName', label: 'Last Name', minWidth: 150 },
+  { id: 'userRole', label: 'User Role', minWidth: 150 },
+  { id: 'update', label: 'Update', minWidth: 150 },
+  { id: 'delete', label: 'Delete', minWidth: 150 },
+
+];
+
+// LOCATION TABLE
+interface locationColumn {
+  id: 'lottoLocation' | 'lottoAddress' | 'update' | 'delete';
+  label: string;
+  minWidth?: number;
+  align?: 'right';
+  format?: (value: number) => string;
+}
+
+const locationcolumns: locationColumn[] = [
+  { id: 'lottoLocation', label: 'Lotto Location', minWidth: 150 },
+  { id: 'lottoAddress', label: 'Lotto Address', minWidth: 150 },
+  { id: 'update', label: 'Update', minWidth: 150 },
+  { id: 'delete', label: 'Delete', minWidth: 150 },
+
+];
+// interface Data {
+//   username: string;
+//   password: string;
+//   firstName: string;
+//   lastName: string;
+  
+// }
+
+// function createData(username: string, password: string, firstName: string, lastName: string): Data {
+//   return { username, password, firstName, lastName };
+// }
+
+// const rows = [
+//   createData('India', 'IN', 'tiger', 'please'),
+//   createData('China', 'CN', 'tiger', 'tiger'),
+//   createData('Italy', 'IT', 'tiger', 'tiger'),
+//   createData('United States', 'US', 'tiger', 'tiger')
+// ];
+
+
+// ADMIN COMPONENT
+
+class Admin extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
     this.state = {
@@ -66,8 +161,55 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
       destinationTable: [],
       username: "",
       password: "",
+      setUpdateUser: {},
+      setUpdateLoco: {},
+      setUpdateActive: false,
     };
   }
+
+  //ALL THE STUFF FOR UPDATING
+  editUpdateUser = (users: any) => {
+    console.log(users);
+    this.setState({ setUpdateUser: users });
+  };
+
+  editUpdateLocation = (locos: any) => {
+    console.log(locos);
+    this.setState({ setUpdateLoco: locos });
+  };
+
+  updateOn = () => {
+    this.setState({ setUpdateActive: true });
+  };
+
+  updateOnDest = () => {
+    this.setState({ setUpdateActive: true });
+  };
+
+  updateOff = () => {
+    this.setState({ setUpdateActive: false });
+  };
+
+  updateOffDest = () => {
+    this.setState({ setUpdateActive: false });
+  };
+
+  // MATERIAL UI TABLE PAGINATION
+
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  // handleChangePage = (event: unknown, newPage: number) => {
+  //   this.setState({setPage(newPage)});
+  // };
+
+  // handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   this.setState({setRowsPerPage(+event.target.value);
+  //     setPage(0)});
+  // };
+
+
+
   //ADDS DELETE BUTTON TO USER TABLE
   deleteUser = (user: any) => {
     console.log("id", user.id);
@@ -79,7 +221,17 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
       }),
     }).then(() => this.fetchUsers());
   };
+  //ADD DELETE BUTTON TO DESTINATION TABLE
+  deleteLoco = (loco: any) => {
+    console.log("id", loco.id);
 
+    fetch(`http://localhost:3000/destination/${loco.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    }).then(() => this.fetchDestinations());
+  };
   // FETCHING ALL USER TO DISPLAY ON TABLE
   // THIS SHOULD HELP YOU MIZUE
   fetchUsers = () => {
@@ -91,7 +243,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
     })
       .then((res) => res.json())
       .then((userData) => {
-        console.log("Pure user data", userData.user[0].username);
+        console.log("Pure user data", userData);
         this.setState({
           userTable: userData.user,
         });
@@ -100,19 +252,19 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
   };
 
   //getting destination information
-  DestinationInfoFetch = () => {
+  fetchDestinations = () => {
     fetch("http://localhost:3000/destination/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: this.props.token,
+        // Authorization: this.props.token,
       },
     })
       .then((res) => res.json())
       .then((destinationInfo) => {
         console.log("destinations", destinationInfo);
         this.setState({
-          destinationTable: destinationInfo,
+          destinationTable: destinationInfo.destinations,
         });
         console.log("Destination state variable", this.state.destinationTable);
       });
@@ -121,23 +273,26 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
   handleSubmit = (event: any) => {
     console.log(this.state.username, this.state.password);
     event.preventDefault();
-    fetch(`http://localhost/user/signup`, {
+    fetch("http://localhost:3000/user/AdminSignUp", {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
       }),
-      headers: new Headers({
+      headers: {
         "Content-Type": "application/json",
-      }),
+      },
     })
       .then((response) => response.json())
       .then((data) => {
-        this.props.token(data.sessionToken);
+        // this.props.token(data.sessionToken);
         console.log(data);
-        this.props.updateUsername(data.user.username);
-        this.props.updateMessage(data.message);
-        this.props.updateUserRole(data.user.userRole);
+        // this.props.updateUsername(data.user.username);
+        // this.props.updateMessage(data.message);
+        // this.props.updateUserRole(data.user.userRole);
+        this.setState({ username: "" });
+        this.setState({ password: "" });
+        this.fetchUsers();
       });
   };
 
@@ -146,31 +301,59 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
       return (
         <tr key={index}>
           <td>{user.username}</td>
-          <td>{user.password}</td>
+          {/* <td>{user.password}</td> */}
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td>{user.userRole}</td>
           <td>
-            <Button
+          <Tooltip title="Update User Info" arrow placement="bottom" style={styles.toolTip}> 
+            <EditSharpIcon fontSize="large"
+              onClick={() => {
+                this.editUpdateUser(user);
+                this.updateOn();
+              }}
+            />
+          </Tooltip>
+          </td>
+          <td>
+          <Tooltip title="Delete User" arrow placement="bottom">
+            <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteUser(user);
-              }}
-            >
-              delete
-            </Button>
+              }} />
+          </Tooltip>    
           </td>
         </tr>
       );
     });
   };
 
-  // destinationWrapper = () => {
-  //   return this.state.destinationTable.map((destination: any, index) => {
-  //     return (
-  //       <tr key={index}>
-  //         <td>{destination.lottoLocation}</td>
-  //         <td>{destination.lottoAddress}</td>
-  //       </tr>
-  //     );
-  //   });
-  // };
+  destinationWrapper = () => {
+    return this.state.destinationTable.map((location: any, index) => {
+      return (
+        <tr key={index}>
+          <td>{location.lottoLocation}</td>
+          <td>{location.lottoAddress}</td>
+          <td>
+            <EditSharpIcon fontSize="large"
+              onClick={() => {
+                this.editUpdateLocation(location);
+                this.updateOnDest();
+              }}
+            />
+             
+          </td>
+          <td>
+            <DeleteIcon fontSize="large"
+              onClick={() => {
+                this.deleteLoco(location);
+              }}
+            />
+          </td>
+        </tr>
+      );
+    });
+  };
 
   componentWillMount() {
     console.log("Im about to mount");
@@ -180,71 +363,244 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
     console.log("component mounted");
     this.fetchUsers();
     this.userWrapper();
-    // this.DestinationInfoFetch();
-    // this.destinationWrapper();
+    this.fetchDestinations();
+    this.destinationWrapper();
     console.log(this.userWrapper());
     // return userMapper();
     // this.DestinationInfoFetch();
   }
+  //This is for the customer username information that we have in localstorage
+  Welcoming() {
+    return localStorage.getItem("message") === null ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Sign Up or Login to see your Lottos
+      </h1>
+    ) : localStorage.getItem("message") === "user succesfully logged in" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        {localStorage.getItem("username")}'s Admin Panel
+      </h1>
+    ) : localStorage.getItem("message") === "user created" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Welcome,{localStorage.getItem("username")}
+      </h1>
+    ) : (
+      "null"
+    );
+  }
+
+  //RENDER
 
   render() {
     return (
       <div>
-        <h1>Testing</h1>
+        {/* <Row> */}
+          <h1 id="welcome-message">{this.Welcoming()}</h1>
+        {/* </Row> */}
 
         {/* {this.userInfoFetch()}
 
         {this.DestinationInfoFetch()} */}
+        <Row>
+          <Col>
+            {/* MATERIAL UI FIXED TABLE */}
+            <Paper style={styles.userRoot}>
+            <TableContainer style={styles.userContainer}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {usercolumns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        // style={{ minWidth: column.minWidth }}
+                        style={styles.tableHeader}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody >
+                  {this.userWrapper()}
+                  {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number' ? column.format(value) : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })} */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            /> */}
+          </Paper>
+          </Col>
+          <Col>
+          {/* ADD NEW USER FORM   */}
+          {/* <h1 id="signup-newuser">Sign up a New User</h1> */}
+          <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} style={styles.newUserForm}>
+            <div>
+              <h1 id="add-newuser">Add a New User</h1>
+              <Input id="newuser-input"
+                // id="outline-margin-normal"
+                type="text"
+                name="username"
+                placeholder="Username"
+                // label="Username"
+                // defaultValue="Username"
+                // variant="outlined"
+                onChange={(e) => this.setState({ username: e.target.value })}
+                value={this.state.username}
+              />
+              <Input id="newuser-input"
+                type="text"
+                name="username"
+                placeholder="Password"
+                // id="outlined-margin-normal"
+                // label="Password"
+                // defaultValue="Password"
+                // variant="outlined"
+                onChange={(e) => this.setState({ password: e.target.value })}
+                value={this.state.password}
+              />
+              <button type="submit">Add New User</button>
+            </div>
+          </Form>
+          </Col>
+        </Row>
+        <Row>
+          {/* DESTINATION TABLE */}
+        <Paper style={styles.locationRoot}>
+            <TableContainer style={styles.locationContainer}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {locationcolumns.map((column) => (
+                      <TableCell 
+                        key={column.id}
+                        align={column.align}
+                        // style={{ minWidth: column.minWidth }}
+                        style={styles.tableHeader}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody >
+                  {this.destinationWrapper()}
+                  {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number' ? column.format(value) : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })} */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            /> */}
+          </Paper>
+          {/* DESTINATION TABLE */}
+          {/* <Container id="destination-table">
+            <Row>
+              <Col md="11">
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Location</th>
+                      <th>Address</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>{this.fetchUsers}</tbody>
+                  This will also be apart of what you need to do
+                  <tbody>{this.destinationWrapper()}</tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Container> */}
+        </Row>
+        {this.state.setUpdateActive ? (
+          <UserEdit
+            updateOff={this.updateOff}
+            token={this.props.token}
+            fetchUsers={this.fetchUsers}
+            setUpdateUser={this.state.setUpdateUser}
+          />
+        ) : (
+          <></>
+        )}
+        {this.state.setUpdateActive ? (
+          <DestinationEdit
+            updateOff={this.updateOff}
+            token={this.props.token}
+            fetchDestination={this.fetchDestinations}
+            setUpdateLoco={this.state.setUpdateLoco}
+          />
+        ) : (
+          <></>
+        )}
+{/* 
+ USER TABLE 
+ <Container id="user-table">
+            <Row>
+              <Col md="8">
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Passwords</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>User Role</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>{this.fetchUsers}</tbody>
+                  This will also be apart of what you need to do
+                  <tbody>{this.userWrapper()}</tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Container> */}
 
-        <h1>Sign up a new User</h1>
-        <form noValidate autoComplete="off">
-          <div>
-            <TextField
-              error
-              id="outline-error"
-              label="Error"
-              defaultValue="Username"
-              variant="outlined"
-            />
-            <TextField
-              error
-              id="outlined-error-helper-text"
-              label="Error"
-              defaultValue="Password"
-              helperText="Incorrect Entry"
-              variant="outlined"
-            />
-          </div>
-        </form>
-        <Table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Passwords</th>
-            </tr>
-          </thead>
-          <tbody>{this.fetchUsers}</tbody>
-          {/* This will also be apart of what you need to do */}
-          <tbody>{this.userWrapper()}</tbody>
-        </Table>
-        <Table>
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Address</th>
-            </tr>
-          </thead>
-          {/* <tbody>{this.destinationWrapper()}</tbody> */}
-        </Table>
-        {/* <TableContainer component={Paper} />
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell></StyledTableCell>
-            </TableRow>
-          </TableHead>
-        </Table> */}
+
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Admin);

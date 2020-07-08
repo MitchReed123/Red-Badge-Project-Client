@@ -1,4 +1,5 @@
 import React from 'react';
+import "./lottoIndex.css";
 
 // import Sitebar from "./components/lottoCRUD/Sitebar";
 

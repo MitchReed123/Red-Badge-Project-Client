@@ -1,0 +1,12 @@
+#newlocation-input {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+}
+
+
+#location-table {
+    background-color: #a9dcbe;
+}

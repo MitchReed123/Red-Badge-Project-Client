@@ -14,7 +14,7 @@ type acceptedProps = {
 
 const styles = {
   root: {
-    backgroundColor: "#000240",
+    backgroundColor: "#231874",
     padding: "10px",
     fontFamily: "MOMCAKE-BOLD"
   },
@@ -81,7 +81,7 @@ class Sitebar extends React.Component<acceptedProps> {
           <Toolbar >
             {/* <Col md="6">  */}
               <Typography variant="h6" style={styles.typography} >
-                Logo Here 
+                <img width="70px" src={require('../../assests/3D test.png')} alt="logo" />
               </Typography>
              {/* </Col>  */}
              {/* <Col style={styles.button} md="6">  */}

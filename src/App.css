@@ -2,15 +2,22 @@
   text-align: center;
 }
 
-body {
+/* body {
   background-color: #000240;
-  /* background-color: #0EB8D2; */
+} */
+ 
+
+body{
+  background-image: url(./assests/background_blue.png);
+  /* background-image: url(./assests/background.svg); */
+  /* transition: 1s linear;
+  transform: rotate(360deg); */
 }
 
-@font-face {
+/* @font-face {
   font-family: Fenord Regular;
   src: url(./assests/FenordRegular.otf);
-}
+} */
 
 @font-face {
   font-family: MOMCAKE-BOLD;

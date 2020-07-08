@@ -1,0 +1,32 @@
+/* #messages {
+    color: #f2f2f2;
+    
+} */
+
+#welcome-message {
+    text-align: center;
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
+    margin-bottom: 40px;
+}
+
+#add-newuser {
+    color: #231874;
+}
+
+#user-table {
+    background-color: #a9dcbe;
+    width: 1000px;
+}
+
+#destination-table {
+    background-color: #fdb20d;
+}
+
+#newuser-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+}

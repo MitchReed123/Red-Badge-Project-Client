@@ -6,9 +6,7 @@ import {Container, Row, Col, Form} from 'reactstrap';
 
 import Signup from "./Signup";
 import Login from "./Login";
-// import LottoImage from '../../assests/lotto.png';
 
-// Lotto = "../../assests/lotto.png";
 
 const styles = {
   root: {
@@ -17,14 +15,14 @@ const styles = {
   },
 
   toggle: {
-    backgroundColor: "#0EB8D2",
-    width: "50%"
+    backgroundColor: "rgba(69, 54, 179, 0.7)",
+    width: "30%",
+    // marginLeft: "5px"
   },
 
   card: {
-    backgroundColor: "#0EB8D2",
-    width: "50%",
-    // LottoImage: `url(${LottoImage})`
+    // backgroundColor: "#f2f2f2",
+    width: "30%",
   },
 
   button: {
@@ -95,34 +93,31 @@ class Auth extends React.Component<acceptedProps, valueTypes> {
     return (
      
       <div style={styles.root}>
+        <Row className="title">
+          <p className="title-THE">The</p>
+          <p className="title-D">D</p><p className="title-daily">aily</p>
+          <p className="title-L">L</p><p className="title-lotto">otto</p>
+        </Row>
+        {/* <Row>
+          <p className="title-D">D</p><p className="title-daily">aily</p>
+        </Row>
         <Row>
+          <p className="title-L">L</p><p className="title-lotto">otto</p>
+        </Row> */}
+        <Row>
+          
           <Col md="6" style={styles.card}>
-            <h1>The Daily Lotto</h1>
-            {/* {this.Lotto = "../../assests/lotto.png"}
-            <img src="lotto.png"/> */}
-            <img width="400px" src={require('../../assests/lotto.png')} alt="logo" />
+            {/* <p className="title-THE">The</p>
+            <p className="title-daily">Daily</p>
+            <p className="title-lotto">Lotto</p> */}
+            <img width="400px" src={require('../../assests/lotto2.png')} alt="logo" />
           </Col>
           <Col md="6" style={styles.toggle}>
-            <Form>
+            <Form >
               <h1>{this.switcher()}</h1>
-              <button onClick={this.loginToggle}>Login or Signup</button>
+              {/* <button id="toggle-button" onClick={this.loginToggle}>Login or Signup</button> */}
+              <button id="toggle-button" onClick={this.loginToggle}>Already have an account? Login here!</button>
             </Form>
-          </Col>
-        </Row>
-      
-        <Row>
-          <h1>row</h1>
-          <Row>
-
-          <Col>
-            <h1>column</h1>
-          </Col>
-          </Row>
-          <Col>
-            <h1>column</h1>
-          </Col>
-          <Col>
-            <h1>column</h1>
           </Col>
         </Row>
         

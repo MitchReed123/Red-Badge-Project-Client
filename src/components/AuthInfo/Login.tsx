@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Form, FormGroup, Input, Label } from "reactstrap";
 
 type acceptedProps = {
   token: any;
@@ -54,13 +54,19 @@ export default class Login extends React.Component<acceptedProps, valueType> {
         <h1 className="auth-header">Login</h1>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Input className="auth-input"
+            <Label htmlFor="username" id="username">
+              Username
+            </Label>
+            <Input id="auth-input"
               onChange={(e) => this.setState({ username: e.target.value })}
               value={this.state.username}
             />
           </FormGroup>
           <FormGroup>
-            <Input className="auth-input"
+            <Label htmlFor="password" id="password">
+              Password
+            </Label>
+            <Input id="auth-input"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
             />
