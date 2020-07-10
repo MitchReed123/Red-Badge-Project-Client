@@ -93,10 +93,13 @@ class Auth extends React.Component<acceptedProps, valueTypes> {
     return (
      
       <div style={styles.root}>
-        <Row className="title">
-          <p className="title-THE">The</p>
+        <Row>
+          {/* <p className="title-THE">The</p>
           <p className="title-D">D</p><p className="title-daily">aily</p>
-          <p className="title-L">L</p><p className="title-lotto">otto</p>
+          <p className="title-L">L</p><p className="title-lotto">otto</p> */}
+          {/* <p className="title">The</p>
+          <p className="title">Daily</p>
+          <p className="title">Lotto</p> */}
         </Row>
         {/* <Row>
           <p className="title-D">D</p><p className="title-daily">aily</p>
@@ -107,10 +110,13 @@ class Auth extends React.Component<acceptedProps, valueTypes> {
         <Row>
           
           <Col md="6" style={styles.card}>
+          <p className="title">The</p>
+          <p className="title">Daily</p>
+          <p className="title">Lotto</p>
             {/* <p className="title-THE">The</p>
             <p className="title-daily">Daily</p>
             <p className="title-lotto">Lotto</p> */}
-            <img width="400px" src={require('../../assests/lotto2.png')} alt="logo" />
+            <img id="lotto-info" width="400px" src={require('../../assests/lotto2.png')} alt="logo" />
           </Col>
           <Col md="6" style={styles.toggle}>
             <Form >

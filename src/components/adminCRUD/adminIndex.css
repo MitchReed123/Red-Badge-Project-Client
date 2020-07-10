@@ -11,7 +11,17 @@
 }
 
 #add-newuser {
-    color: #231874;
+    color: #f2f2f2;
+}
+
+.table-header {
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
+    background-color: rgba(253, 178, 13, 0.8);
+}
+
+#tool-tip {
+    background-color: #fdb20d;
 }
 
 #user-table {

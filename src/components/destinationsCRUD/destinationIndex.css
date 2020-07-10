@@ -6,6 +6,11 @@
     border-radius: 1px;
 }
 
+#add-newlocation {
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
+    font-size: 30px;
+}
 
 #location-table {
     background-color: #a9dcbe;

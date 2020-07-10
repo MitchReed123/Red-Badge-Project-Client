@@ -13,6 +13,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import "./destinationIndex.css";
 
+
+
 type acceptedProps = {
   token: any;
   updateUsername: any;
@@ -31,12 +33,24 @@ type valueTypes = {
 //STYLING 
 const styles = {
   root: {
-    width: "800px",
-    backgroundColor: "#a9dcbe"
+    width: "1000px",
+    backgroundColor: "#f2f2f2",
+    border: "10px solid #4536b3"
   },
 
   container: {
-    maxHeight: "440px"
+    maxHeight: "500px",
+    backgroundColor: "#f2f2f2",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px"
+  },
+
+  tableHeader: {
+    width: "auto",
+    backgroundColor: "#4536b3",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px",
+    color: "#f2f2f2"
   },
 
   newLocationForm: {
@@ -139,14 +153,14 @@ class Destinations extends React.Component<
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
-            <Button
+            {/* <Button
               onClick={() => {
                 this.editUpdateLocation(location);
                 this.updateOn();
               }}
             >
               Update
-            </Button>
+            </Button> */}
           </td>
           <td></td>
         </tr>
@@ -184,6 +198,7 @@ class Destinations extends React.Component<
         <h1>{this.Welcoming()}</h1>
         <Row>
           <Col>
+          <h1 className="table-header">Places to Buy Lottery Tickets</h1>
              {/* MATERIAL UI FIXED TABLE */}
              <Paper style={styles.root}>
             <TableContainer style={styles.container}>
@@ -194,7 +209,8 @@ class Destinations extends React.Component<
                       <TableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth }}
+                        // style={{ minWidth: column.minWidth }}
+                        style={styles.tableHeader}
                       >
                         {column.label}
                       </TableCell>
@@ -240,10 +256,12 @@ class Destinations extends React.Component<
               <tbody>{this.destinationWrapper()}</tbody>
             </Table> */}
           </Col>
+          <Col>
           <Container>
-            <Col>
               <form noValidate autoComplete="off" onSubmit={this.handleSubmit} style={styles.newLocationForm}>
                 <Label id="add-newlocation">Add A Lotto Location!</Label>
+              {/* <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                <FormLabel>Add A Lotto Location!</FormLabel> */}
                 <div>
                   <Input id="newlocation-input"
                     type="text"
@@ -278,9 +296,10 @@ class Destinations extends React.Component<
                   <button type="submit">Add New Location!</button>
                 </div>
               </form>
-            </Col>
           </Container>
+          </Col>
         </Row>
+       
       </div>
     );
   }

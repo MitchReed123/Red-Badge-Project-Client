@@ -50,13 +50,14 @@ const styles = {
   userRoot: {
     width: "1000px",
     backgroundColor: "#f2f2f2",
-    fontFamily: "MOMCAKE-BOLD",
+    // fontFamily: "MOMCAKE-BOLD",
     border: "10px solid #4536b3"
   },
 
   locationRoot: {
     width: "1000px",
-    backgroundColor: "#fdb20d"
+    backgroundColor: "#f2f2f2",
+    border: "10px solid #4536b3"
   },
   
   userContainer: {
@@ -68,7 +69,9 @@ const styles = {
 
   locationContainer: {
     maxHeight: "500px",
-    backgroundColor: "#4536b3"
+    backgroundColor: "#f2f2f2",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px"
   },
 
   tableHeader: {
@@ -88,7 +91,10 @@ const styles = {
   },
 
   toolTip: {
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "white",
+    color: 'rgba(0, 0, 0, 0.87)',
+    // boxShadow: "shadows[1]",
+    fontSize: "11"
   }
 
 };
@@ -296,6 +302,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
       });
   };
 
+  // USER MAPPER/TABLE
   userWrapper = () => {
     return this.state.userTable.map((user: any, index) => {
       return (
@@ -306,7 +313,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{user.lastName}</td>
           <td>{user.userRole}</td>
           <td>
-          <Tooltip title="Update User Info" arrow placement="bottom" style={styles.toolTip}> 
+          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" style={styles.toolTip}> 
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateUser(user);
@@ -316,17 +323,20 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Tooltip>
           </td>
           <td>
-          <Tooltip title="Delete User" arrow placement="bottom">
+          <Tooltip title="Delete User" >
             <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteUser(user);
-              }} />
+              }} 
+            />
           </Tooltip>    
           </td>
         </tr>
       );
     });
   };
+
+// LOCATION MAPPER/TABLE
 
   destinationWrapper = () => {
     return this.state.destinationTable.map((location: any, index) => {
@@ -335,20 +345,23 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
+          <Tooltip title="Update Location Info" arrow placement="bottom">
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLocation(location);
                 this.updateOnDest();
               }}
             />
-             
+          </Tooltip>    
           </td>
           <td>
+          <Tooltip title="Delete Location" >
             <DeleteIcon fontSize="large"
               onClick={() => {
                 this.deleteLoco(location);
               }}
             />
+          </Tooltip>  
           </td>
         </tr>
       );
@@ -402,6 +415,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
         {this.DestinationInfoFetch()} */}
         <Row>
           <Col>
+            <h1 className="table-header">User Info</h1>
             {/* MATERIAL UI FIXED TABLE */}
             <Paper style={styles.userRoot}>
             <TableContainer style={styles.userContainer}>
@@ -484,7 +498,10 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Col>
         </Row>
         <Row>
-          {/* DESTINATION TABLE */}
+        
+        <Col>
+        <h1 className="table-header">Location Info</h1>
+        {/* DESTINATION TABLE */}
         <Paper style={styles.locationRoot}>
             <TableContainer style={styles.locationContainer}>
               <Table stickyHeader aria-label="sticky table">
@@ -531,6 +548,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
               onChangeRowsPerPage={handleChangeRowsPerPage}
             /> */}
           </Paper>
+        </Col>
           {/* DESTINATION TABLE */}
           {/* <Container id="destination-table">
             <Row>

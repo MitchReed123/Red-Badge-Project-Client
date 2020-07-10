@@ -1,3 +1,6 @@
+/* ANTD */
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
@@ -14,12 +17,26 @@ body{
   transform: rotate(360deg); */
 }
 
-/* @font-face {
-  font-family: Fenord Regular;
-  src: url(./assests/FenordRegular.otf);
-} */
+
 
 @font-face {
   font-family: MOMCAKE-BOLD;
   src: url(./assests/MOMCAKE-Bold.otf);
+}
+
+
+@font-face {
+  font-family: Nanami-3D-Medium;
+  src: url(./assests/Nanami-3D-Medium.otf);
+}
+
+@font-face {
+  font-family: RoundorNonCommercial;
+  src: url(./assests/RoundorNonCommercial.otf);
+}
+
+
+@font-face {
+  font-family: Klein-Condensed-ExtraBold-trial;
+  src: url(./assests/Klein-Condensed-ExtraBold-trial.ttf);
 }
