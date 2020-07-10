@@ -1,7 +1,7 @@
 // available to userRole = "user"
 // this is where you GET, http://localhost:3000/destination GET
 import React from "react";
-import { Table, Button, Row, Col, Container, Label } from "reactstrap";
+import { Table, Button, Row, Col, Container } from "reactstrap";
 import { TextField, FormLabel } from "@material-ui/core/";
 
 type acceptedProps = {
@@ -129,7 +129,7 @@ export default class Destinations extends React.Component<
       </h1>
     ) : localStorage.getItem("message") === "user succesfully logged in" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        All Locations
+        All Locations for you {localStorage.getItem("username")}
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>

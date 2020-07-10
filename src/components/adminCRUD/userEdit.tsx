@@ -79,7 +79,9 @@ export default class userEdit extends React.Component<
               </Label>
               <Input
                 name="username"
+                required
                 value={this.state.editUsername}
+                title="required field"
                 onChange={(e) =>
                   this.setState({ editUsername: e.target.value })
                 }
@@ -92,6 +94,8 @@ export default class userEdit extends React.Component<
               <Input
                 name="password"
                 value={this.state.editPassword}
+                required
+                title="Required Field"
                 // value={bcrypt.hashSync(this.state.editPassword, salt)}
                 // pass = bcrypt.hashSync(this.loginForm.value.password, salt);
                 onChange={(e) =>

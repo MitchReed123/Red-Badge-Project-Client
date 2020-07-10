@@ -2,7 +2,6 @@ import React from "react";
 import {
   FormGroup,
   Modal,
-  ModalHeader,
   ModalBody,
   Form,
   Label,
@@ -53,10 +52,10 @@ export default class DestinationUpdate extends React.Component<
       this.props.updateOff();
     });
   };
-
+  //if setUpdateActive is true then dont open the modal
   render() {
     return (
-      <Modal isOpen={false}>
+      <Modal isOpen={true}>
         <ModalBody>
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>

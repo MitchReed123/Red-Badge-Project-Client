@@ -1,9 +1,9 @@
 //Landing page for the rest of the lottoCRUD folder, GET, http://localhost:3000/lotto/
-import React, { Component, useState, useEffect } from "react";
+import React from "react";
 import LottoCreate from "./lottoCreate";
-import LottoTable from "./lottoTable";
+// import LottoTable from "./lottoTable";
 import LottoEdit from "./lottoEdit";
-import { Container, Row, Col, Table, Button } from "reactstrap";
+import { Row, Col, Table, Button } from "reactstrap";
 type acceptedProps = {
   token: string | any;
 };
@@ -163,16 +163,35 @@ export default class LottoIndex extends React.Component<
     this.fetchLottos();
     this.lottoMapper();
   }
+
+  Welcoming() {
+    return localStorage.getItem("message") === null ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Sign Up or Login to see your Lottos
+      </h1>
+    ) : localStorage.getItem("message") === "user succesfully logged in" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Welcome Back {localStorage.getItem("username")} to your Lotto Page
+      </h1>
+    ) : localStorage.getItem("message") === "user created" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Welcome {localStorage.getItem("username")} to your Lottery Page
+      </h1>
+    ) : (
+      "null"
+    );
+  }
+
   render() {
     return (
       <div>
-        <h1>Lotto index</h1>
+        {this.Welcoming()}
         <LottoCreate
           token={this.props.token}
           fetchLottos={this.fetchLottos}
           // destinations={this.fetchLocos}
         />
-        <button onClick={this.handleClick}>Click Me</button>
+        {/* <button onClick={this.handleClick}>Click Me</button> */}
         <h1>{this.state.random}</h1>
         <Row>
           <Col>
