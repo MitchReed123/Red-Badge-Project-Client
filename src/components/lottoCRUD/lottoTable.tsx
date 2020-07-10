@@ -44,7 +44,7 @@ export default class LottoTable extends React.Component<AcceptedProps, valueType
         }).then(() => this.props.fetchLottos())
     }
 
-    lottoMapper=()=>{
+    lottoMapper = () => {
         return this.props.lottos.map((lotto: any, index) => {
             return (
                 <tr key={index}>

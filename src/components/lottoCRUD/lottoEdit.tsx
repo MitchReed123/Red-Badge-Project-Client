@@ -12,7 +12,7 @@ type AcceptedProps = {
 }
 
 type valueTypes = {
-
+    editLottoNum: string,
     editNameOfLotto: string,
     editLottoPot: string,
     editLocation: string,
@@ -23,7 +23,7 @@ export default class LottoEdit extends React.Component<AcceptedProps, valueTypes
     constructor(props: AcceptedProps){
         super(props);
         this.state = {
-
+            editLottoNum: this.props.lottoToUpdate.lottoNum,
             editNameOfLotto: this.props.lottoToUpdate.nameOfLotto,
             editLottoPot: this.props.lottoToUpdate.lottoPot,
             editLocation: this.props.lottoToUpdate.location,
@@ -37,7 +37,7 @@ export default class LottoEdit extends React.Component<AcceptedProps, valueTypes
             method: 'PUT',
             body: JSON.stringify({
                 lottery:{
-                    
+                    lottoNum: this.state.editLottoNum,
                     nameOfLotto: this.state.editNameOfLotto,
                     lottoPot: this.state.editLottoPot,
                     location: this.state.editLocation
@@ -60,6 +60,10 @@ export default class LottoEdit extends React.Component<AcceptedProps, valueTypes
                 <ModalHeader>To be updated</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={this.lottoUpdate}>
+                        <FormGroup>
+                            <Label htmlFor="editLottoNum">Edit Lotto Number:</Label>
+                            <Input type="text" name="editLottoNum" value={this.state.editLottoNum} onChange={(event: any)=>this.setState({ editLottoNum: event.target.value})}/>
+                        </FormGroup>
                         
                         <FormGroup>
                             <Label htmlFor="editNameOfLotto">Edit Lotto Name:</Label>

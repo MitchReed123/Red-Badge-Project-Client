@@ -5,12 +5,13 @@
 }
 
 #lottoNum{
-    height:50px;
-    width: 140px;
-    font-size: 35px;
+    height:40px;
+    width: 260px;
+    font-size: 27px;
     font-weight: bolder;
     box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 4);
     border-radius: 6%;
+    text-align: center;
 }
 
 #random-number-btn{
@@ -18,6 +19,7 @@
     border-radius: 10%;
     margin-bottom: 20px;
     width: 450px;
-    font-size: x-large;
-    font-weight: bolder;
+    font-size: large;
+    font-weight: 600;
+    padding: 10px;
 }
