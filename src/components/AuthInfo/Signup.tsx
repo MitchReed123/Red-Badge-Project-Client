@@ -1,4 +1,4 @@
-import React, { Props } from "react";
+import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 type valueType = {
   username: string;

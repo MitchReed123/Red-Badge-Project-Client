@@ -1,14 +1,14 @@
 // both tables will come fron the User table and the Destination Table. Admin Destination/User will have update/delete power on both tables
 //normal imports
 import React from "react";
-import destinationTable from "../destinationsCRUD/destinationTable";
-import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
-import DestinationCreate from "../destinationsCRUD/destinationCreate";
+// import destinationTable from "../destinationsCRUD/destinationTable";
+// import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
+// import DestinationCreate from "../destinationsCRUD/destinationCreate";
 import UserEdit from "./userEdit";
 import DestinationEdit from "./destinationEdit";
 //Style imports
 import TextField from "@material-ui/core/TextField";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+// import { makeStyles, withStyles } from "@material-ui/core/styles";
 // import Table from "@material-ui/core/Table";
 // import TableBody from "@material-ui/core/TableBody";
 // import TableCell from "@material-ui/core/TableCell";
@@ -16,7 +16,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 // import TableHead from "@material-ui/core/TableHead";
 // import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
-import { Table, Button, Row, Col, Container, Label } from "reactstrap";
+import { Table, Button, Row, Col, Container } from "reactstrap";
 
 type acceptedProps = {
   token: any;
@@ -33,6 +33,7 @@ type valueTypes = {
   username: string;
   password: string;
   setUpdateActive: boolean;
+  SetUpdateActiveLoco: boolean;
 };
 
 // const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
       setUpdateUser: {},
       setUpdateLoco: {},
       setUpdateActive: false,
+      SetUpdateActiveLoco: false,
     };
   }
   //ALL THE STUFF FOR UPDATING
@@ -90,7 +92,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
   };
 
   updateOnDest = () => {
-    this.setState({ setUpdateActive: true });
+    this.setState({ SetUpdateActiveLoco: true });
   };
 
   updateOff = () => {
@@ -98,7 +100,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
   };
 
   updateOffDest = () => {
-    this.setState({ setUpdateActive: false });
+    this.setState({ SetUpdateActiveLoco: false });
   };
 
   //ADDS DELETE BUTTON TO USER TABLE
@@ -186,7 +188,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
         this.fetchUsers();
       });
   };
-
+  // can i do a turnary here where it checks for your id, localStorage.getItem("username") === this.state.editUsername ? ()
   userWrapper = () => {
     return this.state.userTable.map((user: any, index) => {
       return (
@@ -276,7 +278,7 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome,{localStorage.getItem("username")}
+        {localStorage.getItem("username")}'s Admin Panel
       </h1>
     ) : (
       "null"
@@ -286,10 +288,6 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
     return (
       <div>
         <h1>{this.Welcoming()}</h1>
-
-        {/* {this.userInfoFetch()}
-
-        {this.DestinationInfoFetch()} */}
 
         <h1>Sign up a new User</h1>
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
@@ -364,9 +362,9 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
         ) : (
           <></>
         )}
-        {this.state.setUpdateActive ? (
+        {this.state.SetUpdateActiveLoco ? (
           <DestinationEdit
-            updateOff={this.updateOff}
+            updateOff={this.updateOffDest}
             token={this.props.token}
             fetchDestination={this.fetchDestinations}
             setUpdateLoco={this.state.setUpdateLoco}
@@ -374,15 +372,6 @@ export default class Admin extends React.Component<acceptedProps, valueTypes> {
         ) : (
           <></>
         )}
-
-        {/* <TableContainer component={Paper} />
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell></StyledTableCell>
-            </TableRow>
-          </TableHead>
-        </Table> */}
       </div>
     );
   }
