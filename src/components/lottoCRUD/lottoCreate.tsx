@@ -1,9 +1,14 @@
 //grabbing from lotto table, and the http://localhost:3000/lotto/, POST
 import React from "react";
+
 import { Container, Table, Button, Row, Col, Label, Input } from "reactstrap";
 import { TextField, FormLabel, Select } from "@material-ui/core/";
 import { stringify } from "querystring";
 import "./lottoCreate.css";
+
+
+// import { Container, Col, Input } from "reactstrap";
+// import { TextField, FormLabel } from "@material-ui/core/";
 
 type acceptedProps = {
   token: string | any;
@@ -190,8 +195,8 @@ export default class LottoCreate extends React.Component<
                   type="select"
                 >
                   <option>Select a Location!</option>
-                  {this.state.destinationTable.map((loco: any) => (
-                    <option>
+                  {this.state.destinationTable.map((loco: any, index: any) => (
+                    <option key={index}>
                       {loco.lottoLocation}, {loco.lottoAddress}
                     </option>
                   ))}

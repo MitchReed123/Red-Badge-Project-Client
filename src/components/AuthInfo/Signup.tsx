@@ -1,4 +1,4 @@
-import React, { Props } from "react";
+import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 
 
@@ -117,9 +117,8 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
               title="Enter just your last name"
             />
           </FormGroup>
-          {/* <button type="submit">Signup</button> */}
+          <button type="submit">Signup</button>
         </Form>
-        <button type="submit">Signup</button>
       </div>
     );
   }

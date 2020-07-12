@@ -1,7 +1,10 @@
 // available to userRole = "user"
 // this is where you GET, http://localhost:3000/destination GET
 import React from "react";
+
 import { Button, Row, Col, Container, Input, Label } from "reactstrap";
+
+// import { Button, Row, Col, Container } from "reactstrap";
 import { TextField, FormLabel } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -182,7 +185,7 @@ class Destinations extends React.Component<
       </h1>
     ) : localStorage.getItem("message") === "user succesfully logged in" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        All Locations
+        All Locations for you {localStorage.getItem("username")}
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>

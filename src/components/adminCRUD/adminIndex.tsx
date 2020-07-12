@@ -1,9 +1,9 @@
 // both tables will come fron the User table and the Destination Table. Admin Destination/User will have update/delete power on both tables
 //normal imports
 import React from "react";
-import destinationTable from "../destinationsCRUD/destinationTable";
-import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
-import DestinationCreate from "../destinationsCRUD/destinationCreate";
+// import destinationTable from "../destinationsCRUD/destinationTable";
+// import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
+// import DestinationCreate from "../destinationsCRUD/destinationCreate";
 import UserEdit from "./userEdit";
 import DestinationEdit from "./destinationEdit";
 import "./adminIndex.css";
@@ -28,6 +28,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { Button, Row, Col, Container, Label, Form, Input } from "reactstrap";
 
+
 type acceptedProps = {
   token: any;
   updateUsername: any;
@@ -43,6 +44,7 @@ type valueTypes = {
   username: string;
   password: string;
   setUpdateActive: boolean;
+  SetUpdateActiveLoco: boolean;
 };
 
 //STYLING 
@@ -170,6 +172,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
       setUpdateUser: {},
       setUpdateLoco: {},
       setUpdateActive: false,
+      SetUpdateActiveLoco: false,
     };
   }
 
@@ -189,7 +192,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   };
 
   updateOnDest = () => {
-    this.setState({ setUpdateActive: true });
+    this.setState({ SetUpdateActiveLoco: true });
   };
 
   updateOff = () => {
@@ -197,7 +200,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   };
 
   updateOffDest = () => {
-    this.setState({ setUpdateActive: false });
+    this.setState({ SetUpdateActiveLoco: false });
   };
 
   // MATERIAL UI TABLE PAGINATION
@@ -302,7 +305,10 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
       });
   };
 
+
   // USER MAPPER/TABLE
+
+  // can i do a turnary here where it checks for your id, localStorage.getItem("username") === this.state.editUsername ? ()
   userWrapper = () => {
     return this.state.userTable.map((user: any, index) => {
       return (
@@ -394,7 +400,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome,{localStorage.getItem("username")}
+        {localStorage.getItem("username")}'s Admin Panel
       </h1>
     ) : (
       "null"
@@ -409,6 +415,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
         {/* <Row> */}
           <h1 id="welcome-message">{this.Welcoming()}</h1>
         {/* </Row> */}
+
 
         {/* {this.userInfoFetch()}
 
@@ -451,6 +458,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
                     );
                   })} */}
                 </TableBody>
+
               </Table>
             </TableContainer>
             {/* <TablePagination
@@ -580,9 +588,9 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
         ) : (
           <></>
         )}
-        {this.state.setUpdateActive ? (
+        {this.state.SetUpdateActiveLoco ? (
           <DestinationEdit
-            updateOff={this.updateOff}
+            updateOff={this.updateOffDest}
             token={this.props.token}
             fetchDestination={this.fetchDestinations}
             setUpdateLoco={this.state.setUpdateLoco}
@@ -590,31 +598,6 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
         ) : (
           <></>
         )}
-{/* 
- USER TABLE 
- <Container id="user-table">
-            <Row>
-              <Col md="8">
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Username</th>
-                      <th>Passwords</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>User Role</th>
-                      <th>Update</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.fetchUsers}</tbody>
-                  This will also be apart of what you need to do
-                  <tbody>{this.userWrapper()}</tbody>
-                </Table>
-              </Col>
-            </Row>
-          </Container> */}
-
 
       </div>
     );

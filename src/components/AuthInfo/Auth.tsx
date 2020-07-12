@@ -10,7 +10,9 @@ import Login from "./Login";
 
 const styles = {
   root: {
-    padding: "10px",
+    padding: "40px",
+    marginTop: "40px",
+    marginBottom: "40px",
     fontFamily: "MOMCAKE-BOLD"
   },
 
@@ -110,13 +112,13 @@ class Auth extends React.Component<acceptedProps, valueTypes> {
         <Row>
           
           <Col md="6" style={styles.card}>
-          <p className="title">The</p>
-          <p className="title">Daily</p>
-          <p className="title">Lotto</p>
+          <p className="title-the">The</p>
+          <p className="title-daily">Daily</p>
+          <p className="title-lotto">Lotto</p>
             {/* <p className="title-THE">The</p>
             <p className="title-daily">Daily</p>
             <p className="title-lotto">Lotto</p> */}
-            <img id="lotto-info" width="400px" src={require('../../assests/lotto2.png')} alt="logo" />
+            <img id="lotto-info" width="400px" src={require('../../assests/lotto3.png')} alt="The Daily Lotto info" />
           </Col>
           <Col md="6" style={styles.toggle}>
             <Form >
