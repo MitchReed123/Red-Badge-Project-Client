@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Route, Link, Switch } from "react-router-dom";
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Divider } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Apps from "./AssignedFeature/mitch";
 import Bored from "./AssignedFeature/brittany";
@@ -24,7 +24,7 @@ import Taco from "./AssignedFeature/mizue";
 // import { useHistory } from "react-router-dom";
 // import { isNumber } from "util";
 // import * as bcrypt from "bcryptjs";
-// import EditUser from "./editInfo";
+import EditUser from "./editInfo";
 // const salt = bcrypt.genSaltSync(10);
 
 type acceptedProps = {
@@ -35,6 +35,13 @@ type acceptedProps = {
   protectViewsThree: any;
   updateUsername: any;
   protectViewsFour: any;
+  // fetchUsers: any;
+  editUpdateUser: any;
+  updateOn: any;
+  updateOff: any;
+  dataTable: any;
+  setUpdateUser: any;
+  // userMapper: any;
 };
 
 type valueTypes = {
@@ -42,6 +49,8 @@ type valueTypes = {
   nextDraw1: string;
   lotto2: string;
   setOpen: boolean;
+  userTable: [];
+  setUpdateActive: boolean;
 };
 
 export default class Sitebar extends React.Component<
@@ -56,6 +65,8 @@ export default class Sitebar extends React.Component<
       nextDraw1: "",
       lotto2: "",
       setOpen: false,
+      userTable: [],
+      setUpdateActive: false,
     };
   }
 
@@ -98,12 +109,20 @@ export default class Sitebar extends React.Component<
   }
 
   viewPages4() {
-    return localStorage.getItem("token") === null ? (
-      ""
-    ) : (
+    return localStorage.getItem("userRole") === "user" ? (
       <Button>
         <Link to="/UpdateInfo">Edit Info</Link>
       </Button>
+    ) : (
+      ""
+    );
+  }
+
+  validationComparison() {
+    return localStorage.getItem("userRole") === "Admin" ? (
+      <Menu.Item key="5">{this.viewPages2()}</Menu.Item>
+    ) : (
+      ""
     );
   }
 
@@ -120,14 +139,13 @@ export default class Sitebar extends React.Component<
       <Menu.Item key="2">
         <Taco />
       </Menu.Item>
-      <Menu.Divider />
-      <h3>APIS</h3>
-      <Menu.Divider />
+      <Divider orientation="left" dashed={true}>
+        Nav
+      </Divider>
       <Menu.Item key="3">{this.viewPages()}</Menu.Item>
       <Menu.Divider />
       <Menu.Item key="4">{this.viewPages3()}</Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="5">{this.viewPages2()}</Menu.Item>
+      {this.validationComparison()}
       <Menu.Divider />
       <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
     </Menu>
@@ -157,17 +175,51 @@ export default class Sitebar extends React.Component<
           </Dropdown>
 
           <Button onClick={this.props.clickLogout}>Logout</Button>
-          {/* <Button> {this.viewPages4()}TESTING </Button> */}
+          {this.userMapper()}
         </Toolbar>
       </AppBar>
     );
   }
 
-  componentWillMount() {}
+  fetchUsers = () => {
+    fetch(`http://localhost:3000/user/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((userData) => {
+        console.log("Pure user data 15", userData);
+        this.setState({
+          userTable: userData.user,
+        });
+        console.log("State Variable Data 15", this.state.userTable);
+      });
+  };
+
+  userMapper = () => {
+    return this.state.userTable.map((user: any, index) => {
+      return user.username === localStorage.getItem("username") ? (
+        <Button
+          name="edit info"
+          defaultValue="Edit Info"
+          onClick={() => {
+            this.props.editUpdateUser(user);
+            this.props.updateOn();
+          }}
+        >
+          <Link to="UpdateInfo">Edit Info!</Link>
+        </Button>
+      ) : (
+        ""
+      );
+    });
+  };
 
   componentDidMount() {
-    // this.fetchUsers();
-    // this.userMapper();
+    this.fetchUsers();
+    this.userMapper();
   }
 
   render() {
@@ -185,19 +237,10 @@ export default class Sitebar extends React.Component<
             {this.props.protectViewsThree()}
           </Route>
           <Route exact path="/UpdateInfo">
+            {/* {this.userMapper()} */}
             {this.props.protectViewsFour()}
           </Route>
         </Switch>
-        {/* {this.state.setUpdateActive ? (
-          <EditInfo
-            userMapper={this.userMapper}
-            updateOff={this.updateOff}
-            fetchUsers={this.fetchUsers}
-            setUpdateUser={this.state.setUpdateUser}
-          />
-        ) : (
-          <></>
-        )} */}
       </div>
     );
   }

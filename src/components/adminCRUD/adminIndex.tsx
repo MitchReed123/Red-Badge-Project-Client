@@ -1,21 +1,9 @@
 // both tables will come fron the User table and the Destination Table. Admin Destination/User will have update/delete power on both tables
 //normal imports
 import React from "react";
-// import destinationTable from "../destinationsCRUD/destinationTable";
-// import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
-// import DestinationCreate from "../destinationsCRUD/destinationCreate";
 import UserEdit from "./userEdit";
 import DestinationEdit from "./destinationEdit";
-//Style imports
 import TextField from "@material-ui/core/TextField";
-// import { makeStyles, withStyles } from "@material-ui/core/styles";
-// import Table from "@material-ui/core/Table";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import TableHead from "@material-ui/core/TableHead";
-// import TableRow from "@material-ui/core/TableRow";
-// import Paper from "@material-ui/core/Paper";
 import { Table, Button, Row, Col, Container } from "reactstrap";
 
 type acceptedProps = {
@@ -35,32 +23,6 @@ type valueTypes = {
   setUpdateActive: boolean;
   SetUpdateActiveLoco: boolean;
 };
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     "& .MuiTextField-root": {
-//       margin: theme.spacing(1),
-//       width: 200,
-//     },
-//   },
-// }));
-// const StyledTableCell = withStyles((theme) => ({
-//   head: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
-
-// const StyledTableRow = withStyles((theme) => ({
-//   root: {
-//     "&:nth-of-type(odd)": {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//   },
-// }))(TableRow);
 
 export default class Admin extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
