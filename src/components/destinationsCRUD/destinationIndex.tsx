@@ -3,6 +3,8 @@
 import React from "react";
 import { Table, Button, Row, Col, Container } from "reactstrap";
 import { TextField, FormLabel } from "@material-ui/core/";
+import Maps from "./maps";
+// import {Map, GoogleApiWrapper} from 'google-maps-react'
 
 type acceptedProps = {
   token: any;
@@ -187,6 +189,10 @@ export default class Destinations extends React.Component<
                 </div>
                 <button type="submit">New Location!!</button>
               </form>
+            </Col>
+            <Col>
+              <Maps />
+              {/* this displays all of our locations on a google map, still working on it tho */}
             </Col>
           </Container>
         </Row>

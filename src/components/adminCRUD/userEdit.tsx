@@ -62,6 +62,7 @@ export default class userEdit extends React.Component<
         // Authorization: this.props.token,
       }),
     }).then((res) => {
+      console.log(res);
       this.props.fetchUsers();
       this.props.updateOff();
     });
