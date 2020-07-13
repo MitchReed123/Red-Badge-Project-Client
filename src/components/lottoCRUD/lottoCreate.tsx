@@ -1,6 +1,6 @@
 //grabbing from lotto table, and the http://localhost:3000/lotto/, POST
 import React from "react";
-import {Container, Row, Col, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import {Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Slot2 from '../../assets/Slot2.png'
 import "../lottoCRUD/lottoCreate.css";
 
@@ -180,14 +180,17 @@ export default class LottoCreate extends React.Component<AcceptedProps, valueTyp
                         {/* <Label htmlFor="lottoNum"> Lotto Number: </Label>
                         <Input id="lottoNum" name="lottoNum" value={this.state.lottoNum} onChange={(event: any)=>this.setState({ lottoNum: event.target.value})}/>  */}
                     </FormGroup>
+
                     <FormGroup>
                         <Label htmlFor="nameOfLotto"> Lotto Name: </Label>
                         <Input name="nameOfLotto" value={this.state.nameOfLotto} onChange={(event: any)=>this.setState({nameOfLotto: event.target.value})}/>
                     </FormGroup>
+
                     <FormGroup>
                         <Label htmlFor="lottoPot">Lotto Pot: </Label>
                         <Input name="lottoPot" value={this.state.lottoPot} onChange={(event: any)=>this.setState({lottoPot: event.target.value})}/>
                     </FormGroup>
+
                     <FormGroup>
                         <Label htmlFor="lottoPot">Location (select): </Label>
                         <Input type="select" name="location" value={this.state.location} onChange={(event: any)=>this.setState({location: event.target.value})}>
@@ -198,6 +201,8 @@ export default class LottoCreate extends React.Component<AcceptedProps, valueTyp
                             ))}
                         </Input>
                     </FormGroup>
+                    {/* </Col> */}
+                    {/* </Row> */}
                     <Input type="submit"value="Add to Lotto History"/>
                 </Form>
 

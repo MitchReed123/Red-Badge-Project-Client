@@ -1,6 +1,6 @@
 // DELETE, http://localhost:3000/:id, this is where we put together the table, this will have a mapper on it
 import React from "react";
-import {Table, Button} from 'reactstrap';
+import { Table, Button, Row, Col } from 'reactstrap';
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -48,7 +48,7 @@ export default class LottoTable extends React.Component<AcceptedProps, valueType
         return this.props.lottos.map((lotto: any, index) => {
             return (
                 <tr key={index}>
-                    <th>{lotto.id}</th>
+                    <th >{lotto.id}</th>
                     <td>{lotto.lottoNum}</td>
                     <td>{lotto.nameOfLotto}</td>
                     <td>{lotto.lottoPot}</td>
@@ -77,7 +77,9 @@ export default class LottoTable extends React.Component<AcceptedProps, valueType
         <div className="">
             <h1>Lotto History</h1>
             <hr/>
-            <Table a striped>
+            <Row>
+                <Col>
+            <Table responsive>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -91,8 +93,11 @@ export default class LottoTable extends React.Component<AcceptedProps, valueType
                     {this.lottoMapper()}
                 </tbody>
             </Table>
+            </Col>
+            </Row>
 
         </div>
+
         );
     }
 }
