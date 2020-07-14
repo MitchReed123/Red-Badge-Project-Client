@@ -111,7 +111,7 @@ export default class LottoCreate extends React.Component<
     this.fetchLocos();
   }
   fetchLocos = () => {
-    fetch("http://localhost:3000/destination/", {
+    fetch(`${APIURL}/destination/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
