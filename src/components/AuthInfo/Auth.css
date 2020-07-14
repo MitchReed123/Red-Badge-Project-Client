@@ -1,0 +1,146 @@
+#logout-button {
+  margin-top: 1em;
+    border: 2px solid #fa5a57;
+    border-radius: 2px;
+    height: 70px;
+    width: 250px;
+    background-color: #fa5a57;
+    color: whitesmoke;
+    box-shadow: 10px 5px 7px 0px rgba(184, 182, 182, 0.75);
+    /* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */
+    cursor: pointer;
+    font-family: "MOMCAKE-BOLD";
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+
+button {
+    margin-top: 1em;
+    border: 2px solid #fa5a57;
+    border-radius: 2px;
+    height: 70px;
+    width: 250px;
+    background-color: #fa5a57;
+    color: whitesmoke;
+    box-shadow: 10px 5px 7px 0px rgba(184, 182, 182, 0.75);
+    /* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */
+    cursor: pointer;
+    font-family: "MOMCAKE-BOLD";
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.auth-header {
+    color: #f2f2f2;
+    font-size: 70px;
+}
+
+#username {
+    color: #f2f2f2;
+    font-size: 30px;
+}
+
+#password {
+    color: #f2f2f2;
+    font-size: 30px;
+}
+
+#firstName {
+    color: #f2f2f2;
+    font-size: 30px;
+}
+
+#lastName {
+    color: #f2f2f2;
+    font-size: 30px;
+}
+
+#signup-form {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+}
+
+#auth-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+}
+
+#auth-input:focus {
+    background-color: rgba(69, 54, 179, 0.8);
+    /* background-color: rgba(169, 220, 190, 0.8); */
+    /* color: black; */
+}
+
+#auth-input[type="text"] {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+  }
+
+  div {
+    /* margin-top: 20px; */
+    margin-bottom: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  
+
+  .title-the {
+    font-family: "Klein-Condensed-ExtraBold-trial";
+    color: #f2f2f2;
+    font-size: 50px;
+    margin: -42px;
+  }
+
+  .title-daily {
+    font-family: "Klein-Condensed-ExtraBold-trial";
+    color: #f2f2f2;
+    font-size: 120px;
+    margin: -42px;
+  }
+
+  .title-lotto {
+    font-family: "Klein-Condensed-ExtraBold-trial";
+    color: #f2f2f2;
+    font-size: 140px;
+    margin: -42px;
+  }
+
+  #lotto-info {
+      margin-top: 50px;
+  }
+
+  #switch-button {
+      margin-top: 50px;
+  }
+
+
+  #toggle-button {
+      /* margin-top: 5px; */
+      margin-bottom: 40px;
+  }
+
+  #row-one {
+    background-color: #a9dcbe;
+}
+
+#col-one {
+    background-color: #fdb20d;
+}
+
+#col-two {
+    background-color: #a9dcbe;
+}
+
+#row-two {
+    background-color: #fa5a57;
+}
