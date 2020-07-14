@@ -1,88 +1,102 @@
 // grabbing from Lotto Table, http://localhost:3000/:id, PUT(UPDATE)
 import React from "react";
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import {
+  FormGroup,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  Label,
+  Input,
+  Button,
+} from "reactstrap";
 
-type AcceptedProps = {
-    fetchLottos: any,
-    token: any,
-    lottos: [],
-    // updateActive : boolean,
-    lottoToUpdate: any,
-    updateOff: any
-}
+type acceptedProps = {
+  updateOff: any;
+  token: any;
+  fetchLottos: any;
+  setUpdateLotto: any;
+};
 
 type valueTypes = {
-    editLottoNum: string,
-    editNameOfLotto: string,
-    editLottoPot: string,
-    editLocation: string,
-    editLottos: [],
-}
+  editLottoName: string | any;
+  editLottoPot: string | any;
+  editLottoLoco: string | any;
+};
 
-export default class LottoEdit extends React.Component<AcceptedProps, valueTypes> {
-    constructor(props: AcceptedProps){
-        super(props);
-        this.state = {
-            editLottoNum: this.props.lottoToUpdate.lottoNum,
-            editNameOfLotto: this.props.lottoToUpdate.nameOfLotto,
-            editLottoPot: this.props.lottoToUpdate.lottoPot,
-            editLocation: this.props.lottoToUpdate.location,
-            editLottos: [],
-        }
-    }
+export default class LottoEdit extends React.Component<
+  acceptedProps,
+  valueTypes
+> {
+  constructor(props: acceptedProps) {
+    super(props);
+    this.state = {
+      editLottoName: this.props.setUpdateLotto.nameOfLotto,
+      editLottoPot: this.props.setUpdateLotto.lottoPot,
+      editLottoLoco: this.props.setUpdateLotto.location,
+    };
+  }
 
-    lottoUpdate=(event: any) =>{
-        event.preventDefault();
-        fetch(`http://localhost:3000/lotto/${this.props.lottoToUpdate.id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                lottery:{
-                    lottoNum: this.state.editLottoNum,
-                    nameOfLotto: this.state.editNameOfLotto,
-                    lottoPot: this.state.editLottoPot,
-                    location: this.state.editLocation
+  handleSubmit = (event: any) => {
+    event.preventDefault();
+    fetch(`http://localhost:3000/lotto/${this.props.setUpdateLotto.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        lottery: {
+          nameOfLotto: this.state.editLottoName,
+          lottoPot: this.state.editLottoPot,
+          location: this.state.editLottoLoco,
+        },
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+        Authorization: this.props.token,
+      }),
+    }).then((res) => {
+      this.props.fetchLottos();
+      this.props.updateOff();
+    });
+  };
+  render() {
+    return (
+      <Modal isOpen={true}>
+        <ModalHeader>Edit a Lotto</ModalHeader>
+        <ModalBody>
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <Label htmlFor="nameOfLotto">Edit a Lotto Name</Label>
+              <Input
+                name="nameOfLotto"
+                value={this.state.editLottoName}
+                onChange={(e) =>
+                  this.setState({ editLottoName: e.target.value })
                 }
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            }),
-        }).then((res)=>{
-            this.props.fetchLottos();
-            this.props.updateOff();
-        })
-    }
-
-
-    render() {
-        return(
-            <Modal isOpen={true}>
-                <ModalHeader>To be updated</ModalHeader>
-                <ModalBody>
-                    <Form onSubmit={this.lottoUpdate}>
-                        <FormGroup>
-                            <Label htmlFor="editLottoNum">Edit Lotto Number:</Label>
-                            <Input type="text" name="editLottoNum" value={this.state.editLottoNum} onChange={(event: any)=>this.setState({ editLottoNum: event.target.value})}/>
-                        </FormGroup>
-                        
-                        <FormGroup>
-                            <Label htmlFor="editNameOfLotto">Edit Lotto Name:</Label>
-                            <Input type="text" name="editNameOfLotto" value={this.state.editNameOfLotto} onChange={(event: any)=>this.setState({ editNameOfLotto: event.target.value})}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="editLottoPot">Edit Lotto Pot:</Label>
-                            <Input type="text" name="editLottoPot" value={this.state.editLottoPot} onChange={(event: any)=>this.setState({ editLottoPot: event.target.value})}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="editLocation">Edit Location:</Label>
-                            <Input type="text" name="editLocation" value={this.state.editLocation} onChange={(event: any)=>this.setState({ editLocation: event.target.value})}/>
-                        </FormGroup>
-                        <Button type="submit">Update!</Button>
-                    </Form>
-                </ModalBody>
-            </Modal>
-
-        );
-    }
-
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="lottoPot">Edit a Lotto Pot</Label>
+              <Input
+                name="lottoPot"
+                value={this.state.editLottoPot}
+                onChange={(e) =>
+                  this.setState({ editLottoPot: e.target.value })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="location">Edit Lotto Location</Label>
+              <Input
+                name="location"
+                value={this.state.editLottoLoco}
+                onChange={(e) =>
+                  this.setState({ editLottoLoco: e.target.value })
+                }
+              />
+            </FormGroup>
+            <Button type="submit">Update Lotto</Button>
+          </Form>
+        </ModalBody>
+      </Modal>
+    );
+  }
 }

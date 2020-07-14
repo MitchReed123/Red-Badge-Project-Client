@@ -36,7 +36,7 @@ export default class Login extends React.Component<acceptedProps, valueType> {
         password: this.state.password,
       }),
       headers: new Headers({
-        "Content-Type": "application/json",
+        "content-type": "application/json",
       }),
     })
       .then((response) => response.json())
@@ -45,7 +45,7 @@ export default class Login extends React.Component<acceptedProps, valueType> {
         this.props.updateUsername(data.user.username);
         this.props.updateMessage(data.message);
         this.props.updateUserRole(data.user.userRole);
-        console.log(data);
+        console.log(data.username, data.userRole);
       });
   };
   render() {

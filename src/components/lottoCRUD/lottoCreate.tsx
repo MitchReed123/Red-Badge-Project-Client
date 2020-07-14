@@ -1,213 +1,195 @@
 //grabbing from lotto table, and the http://localhost:3000/lotto/, POST
 import React from "react";
-import {Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import Slot2 from '../../assets/Slot2.png'
-import "../lottoCRUD/lottoCreate.css";
-
-
-// number needs to be generated
-
-type AcceptedProps = {
-    token: string | any;
-    fetchLottos: any;
-    // updateLottoNum: React.ReactNode;
-    // updateNameOfLotto:  any,
-    // updateLottoPot:  any,
-    // updateLocation:  any
-}
+import { Container, Col, Input } from "reactstrap";
+import { TextField, FormLabel } from "@material-ui/core/";
+type acceptedProps = {
+  token: string | any;
+  fetchLottos: any;
+  // destinations: any;
+};
 
 type valueTypes = {
-    numberHolder: number | any,
-    lottoNum: string | any,
-    nameOfLotto: string,
-    lottoPot: string,
-    location: string | any,
-    lottos: [],
-    locationTable: []
-}
+  lottoNum: string;
+  nameOfLotto: string;
+  lottoPot: string;
+  location: any | [];
+  random: number;
+  destinationTable: [] | any;
+  displayData: [];
+};
 
+export default class LottoCreate extends React.Component<
+  acceptedProps,
+  valueTypes
+> {
+  constructor(props: acceptedProps) {
+    super(props);
+    this.state = {
+      //if i can call a function somewhere on the math equation i can make the numbers below 10 have a 0 before them
+      //if(this.state.lottoNum < 10){
+      //   function for the add zero
+      // } else {
+      //   this.state.lottoNum
+      // }
+      lottoNum:
+        Math.floor(1 + Math.random() * 49) +
+        "-" +
+        Math.floor(1 + Math.random() * 49) +
+        "-" +
+        Math.floor(1 + Math.random() * 49) +
+        "-" +
+        Math.floor(1 + Math.random() * 49) +
+        "-" +
+        Math.floor(1 + Math.random() * 49) +
+        "-" +
+        Math.floor(1 + Math.random() * 49),
+      // Math.floor(100000000000 + Math.random() * 900000000000),
+      nameOfLotto: "",
+      lottoPot: "",
+      location: [],
+      random: 0,
+      destinationTable: [],
+      displayData: [],
+    };
+  }
 
-export default class LottoCreate extends React.Component<AcceptedProps, valueTypes> {
-    constructor(props: AcceptedProps){
-        super(props);
-        this.state = {
-            lottoNum: 
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) , 
-            numberHolder: '',
-            
-            nameOfLotto: '',
-            lottoPot: '',
-            location: '',
-            lottos: [],
-            locationTable: [],
-        }
-    }
+  // randomNum = () => {
+  //   this.setState({
+  //     lottoNum: Math.floor(100000000000 + Math.random() * 900000000000),
+  //   });
+  // };
 
-    handleSubmit = (event: any)=>{
-        console.log(this.state.lottoNum, this.state.nameOfLotto, this.state.lottoPot, this.state.location);
-        event.preventDefault();
-        fetch(`http://localhost:3000/lotto/`, {
-            method: "POST",
-            body: JSON.stringify({
-
-                    lottoNum: this.state.lottoNum,
-                    nameOfLotto: this.state.nameOfLotto,
-                    lottoPot: this.state.lottoPot,
-                    location: this.state.location
-
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            }),
-        }).then((res)=>res.json())
-        .then((lottoData) => {
-            console.log(lottoData);
-            this.setState({
-                lottoNum: 
-                    Math.floor(Math.random() * 49 + 1) + 
-                    "-" +
-                    Math.floor(Math.random() * 49 + 1) +
-                    "-" +
-                    Math.floor(Math.random() * 49 + 1) +
-                    "-" +
-                    Math.floor(Math.random() * 49 + 1) +
-                    "-" +
-                    Math.floor(Math.random() * 49 + 1) +
-                    "-" +
-                    Math.floor(Math.random() * 49 + 1),
-            });
-            this.setState({
-                nameOfLotto: '',
-                lottoPot: '',
-                // location: '',
-                lottos: [],
-            });
-            this.setState({
-                location: '',
-            });
-            
-            console.log(this.state.lottos);
-        })
-    }
-
-    generateRandomNumber = () => {
-    //     // var randomNumber = Math.floor(Math.random() * 900000 + 100000);
+  handleSubmit = (event: any) => {
+    event.preventDefault();
+    fetch("http://localhost:3000/lotto/", {
+      method: "POST",
+      body: JSON.stringify({
+        lottoNum: this.state.lottoNum,
+        nameOfLotto: this.state.nameOfLotto,
+        lottoPot: this.state.lottoPot,
+        location: this.state.location,
+      }),
+      headers: new Headers({
+        "content-type": "application/json",
+        Authorization: this.props.token,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
         this.setState({
-            numberHolder: 
-                Math.floor(Math.random() * 49 + 1) + 
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1) +
-                "-" +
-                Math.floor(Math.random() * 49 + 1),
-        })
-    }
+          lottoNum:
+            Math.floor(1 + Math.random() * 49) +
+            "-" +
+            Math.floor(1 + Math.random() * 49) +
+            "-" +
+            Math.floor(1 + Math.random() * 49) +
+            "-" +
+            Math.floor(1 + Math.random() * 49) +
+            "-" +
+            Math.floor(1 + Math.random() * 49) +
+            "-" +
+            Math.floor(1 + Math.random() * 49),
+        });
+        this.setState({ nameOfLotto: "" });
+        this.setState({ lottoPot: "" });
+        this.setState({ location: <option>Select a Location!</option> });
+        this.props.fetchLottos();
+      });
+  };
+  //im going to have to map over the location table and set it equal to a drop down list, should be able to do it by setting the map data to a li wrapped in a ul
+  componentDidMount() {
+    this.props.fetchLottos();
+    this.fetchLocos();
+  }
+  fetchLocos = () => {
+    fetch("http://localhost:3000/destination/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((locoData) => {
+        // im going to have to do what john did i think to run over an entire array of items and display them all in a dropdown list on the options tab, he sent me the code for that during the 24hour project so i should be able to do it. i hope this whole thing isnt a waste of time tbh
+        console.log("loco data", locoData.destinations);
+        this.setState({
+          destinationTable: locoData.destinations,
+        });
+        console.log("Destinations tho", this.state.location);
+      });
+  };
+  destinationWrapper = () => {
+    return this.state.destinationTable.map((location: any, index: any) => {
+      return (
+        <ul key={index}>
+          <li>{location.lottoLocation}</li>
+          <li>{location.lottoAddress}</li>
+        </ul>
+      );
+    });
+  };
+  render() {
+    return (
+      <div>
+        <Container>
+          <Col>
+            <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+              <FormLabel>Create a Lotto</FormLabel>
+              <div>
+                <TextField
+                  label="Lotto Number"
+                  id="outlined-margin-normal"
+                  defaultValue="Lotto Num"
+                  margin="normal"
+                  variant="outlined"
+                  // disabled
+                  onChange={(e: any) =>
+                    this.setState({ lottoNum: e.target.value })
+                  }
+                  value={this.state.lottoNum}
+                />
 
-    
-    //FETCHING ALL DESTINATION DATA TO DISPLAY ON TABLE
-    fetchLocations =() => {
-        fetch('http://localhost:3000/destination/', {
-            method: 'GET',
-            headers: new Headers ({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            })
-        }).then(res => res.json())
-        .then(locationData => {
-            this.setState({
-                locationTable: locationData.destinations,
-            })
-            console.log("Showing location",this.state.locationTable);
-        })
-    }
-
-    locationMapper =() => {
-        return this.state.locationTable.map((location: any, index: any) => {
-            return(
-                <ul key={index}>
-                    <li>{location.lottoLocation}</li>
-                    <li>{location.lottoAddress}</li>
-                </ul>
-            )
-        })
-    }
-
-    componentWillMount(){
-        console.log("will mount")
-    }
-
-    componentDidMount(){
-        console.log(this.fetchLocations());
-        console.log(this.locationMapper());
-        this.fetchLocations();
-        this.locationMapper();
-
-    }
-
-    render(){
-
-        return (
-            <>
-                <h3>LottoCreate</h3>
-
-                    <Button id="random-number-btn" type='submit' onClick={this.generateRandomNumber}><p>Click on this Slot!!</p><img id="slot" src={Slot2} alt=""/>
-                    <br></br>
-                        {/* <p>
-                            <Input id="lottoNum" name="lottoNum" value={this.state.numberHolder} />
-                        </p> */}
-                    </Button>
-
-                    <Form onSubmit={this.handleSubmit}>
-                    <FormGroup>
-                        <Label htmlFor="lottoNum"> Lotto Number: </Label>
-                        <Input id="lottoNum" name="lottoNum" value={this.state.numberHolder} onChange={(event: any)=>this.setState({ lottoNum: event.target.value})}/>
-                        {/* <Label htmlFor="lottoNum"> Lotto Number: </Label>
-                        <Input id="lottoNum" name="lottoNum" value={this.state.lottoNum} onChange={(event: any)=>this.setState({ lottoNum: event.target.value})}/>  */}
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label htmlFor="nameOfLotto"> Lotto Name: </Label>
-                        <Input name="nameOfLotto" value={this.state.nameOfLotto} onChange={(event: any)=>this.setState({nameOfLotto: event.target.value})}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label htmlFor="lottoPot">Lotto Pot: </Label>
-                        <Input name="lottoPot" value={this.state.lottoPot} onChange={(event: any)=>this.setState({lottoPot: event.target.value})}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label htmlFor="lottoPot">Location (select): </Label>
-                        <Input type="select" name="location" value={this.state.location} onChange={(event: any)=>this.setState({location: event.target.value})}>
-                            {this.state.locationTable.map((location:any, index: any) => (
-                                <option key={index}>
-                                    {location.lottoLocation} : {location.lottoAddress}
-                                </option>
-                            ))}
-                        </Input>
-                    </FormGroup>
-                    {/* </Col> */}
-                    {/* </Row> */}
-                    <Input type="submit"value="Add to Lotto History"/>
-                </Form>
-
-            </>
-        )
-    }
+                <TextField
+                  label="Name of lotto"
+                  id="outlined-margin-normal"
+                  defaultValue="Name of Lotto"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={(e) =>
+                    this.setState({ nameOfLotto: e.target.value })
+                  }
+                  value={this.state.nameOfLotto}
+                />
+                <TextField
+                  label="Lotto Pot"
+                  id="outlined-margin-normal"
+                  defaultValue="Lotto Pot"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={(e) => this.setState({ lottoPot: e.target.value })}
+                  value={this.state.lottoPot}
+                />
+                <Input
+                  id="locos"
+                  defaultValue="Location"
+                  onChange={(e) => this.setState({ location: e.target.value })}
+                  value={this.state.location}
+                  type="select"
+                >
+                  <option>Select a Location!</option>
+                  {this.state.destinationTable.map((loco: any, index: any) => (
+                    <option key={index}>
+                      {loco.lottoLocation}, {loco.lottoAddress}
+                    </option>
+                  ))}
+                </Input>
+              </div>
+              <button type="submit">New Lotto!</button>
+            </form>
+          </Col>
+        </Container>
+      </div>
+    );
+  }
 }
-

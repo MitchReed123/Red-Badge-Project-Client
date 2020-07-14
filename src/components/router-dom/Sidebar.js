@@ -22,12 +22,23 @@ const sidebar = (props) => {
     );
   }
 
+  function viewPages3() {
+    return localStorage.getItem("token") === null ? (
+      ""
+    ) : (
+      <li>
+        <Link to="/Destination">Destinations</Link>
+      </li>
+    );
+  }
+
   return (
     <div className="sitebar-all">
       <div className="sidebar">
         <div className="sidebar-list-styling">
           <ul className="sidebar-list list-unstyled">
             {viewPages()}
+            {viewPages3()}
             {viewPages2()}
           </ul>
         </div>
@@ -36,6 +47,9 @@ const sidebar = (props) => {
         <Switch>
           <Route exact path="/">
             {props.protectedViews()}
+          </Route>
+          <Route exact path="/Destination">
+            {props.protectedViewsTwo()}
           </Route>
           <Route exact path="/Admin">
             {props.protectViewsThree()}
