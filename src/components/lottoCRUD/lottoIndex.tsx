@@ -3,7 +3,26 @@ import React from "react";
 import LottoCreate from "./lottoCreate";
 // import LottoTable from "./lottoTable";
 import LottoEdit from "./lottoEdit";
-import { Row, Col, Table, Button } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
+import "./lottoIndex.css";
+
+
+
+import { withStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
+import DeleteIcon from '@material-ui/icons/DeleteSharp';
+import EditSharpIcon from '@material-ui/icons/EditSharp';
+
+import Tooltip from '@material-ui/core/Tooltip';
+
+
 type acceptedProps = {
   token: string | any;
 };
@@ -20,7 +39,80 @@ type valueTypes = {
   lottoEmpty: any;
   hyphen: string;
 };
-export default class LottoIndex extends React.Component<
+
+//STYLING 
+const styles = {
+  welcome: {
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "35%",
+    marginRight: "35%",
+    color: "#f2f2f2",
+    alignContent: "center",
+  },
+
+  root: {
+    width: "100%",
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    border: "10px solid rgba(69, 54, 179, 0.8)"
+  },
+
+  container: {
+    maxHeight: "auto",
+    backgroundColor: "#f2f2f2",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px"
+  },
+
+  tableHeader: {
+    width: "auto",
+    backgroundColor: "#4536b3",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px",
+    color: "#f2f2f2"
+  },
+
+  newLotto: {
+    backgroundColor: "#4536b3",
+    width: "100%",
+    // height: "700px",
+    marginRight: "30%",
+    marginLeft: "30%", 
+  },
+
+  toolTip: {
+    backgroundColor: "white",
+    color: 'rgba(0, 0, 0, 0.87)',
+    // boxShadow: "shadows[1]",
+    fontSize: "11"
+  }
+
+};
+
+// MATERIAL UI FIXED TABLE
+interface Column {
+  id: 'lottoNum' | 'nameOfLotto' | 'lottoPot' | 'location' | 'update' | 'delete';
+  label: string;
+  minWidth?: number;
+  align?: 'right';
+  format?: (value: number) => string;
+}
+
+const columns: Column[] = [
+  { id: 'lottoNum', label: 'Lottery Number', minWidth: 100 },
+  { id: 'nameOfLotto', label: 'Name of Lottery', minWidth: 100 },
+  { id: 'lottoPot', label: 'Lottery Pot Amount', minWidth: 100 },
+  { id: 'location', label: 'Lottery Location', minWidth: 100 },
+  { id: 'update', label: 'Update', minWidth: 100 },
+  { id: 'delete', label: 'Delete', minWidth: 100 },
+
+];
+
+
+class LottoIndex extends React.Component<
   acceptedProps,
   valueTypes
 > {
@@ -134,23 +226,23 @@ export default class LottoIndex extends React.Component<
           <td>{lotto.lottoPot}</td>
           <td>{lotto.location}</td>
           <td>
-            <Button
+          <Tooltip id="tool-tip" title="Update Lotto Info" arrow placement="bottom" style={styles.toolTip}>
+            <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLotto(lotto);
                 this.updateOn();
               }}
-            >
-              Update
-            </Button>
+            />
+          </Tooltip>  
           </td>
           <td>
-            <Button
+          <Tooltip id="tool-tip" title="Delete Lotto" arrow placement="bottom">
+            <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteLotto(lotto);
               }}
-            >
-              Delete
-            </Button>
+            />
+          </Tooltip>  
           </td>
         </tr>
       );
@@ -171,11 +263,11 @@ export default class LottoIndex extends React.Component<
       </h1>
     ) : localStorage.getItem("message") === "user succesfully logged in" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome Back {localStorage.getItem("username")} to your Lotto Page
+        Welcome Back {localStorage.getItem("username")}!
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome {localStorage.getItem("username")} to your Lottery Page
+        Welcome {localStorage.getItem("username")} to your Lottery Profile!
       </h1>
     ) : (
       "null"
@@ -185,27 +277,50 @@ export default class LottoIndex extends React.Component<
   render() {
     return (
       <div>
-        {this.Welcoming()}
-        <LottoCreate
-          token={this.props.token}
-          fetchLottos={this.fetchLottos}
-          // destinations={this.fetchLocos}
-        />
-        {/* <button onClick={this.handleClick}>Click Me</button> */}
-        <h1>{this.state.random}</h1>
         <Row>
-          <Col>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Lotto Number</th>
-                  <th>Name of Lottery</th>
-                  <th>Lottery Pot</th>
-                  <th>Lotto location</th>
-                </tr>
-              </thead>
-              <tbody>{this.lottoMapper()}</tbody>
-            </Table>
+          <div style={styles.welcome}>
+            {this.Welcoming()}
+          </div>
+        </Row>
+        <Row>
+        <Col md="7">
+          <h1 className="table-header">Your Lottery Numbers</h1>
+          {/* MATERIAL UI FIXED TABLE */}
+            <Paper style={styles.root}>
+              <TableContainer style={styles.container}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          // style={{ minWidth: column.minWidth }}
+                          style={styles.tableHeader}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.lottoMapper()}
+                    
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              
+            </Paper>
+            
+          </Col>
+          <Col md="5">
+            <LottoCreate 
+            token={this.props.token}
+            fetchLottos={this.fetchLottos}
+            // destinations={this.fetchLocos}
+          />
+          {/* <button onClick={this.handleClick}>Click Me</button> */}
+          <h1>{this.state.random}</h1>
           </Col>
         </Row>
 
@@ -223,3 +338,5 @@ export default class LottoIndex extends React.Component<
     );
   }
 }
+
+export default withStyles(styles)(LottoIndex);

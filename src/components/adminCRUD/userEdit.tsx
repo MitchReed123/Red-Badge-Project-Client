@@ -10,6 +10,7 @@ import {
   Button,
 } from "reactstrap";
 import * as bcrypt from "bcryptjs";
+import "./userEdit.css";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -70,15 +71,15 @@ export default class userEdit extends React.Component<
 
   render() {
     return (
-      <Modal isOpen={true}>
-        <ModalHeader>Edit a User</ModalHeader>
-        <ModalBody>
+      <Modal id="modal" isOpen={true}>
+        <ModalHeader id="edit-header">Edit a User</ModalHeader>
+        <ModalBody id="modal-body">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label htmlFor="username" id="username">
+              <Label htmlFor="username" id="edit-text">
                 Edit Username
               </Label>
-              <Input
+              <Input id="edit-input"
                 name="username"
                 required
                 value={this.state.editUsername}
@@ -89,11 +90,13 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="password" id="password">
+              <Label htmlFor="password" id="edit-text">
                 Edit PassWord
               </Label>
-              <Input
+              <Input id="edit-input"
                 name="password"
+                placeholder="Enter New Password"
+                // value={this.state.editPassword}
                 value={this.state.editPassword}
                 required
                 title="Required Field"
@@ -105,20 +108,20 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="userRole" id="userRole">
+              <Label htmlFor="userRole" id="edit-text">
                 Edit User Role
               </Label>
-              <Input
+              <Input id="edit-input"
                 name="userRole"
                 value={this.state.userRole}
                 onChange={(e) => this.setState({ userRole: e.target.value })}
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="firstName" id="firstName">
+              <Label htmlFor="firstName" id="edit-text">
                 Edit First Name
               </Label>
-              <Input
+              <Input id="edit-input"
                 name="firstName"
                 value={this.state.userFirstName}
                 onChange={(e) =>
@@ -127,10 +130,10 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="lastName" id="lastName">
+              <Label htmlFor="lastName" id="edit-text">
                 Edit Last Name
               </Label>
-              <Input
+              <Input id="edit-input"
                 name="lastName"
                 value={this.state.userLastName}
                 onChange={(e) =>
@@ -138,7 +141,7 @@ export default class userEdit extends React.Component<
                 }
               />
             </FormGroup>
-            <Button type="submit">Update user</Button>
+            <button id="edit-button" type="submit">Update User</button>
           </Form>
         </ModalBody>
       </Modal>

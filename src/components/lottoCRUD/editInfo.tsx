@@ -3,6 +3,8 @@ import * as bcrypt from "bcryptjs";
 import { Modal, Button, Input, Form, Col, Row } from "antd";
 import { Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { withStyles } from "@material-ui/core/styles";
+import "./editInfo.css";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -20,6 +22,59 @@ type valueTypes = {
   userFirstName: string;
   userLastName: string;
   visible: boolean;
+};
+
+//STYLING
+const styles = {
+  welcome: {
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "35%",
+    marginRight: "35%",
+    color: "#f2f2f2",
+    alignContent: "center",
+  },
+
+  header: {
+    // backgroundColor: "#f2f2f2",
+    // fontFamily: "MOMCAKE-BOLD",
+    // fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "400px",
+    marginRight: "400px",
+    // color: "#f2f2f2",
+    // alignContent: "center",
+  },
+
+  form: {
+    backgroundColor: "#4536b3",
+    fontFamily: "MOMCAKE-BOLD",
+    height: "600px",
+    // marginTop: "10px",
+    marginBottom: "40px",
+    marginLeft: "25%",
+    marginRight: "25%",
+    // color: "#f2f2f2",
+    // alignContent: "center",
+  },
+
+  updateButton: {
+    // marginLeft: "600px",
+    backgroundColor: "#fa5a57",
+    fontFamily: "MOMCAKE-BOLD",
+    border: "2px solid #fa5a57",
+    borderRadius: "2px",
+    height: "70px",
+    width: "250px",
+    color: "whitesmoke",
+    boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
+    cursor: "pointer",
+    fontSize: "20px",
+  },
 };
 
 const layout = {
@@ -49,10 +104,7 @@ const tests = {
   },
 };
 
-export default class EditInfo extends React.Component<
-  acceptedProps,
-  valueTypes
-> {
+class EditInfo extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
     this.state = {
@@ -115,70 +167,97 @@ export default class EditInfo extends React.Component<
 
   body = (
     <div>
-      <h4>Update Your Username/Password</h4>
-      <Form
-        {...layout}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={this.handleSubmit} //this.handlesubmit
-        onFinishFailed={this.onFinishFailed}
-        size="middle"
-      >
-        <Col span={24}>
-          <Row justify="center">
+      <Row>
+        <div style={styles.welcome}>
+          <h1>{this.Welcoming()}</h1>
+        </div>
+      </Row>
+      <Row>
+        <Form
+          style={styles.form}
+          // {...layout}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={this.handleSubmit} //this.handlesubmit
+          onFinishFailed={this.onFinishFailed}
+          // size="middle"
+        >
+          <Col>
+            {/* <Row justify="center"> */}
+            <h1 id="form-header">Enter new username: </h1>
             <Form.Item
-              style={{
-                width: "250px",
-                alignContent: "center",
-                alignItems: "center",
-              }}
-              label="username"
-              name="username"
-              help="Please enter a username"
+              // style={{
+              //   width: "250px",
+              //   alignContent: "center",
+              //   alignItems: "center",
+              // }}
+              // label="username"
+              // name="username"
+              // help="Please enter a username"
               initialValue={this.props.setUpdateUser.username}
               rules={[{ required: true, message: "please input a username" }]}
             >
               <Input
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
-                title="Must contain atleast one number and one uppercase and lowercase letter, and at least 4 or more characters"
+                value={this.props.setUpdateUser.username}
+                id="input"
                 onChange={(e) =>
                   this.setState({ editUsername: e.target.value })
                 }
               />
-            </Form.Item>
-          </Row>
-        </Col>
-        <Col span={24}>
-          <Row justify="center">
-            <Form.Item
-              label="password"
-              style={{ width: "250px" }}
-              name="password"
-              // initialValue={this.props.setUpdateUser.password}
-              help="Please enter a password"
-              rules={[{ required: true, message: "Please enter a password" }]}
-            >
+              <h1 id="form-header">Enter new password: </h1>
               <Input.Password
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
-                title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"
-                placeholder="New Password!"
+                id="input"
                 onChange={(e) =>
                   this.setState({ editPassword: e.target.value })
                 }
               />
+              {/* </Form.Item> */}
+              {/* </Row> */}
+              {/* </Col>
+          <Col id="col-two" span={24}> */}
+              {/* <Row justify="center"> */}
+              {/* <h1>Enter new password: </h1> */}
+              {/* <Form.Item
+                // label="password"
+                // style={{ width: "250px" }}
+                // name="password"
+                // initialValue={this.props.setUpdateUser.password}
+                // help="Please enter a password"
+                rules={[{ required: true, message: "Please enter a password" }]}
+              > */}
+              {/* <Input.Password id="input"
+                  onChange={(e) =>
+                    this.setState({ editPassword: e.target.value })
+                  }
+                /> */}
             </Form.Item>
-          </Row>
-        </Col>
-        <Col span={24}>
-          <Row justify="center">
-            <Button type="primary" htmlType="submit">
-              Update Info!
+            {/* </Row> */}
+            <Button htmlType="submit" style={styles.updateButton}>
+              Update
             </Button>
-          </Row>
-        </Col>
-      </Form>
+          </Col>
+        </Form>
+      </Row>
     </div>
   );
+
+  Welcoming() {
+    return localStorage.getItem("message") === null ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Sign up or Login to see your Ratings!
+      </h1>
+    ) : localStorage.getItem("message") === "user succesfully logged in" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Update Your Username/Password {localStorage.getItem("username")}!
+      </h1>
+    ) : localStorage.getItem("message") === "user created" ? (
+      <h1 id="messages" style={{ textAlign: "center" }}>
+        Welcome, {localStorage.getItem("username")}
+      </h1>
+    ) : (
+      "null"
+    );
+  }
 
   render() {
     return (
@@ -200,3 +279,5 @@ export default class EditInfo extends React.Component<
     );
   }
 }
+
+export default withStyles(styles)(EditInfo);

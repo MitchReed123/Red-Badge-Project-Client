@@ -12,6 +12,19 @@ type valueTypes = {
   BTCPrice: number | any;
   BTCChange: string;
 };
+
+// STYLING
+const styles = {
+  navButton: {
+    backgroundColor: "#a9dcbe",
+    border: "2px solid #a9dcbe",
+    fontFamily: "MOMCAKE-BOLD",
+    color: "whitesmoke",
+    fontSize: "22px",
+    // text: "center"
+  }
+};
+
 export default class App extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
@@ -106,7 +119,7 @@ export default class App extends React.Component<acceptedProps, valueTypes> {
   };
   render() {
     return (
-      <Button type="primary" onClick={this.openNotification}>
+      <Button  onClick={this.openNotification} style={styles.navButton}>
         LTC/BTC
       </Button>
     );

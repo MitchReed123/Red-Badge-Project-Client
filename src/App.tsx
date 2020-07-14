@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EditUser from "./components/lottoCRUD/editInfo";
 // import ResetPass from "../src/components/router-dom/updatePassword";
 
+
 type valueTypes = {
   setUsername: string | any;
   setToken: string | any;
