@@ -139,6 +139,8 @@ export default class EditInfo extends React.Component<
               rules={[{ required: true, message: "please input a username" }]}
             >
               <Input
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
+                title="Must contain atleast one number and one uppercase and lowercase letter, and at least 4 or more characters"
                 onChange={(e) =>
                   this.setState({ editUsername: e.target.value })
                 }
@@ -157,6 +159,9 @@ export default class EditInfo extends React.Component<
               rules={[{ required: true, message: "Please enter a password" }]}
             >
               <Input.Password
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"
+                placeholder="New Password!"
                 onChange={(e) =>
                   this.setState({ editPassword: e.target.value })
                 }
@@ -164,9 +169,13 @@ export default class EditInfo extends React.Component<
             </Form.Item>
           </Row>
         </Col>
-        <Button type="primary" htmlType="submit">
-          Testing
-        </Button>
+        <Col span={24}>
+          <Row justify="center">
+            <Button type="primary" htmlType="submit">
+              Update Info!
+            </Button>
+          </Row>
+        </Col>
       </Form>
     </div>
   );

@@ -9,7 +9,7 @@
 //   // this is the deployed react application
 //   case "front end url":
 //     // this is the full url of the deployed API(Server side)
-//     APIURL = "server api url";
+//     APIURL = "https://git.heroku.com/lottoserver.git";
 //   // testing
 // }
 
