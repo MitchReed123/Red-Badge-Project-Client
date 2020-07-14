@@ -1,4 +1,4 @@
-/* ANTD DESIGN */
+/* ANTD */
 @import "~antd/dist/antd.css";
 
 .App {
@@ -18,22 +18,11 @@ body{
 }
 
 
-
 @font-face {
   font-family: MOMCAKE-BOLD;
   src: url(./assests/MOMCAKE-Bold.otf);
 }
 
-
-@font-face {
-  font-family: Nanami-3D-Medium;
-  src: url(./assests/Nanami-3D-Medium.otf);
-}
-
-@font-face {
-  font-family: RoundorNonCommercial;
-  src: url(./assests/RoundorNonCommercial.otf);
-}
 
 
 @font-face {

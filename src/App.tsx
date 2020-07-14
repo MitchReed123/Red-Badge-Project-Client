@@ -62,44 +62,8 @@ export default class App extends React.Component<{}, valueTypes> {
     }
   }
 
-  userMapper = () => {
-    return this.state.userTable.map((user: any, index) => {
-      return (
-        <>
-          <h1>{user.username}</h1>
-          <h1>{user.password}</h1>
-          <Button
-            onClick={() => {
-              this.editUpdateUser(user);
-              this.updateOn();
-            }}
-          >
-            Update Info!
-          </Button>
-        </>
-      );
-    });
-  };
-
-  fetchUsers = () => {
-    fetch("http://localhost:3000/user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((userData) => {
-        console.log("Pure user data", userData);
-        this.setState({
-          userTable: userData.user,
-        });
-        console.log("State Variable Data", this.state.userTable);
-      });
-  };
-
   editUpdateUser = (users: any) => {
-    console.log(users);
+    console.log("USERS", users);
     this.setState({ setUpdateUser: users });
   };
 
@@ -192,8 +156,8 @@ export default class App extends React.Component<{}, valueTypes> {
       <EditUser
         updateOff={this.updateOff}
         token={this.updateToken}
-        fetchUsers={this.fetchUsers}
         setUpdateUser={this.state.setUpdateUser}
+        editUpdateUser={this.editUpdateUser}
       />
     ) : (
       <Auth
@@ -217,6 +181,13 @@ export default class App extends React.Component<{}, valueTypes> {
             protectedViewsTwo={this.protectedViewsTwo}
             protectViewsThree={this.protectViewsThree}
             protectViewsFour={this.protectedViewsFour}
+            // fetchUsers={this.fetchUsers}
+            updateOn={this.updateOn}
+            updateOff={this.updateOff}
+            dataTable={this.state.userTable}
+            setUpdateUser={this.state.setUpdateUser}
+            // userMapper={this.userMapper}
+            editUpdateUser={this.editUpdateUser}
             // protectViewsFour={this.protectedViewsFour}
           />
         </Router>

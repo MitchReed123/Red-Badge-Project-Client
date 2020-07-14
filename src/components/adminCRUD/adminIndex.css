@@ -1,36 +1,29 @@
-/* #messages {
+/* WELCOME MESSAGE */
+#messages {
     color: #f2f2f2;
-    
-} */
-
-#welcome-message {
-    text-align: center;
-    color: #f2f2f2;
-    font-family: MOMCAKE-BOLD;
-    margin-bottom: 40px;
+    font-size: 60px;
 }
 
-#add-newuser {
-    color: #f2f2f2;
-}
-
+/* TABLES */
 .table-header {
     color: #f2f2f2;
     font-family: MOMCAKE-BOLD;
-    background-color: rgba(253, 178, 13, 0.8);
+    background-color: rgba(253, 178, 13, 0.9);
 }
 
-#tool-tip {
-    background-color: #fdb20d;
-}
-
-#user-table {
+/* #user-table {
     background-color: #a9dcbe;
     width: 1000px;
 }
 
 #destination-table {
     background-color: #fdb20d;
+} */
+
+/* ADD NEW USER FORM */
+#add-newuser {
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
 }
 
 #newuser-input {
@@ -39,4 +32,26 @@
     height: 70px;
     border: 2px solid #f2f2f2;
     border-radius: 1px;
+}
+
+/* EXTRAS */
+#tool-tip {
+    background-color: #fdb20d;
+}
+
+/* LAYOUT */
+#row-one {
+    background-color: #a9dcbe;
+}
+
+#col-one {
+    background-color: #fdb20d;
+}
+
+#col-two {
+    background-color: #f2f2f2;
+}
+
+#row-two {
+    background-color: #fa5a57;
 }

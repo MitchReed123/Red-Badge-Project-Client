@@ -119,8 +119,28 @@ button {
       margin-top: 50px;
   }
 
+  #switch-button {
+      margin-top: 50px;
+  }
+
 
   #toggle-button {
-      margin-top: 20px;
+      /* margin-top: 5px; */
       margin-bottom: 40px;
   }
+
+  #row-one {
+    background-color: #a9dcbe;
+}
+
+#col-one {
+    background-color: #fdb20d;
+}
+
+#col-two {
+    background-color: #a9dcbe;
+}
+
+#row-two {
+    background-color: #fa5a57;
+}

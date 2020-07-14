@@ -1,8 +1,8 @@
 // available to userRole = "user"
 // this is where you GET, http://localhost:3000/destination GET
 import React from "react";
-
-import { Button, Row, Col, Container, Input, Label } from "reactstrap";
+import { Row, Col, Container, Input, Label, Form} from "reactstrap";
+import "./destinationIndex.css";
 
 // import { Button, Row, Col, Container } from "reactstrap";
 import { TextField, FormLabel } from "@material-ui/core/";
@@ -14,9 +14,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import "./destinationIndex.css";
 
 
+
+import Maps from "./maps";
+import { findByLabelText } from "@testing-library/react";
+// import {Map, GoogleApiWrapper} from 'google-maps-react'
 
 type acceptedProps = {
   token: any;
@@ -35,10 +38,22 @@ type valueTypes = {
 
 //STYLING 
 const styles = {
+  welcome: {
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "35%",
+    marginRight: "35%",
+    color: "#f2f2f2",
+    alignContent: "center",
+  },
+
   root: {
-    width: "1000px",
-    backgroundColor: "#f2f2f2",
-    border: "10px solid #4536b3"
+    width: "100%",
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    border: "10px solid rgba(69, 54, 179, 0.8)"
   },
 
   container: {
@@ -57,13 +72,21 @@ const styles = {
   },
 
   newLocationForm: {
-    backgroundColor: "#4536b3",
-    width: "50%",
-    height: "400px",
-    marginRight: "30%",
-    marginLeft: "30%",
-    
-  }
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    width: "60%",
+    height: "500px",
+    // marginRight: "20px",
+    marginLeft: "5%",
+    marginTop: "5%"
+    // justifyContent: "center"
+  },
+
+  // map: {
+  //   backgroundColor: "#4536b3",
+  //   width: "80%",
+  //   marginRight: "5%",
+  //   marginLeft: "5%",
+  // }
 };
 
 // MATERIAL UI FIXED TABLE
@@ -185,11 +208,11 @@ class Destinations extends React.Component<
       </h1>
     ) : localStorage.getItem("message") === "user succesfully logged in" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        All Locations for you {localStorage.getItem("username")}
+        Lottery locations for {localStorage.getItem("username")}!
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome,{localStorage.getItem("username")}
+        Welcome, {localStorage.getItem("username")}
       </h1>
     ) : (
       "null"
@@ -198,12 +221,16 @@ class Destinations extends React.Component<
   render() {
     return (
       <div>
-        <h1>{this.Welcoming()}</h1>
-        <Row>
-          <Col>
+        <Row >
+          <div style={styles.welcome}>
+            <h1>{this.Welcoming()}</h1>
+          </div>
+        </Row>
+        <Row xs="12" >
+        <Col md="7" id="col-one" style={styles.root}>
           <h1 className="table-header">Places to Buy Lottery Tickets</h1>
              {/* MATERIAL UI FIXED TABLE */}
-             <Paper style={styles.root}>
+            <Paper >
             <TableContainer style={styles.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -222,46 +249,18 @@ class Destinations extends React.Component<
                 </TableHead>
                 <TableBody>
                   {this.destinationWrapper()}
-                  {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })} */}
                 </TableBody>
               </Table>
             </TableContainer>
-            {/* <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            /> */}
+            
           </Paper>
-            {/* <Table id="location-table">
-              <thead>
-                <tr>
-                  <th>Lottery Location</th>
-                  <th>Lottery Address</th>
-                </tr>
-              </thead>
-              <tbody>{this.destinationWrapper()}</tbody>
-            </Table> */}
+            
           </Col>
-          <Col>
-          <Container>
-              <form noValidate autoComplete="off" onSubmit={this.handleSubmit} style={styles.newLocationForm}>
+          <Col md="4" id="col-two" style={styles.newLocationForm}>
+          {/* <Row> */}
+
+          <Container >
+              <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
                 <Label id="add-newlocation">Add A Lotto Location!</Label>
               {/* <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
                 <FormLabel>Add A Lotto Location!</FormLabel> */}
@@ -270,38 +269,38 @@ class Destinations extends React.Component<
                     type="text"
                     name="Lotto Location Name"
                     placeholder="Location"
-                    // label="Lotto Location Name"
-                    // id="outlined-margin-normal"
-                    // defaultValue="Location Name"
-                    // className={classes.textField}
-                    // margin="normal"
-                    // variant="outlined"
                     onChange={(e) =>
                       this.setState({ lottoLocation: e.target.value })
                     }
                     value={this.state.lottoLocation}
                   />
-                  <br />
+                  {/* <br /> */}
                   <Input id="newlocation-input"
                     type="text"
                     name="Lotto Location Address"
                     placeholder="Location Address"
-                    // label="Lotto Address"
-                    // id="outlined-margin-normal"
-                    // defaultValue="Location Address"
-                    // margin="normal"
-                    // variant="outlined"
                     onChange={(e) =>
                       this.setState({ lottoAddress: e.target.value })
                     }
                     value={this.state.lottoAddress}
                   />
-                  <button type="submit">Add New Location!</button>
+                  <button id="newLocation-button" type="submit">Add New Location!</button>
                 </div>
-              </form>
-          </Container>
-          </Col>
+              </Form>
+              </Container>
+          {/* </Row> */}
+            </Col>
         </Row>
+        
+        <Row md="9" >
+          {/* <Col style={styles.map}> */}
+              {/* <Container > */}
+                <Maps />
+                {/* this displays all of our locations on a google map, still working on it tho */}
+              {/* </Container> */}
+            {/* </Col>          */}
+          </Row>
+       
        
       </div>
     );

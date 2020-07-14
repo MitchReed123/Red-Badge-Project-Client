@@ -1,13 +1,17 @@
 import React from "react";
 import {Container, Row, Col} from 'reactstrap';
+import "./Sitebar.css";
+
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+
 import { Route, Link, Switch } from "react-router-dom";
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Divider } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+
 import Apps from "./AssignedFeature/mitch";
 import Bored from "./AssignedFeature/brittany";
 import Taco from "./AssignedFeature/mizue";
@@ -25,7 +29,7 @@ import Taco from "./AssignedFeature/mizue";
 // import { useHistory } from "react-router-dom";
 // import { isNumber } from "util";
 // import * as bcrypt from "bcryptjs";
-// import EditUser from "./editInfo";
+import EditUser from "./editInfo";
 // const salt = bcrypt.genSaltSync(10);
 
 type acceptedProps = {
@@ -36,6 +40,13 @@ type acceptedProps = {
   protectViewsThree: any;
   updateUsername: any;
   protectViewsFour: any;
+  // fetchUsers: any;
+  editUpdateUser: any;
+  updateOn: any;
+  updateOff: any;
+  dataTable: any;
+  setUpdateUser: any;
+  // userMapper: any;
 };
 
 type valueTypes = {
@@ -43,6 +54,8 @@ type valueTypes = {
   nextDraw1: string;
   lotto2: string;
   setOpen: boolean;
+  userTable: [];
+  setUpdateActive: boolean;
 };
 
 // MATERIAL STYLES 
@@ -56,23 +69,65 @@ const styles = {
 
   logoutButton: {
     marginLeft: "600px",
-    // backgroundColor: "#fa5a57",
-    // fontFamily: "MOMCAKE-BOLD",
-    // marginTop: "1em",
-    // border: "2px solid #fa5a57",
-    // borderRadius: "2px",
-    // height: "70px",
-    // width: "250px",
-    // color: "whitesmoke",
-    // boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
-    // cursor: "pointer",
-    // fontSize: "20px",
+    backgroundColor: "#fa5a57",
+    fontFamily: "MOMCAKE-BOLD",
+    marginTop: "1em",
+    border: "2px solid #fa5a57",
+    borderRadius: "2px",
+    height: "70px",
+    width: "250px",
+    color: "whitesmoke",
+    boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
+    cursor: "pointer",
+    fontSize: "20px",
   }, 
 
-  menuButton: {
-    backgroundColor: "#f2f2f2",
+  updateButton: {
+    backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
+    marginTop: "1em",
+    border: "2px solid #fa5a57",
+    borderRadius: "2px",
+    height: "70px",
+    width: "250px",
+    color: "whitesmoke",
+    boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
+    cursor: "pointer",
+    fontSize: "20px",
     marginLeft: "60px"
+  },
+
+  menuButton: {
+    backgroundColor: "#fa5a57",
+    fontFamily: "MOMCAKE-BOLD",
+    marginTop: "1em",
+    border: "2px solid #fa5a57",
+    borderRadius: "2px",
+    height: "70px",
+    width: "250px",
+    color: "whitesmoke",
+    boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
+    cursor: "pointer",
+    fontSize: "20px",
+    marginLeft: "60px"
+  },
+
+  // menuText: {
+  //   fontFamily: "MOMCAKE-BOLD",
+  // },
+
+  navButton: {
+    backgroundColor: "#fa5a57",
+    fontFamily: "MOMCAKE-BOLD",
+    color: "whitesmoke",
+    fontSize: "20px"
+  },
+
+  navDivider: {
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "30px",
+    margin: "15px"
+    // justifyContent: "center"
   },
 
   typography: {
@@ -83,7 +138,7 @@ const styles = {
 };
 
 
-class Sitebar extends React.Component<acceptedProps> {
+class Sitebar extends React.Component<acceptedProps, valueTypes> {
 
 // export default class Sitebar extends React.Component<
 //   acceptedProps,
@@ -97,6 +152,8 @@ class Sitebar extends React.Component<acceptedProps> {
       nextDraw1: "",
       lotto2: "",
       setOpen: false,
+      userTable: [],
+      setUpdateActive: false,
     };
   }
 
@@ -112,16 +169,16 @@ class Sitebar extends React.Component<acceptedProps> {
     return localStorage.getItem("token") === null ? (
       ""
     ) : (
-      <Button style={{ color: "black" }}>
-        <Link to="/">Home</Link>
+      <Button style={styles.navButton}>
+        <Link style={{ textDecoration: 'none', color: 'white' }} to="/">Home</Link>
       </Button>
     );
   }
 
   viewPages2() {
     return localStorage.getItem("userRole") === "Admin" ? (
-      <Button style={{ color: "black" }}>
-        <Link to="/Admin">Admin</Link>
+      <Button style={styles.navButton}>
+        <Link style={{ textDecoration: 'none', color: 'white' }} to="/Admin">Admin</Link>
       </Button>
     ) : (
       ""
@@ -132,19 +189,27 @@ class Sitebar extends React.Component<acceptedProps> {
     return localStorage.getItem("token") === null ? (
       ""
     ) : (
-      <Button style={{ color: "black" }}>
-        <Link to="/Destination">Destinations</Link>
+      <Button style={styles.navButton}>
+        <Link style={{ textDecoration: 'none', color: 'white' }} to="/Destination">Lottery Ticket Locations</Link>
       </Button>
     );
   }
 
   viewPages4() {
-    return localStorage.getItem("token") === null ? (
-      ""
-    ) : (
-      <Button>
-        <Link to="/UpdateInfo">Edit Info</Link>
+    return localStorage.getItem("userRole") === "user" ? (
+      <Button style={styles.navButton}>
+        <Link style={{ textDecoration: 'none', color: 'white' }} to="/UpdateInfo">Edit Info</Link>
       </Button>
+    ) : (
+      ""
+    );
+  }
+
+  validationComparison() {
+    return localStorage.getItem("userRole") === "Admin" ? (
+      <Menu.Item key="5">{this.viewPages2()}</Menu.Item>
+    ) : (
+      ""
     );
   }
   testing() {
@@ -158,35 +223,60 @@ class Sitebar extends React.Component<acceptedProps> {
   // DROPDOWN MENU
   menu = (
     <Menu>
-      <Menu.Item key="0">
+      <Menu.Item key="3">{this.viewPages()}</Menu.Item>
+      {/* <Menu.Divider /> */}
+      <Menu.Item key="4">{this.viewPages3()}</Menu.Item>
+      {this.validationComparison()}
+      {/* <Menu.Divider /> */}
+      <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
+      <hr />
+      <p style={styles.navDivider}>Check out these APIs!</p>
+      {/* <Divider orientation="left" dashed={true}>
+        Nav
+      </Divider> */}
+      <Menu.Item key="0" >
         <Apps />
       </Menu.Item>
-      <Menu.Divider />
+      {/* <Menu.Divider /> */}
       <Menu.Item key="1">
         <Bored />
       </Menu.Item>
-      <Menu.Divider />
+      {/* <Menu.Divider /> */}
       <Menu.Item key="2">
         <Taco />
       </Menu.Item>
-      <Menu.Divider />
-      <h3>APIS</h3>
-      <Menu.Divider />
-      <Menu.Item key="3">{this.viewPages()}</Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="4">{this.viewPages3()}</Menu.Item>
-      <Menu.Divider />
-      {this.testing()}
-      <Menu.Divider />
-      <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
     </Menu>
   );
+  // menu = (
+  //   <Menu>
+  //     <Menu.Item key="0">
+  //       <Apps />
+  //     </Menu.Item>
+  //     <Menu.Divider />
+  //     <Menu.Item key="1">
+  //       <Bored />
+  //     </Menu.Item>
+  //     <Menu.Divider />
+  //     <Menu.Item key="2">
+  //       <Taco />
+  //     </Menu.Item>
+  //     <Divider orientation="left" dashed={true}>
+  //       Nav
+  //     </Divider>
+  //     <Menu.Item key="3">{this.viewPages()}</Menu.Item>
+  //     <Menu.Divider />
+  //     <Menu.Item key="4">{this.viewPages3()}</Menu.Item>
+  //     {this.validationComparison()}
+  //     <Menu.Divider />
+  //     <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
+  //   </Menu>
+  // );
 
   logoutBtn() {
     return localStorage.getItem("token") === null ? (
       ""
     ) : (
-      // STYLING HERE
+      // NAVBAR STYLING HERE
       <AppBar position="static" style={styles.root}>
         <Toolbar className="classes.color">
           <Typography variant="h6" id="navTitle" style={styles.typography}>
@@ -196,7 +286,7 @@ class Sitebar extends React.Component<acceptedProps> {
           {this.viewPages3()}
           {this.viewPages2()} */}
           {/* {this.viewPages4()} */}
-          <Dropdown overlay={this.menu} trigger={["click"]}>
+          <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
             <Button style={styles.menuButton}
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
@@ -205,19 +295,55 @@ class Sitebar extends React.Component<acceptedProps> {
               Menu <DownOutlined />
             </Button>
           </Dropdown>
-
-          <button id="logout-button" style={styles.logoutButton} onClick={this.props.clickLogout}>Logout</button>
+          {/* <button style={styles.updateButton}>{this.userMapper()}</button> */}
+          {this.userMapper()}
           {/* <Button> {this.viewPages4()}TESTING </Button> */}
+          <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
         </Toolbar>
       </AppBar>
     );
   }
 
-  componentWillMount() {}
+  fetchUsers = () => {
+    fetch(`http://localhost:3000/user/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((userData) => {
+        console.log("Pure user data 15", userData);
+        this.setState({
+          userTable: userData.user,
+        });
+        console.log("State Variable Data 15", this.state.userTable);
+      });
+  };
+
+  userMapper = () => {
+    return this.state.userTable.map((user: any, index) => {
+      return user.username === localStorage.getItem("username") ? (
+        <button style={styles.updateButton}
+          // name="edit info"
+          // defaultValue="Edit Info"
+          onClick={() => {
+            this.props.editUpdateUser(user);
+            this.props.updateOn();
+          }}
+        >
+          <Link style={{ textDecoration: 'none', color: 'white' }} to="UpdateInfo"  >Update Profile</Link>
+          {/* style={styles.updateButton} */}
+        </button>
+      ) : (
+        ""
+      );
+    });
+  };
 
   componentDidMount() {
-    // this.fetchUsers();
-    // this.userMapper();
+    this.fetchUsers();
+    this.userMapper();
   }
 
   render() {
@@ -250,19 +376,10 @@ class Sitebar extends React.Component<acceptedProps> {
             {this.props.protectViewsThree()}
           </Route>
           <Route exact path="/UpdateInfo">
+            {/* {this.userMapper()} */}
             {this.props.protectViewsFour()}
           </Route>
         </Switch>
-        {/* {this.state.setUpdateActive ? (
-          <EditInfo
-            userMapper={this.userMapper}
-            updateOff={this.updateOff}
-            fetchUsers={this.fetchUsers}
-            setUpdateUser={this.state.setUpdateUser}
-          />
-        ) : (
-          <></>
-        )} */}
       </div>
     );
   }

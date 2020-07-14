@@ -8,27 +8,37 @@ import React from "react";
 // ANTD 
 import { Button, notification } from "antd";
 
-// MATERIAL UI TEST
-// const styles = {
-//     root: {
-//       padding: "10px",
-//       fontFamily: "MOMCAKE-BOLD",
-//       color: "black",
-//       fontSize: "20px",
-//       backgroundColor: "#f2f2f2"
-//     },
+// STYLING
+const styles = {
+  navButton: {
+    backgroundColor: "#4536b3",
+    border: "2px solid #4536b3",
+    fontFamily: "MOMCAKE-BOLD",
+    color: "whitesmoke",
+    fontSize: "22px",
+    // text: "center"
+  }
+};
 
-//     header: {
-//         color: "#f2f2f2"
-//     }
-// };
+    // root: {
+    //   padding: "10px",
+    //   fontFamily: "MOMCAKE-BOLD",
+    //   color: "black",
+    //   fontSize: "20px",
+    //   backgroundColor: "#f2f2f2"
+    // },
+
+    // header: {
+    //     color: "#f2f2f2"
+    // }
+
 
 type acceptedProps = {
   // no token
 };
 
 type valueTypes = {
-  // these will match this.state 
+  // will match this.state 
     activity: string;
     type: string;
     participants: null;
@@ -81,7 +91,7 @@ export default class Bored extends React.Component<acceptedProps, valueTypes> {
   render() {
     return (
       <div>
-        <Button onClick={this.openNotification}>BORED?</Button>
+        <Button onClick={this.openNotification} style={styles.navButton}>BORED?</Button>
        {/* <h1 style={styles.header}>BORED API</h1>
                 <SnackbarContent action={action} style={styles.root}
                     message={this.state.activity}

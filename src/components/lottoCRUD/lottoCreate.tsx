@@ -140,21 +140,17 @@ export default class LottoCreate extends React.Component<
   render() {
     return (
       <div>
-        <Container>
+        <Container id="form">
+          <h1 className="header">Generate a Lotto Number!</h1>
           <Col>
             <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-              <FormLabel>Click the button to generate a new lotto number then fill in the form to add to your lottery numbers. </FormLabel>
+              <p className="generator-info">Click the button to generate a new lotto number then fill in the form to add to your lottery numbers. </p>
               <div>
                 <Input id="newlotto-input"
                   type="text"
                   name="Lotto Number"
-                  placeholder="Lotto Number"
-                  // label="Lotto Number"
-                  // id="outlined-margin-normal"
-                  // defaultValue="Lotto Num"
-                  // margin="normal"
-                  // variant="outlined"
-                  // disabled
+                  placeholder="Generated Lottery Number"
+                
                   onChange={(e: any) =>
                     this.setState({ lottoNum: e.target.value })
                   }
@@ -164,12 +160,8 @@ export default class LottoCreate extends React.Component<
                 <Input id="newlotto-input"
                   type="text"
                   name="Name of lotto"
-                  placeholder="Name of lotto"
-                  // label="Name of lotto"
-                  // id="outlined-margin-normal"
-                  // defaultValue="Name of Lotto"
-                  // margin="normal"
-                  // variant="outlined"
+                  placeholder="Name of Lottery"
+    
                   onChange={(e) =>
                     this.setState({ nameOfLotto: e.target.value })
                   }
@@ -178,12 +170,8 @@ export default class LottoCreate extends React.Component<
                 <Input id="newlotto-input"
                   type="text"
                   name="Lotto Pot"
-                  placeholder="Lotto Pot"
-                  // label="Lotto Pot"
-                  // id="outlined-margin-normal"
-                  // defaultValue="Lotto Pot"
-                  // margin="normal"
-                  // variant="outlined"
+                  placeholder="Pot Amount"
+                  
                   onChange={(e) => this.setState({ lottoPot: e.target.value })}
                   value={this.state.lottoPot}
                 />
@@ -194,7 +182,7 @@ export default class LottoCreate extends React.Component<
                   value={this.state.location}
                   type="select"
                 >
-                  <option>Select a Location!</option>
+                  <option>Select a Lottery Ticket Location!</option>
                   {this.state.destinationTable.map((loco: any, index: any) => (
                     <option key={index}>
                       {loco.lottoLocation}, {loco.lottoAddress}

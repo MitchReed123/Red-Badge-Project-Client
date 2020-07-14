@@ -1,15 +1,14 @@
 // both tables will come fron the User table and the Destination Table. Admin Destination/User will have update/delete power on both tables
 //normal imports
 import React from "react";
-// import destinationTable from "../destinationsCRUD/destinationTable";
-// import DestinationUpdate from "../destinationsCRUD/destinationUpdate";
-// import DestinationCreate from "../destinationsCRUD/destinationCreate";
+import { Button, Row, Col, Container, Label, Form, Input } from "reactstrap";
+
 import UserEdit from "./userEdit";
 import DestinationEdit from "./destinationEdit";
 import "./adminIndex.css";
 
 
-//Style imports
+//MATERIAL IMPORTS
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -19,14 +18,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import TablePagination from '@material-ui/core/TablePagination';
 
 import DeleteIcon from '@material-ui/icons/DeleteSharp';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { Button, Row, Col, Container, Label, Form, Input } from "reactstrap";
 
 
 type acceptedProps = {
@@ -49,17 +46,22 @@ type valueTypes = {
 
 //STYLING 
 const styles = {
-  userRoot: {
-    width: "1000px",
-    backgroundColor: "#f2f2f2",
-    // fontFamily: "MOMCAKE-BOLD",
-    border: "10px solid #4536b3"
+  welcome: {
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "35%",
+    marginRight: "35%",
+    color: "#f2f2f2",
+    alignContent: "center",
   },
-
-  locationRoot: {
-    width: "1000px",
-    backgroundColor: "#f2f2f2",
-    border: "10px solid #4536b3"
+  
+  userRoot: {
+    width: "100%",
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    border: "10px solid rgba(69, 54, 179, 0.8)"
   },
   
   userContainer: {
@@ -67,6 +69,19 @@ const styles = {
     backgroundColor: "#f2f2f2",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px"
+  },
+
+  locationRoot: {
+    // width: "1000px",
+    // backgroundColor: "#f2f2f2",
+    // border: "10px solid #4536b3",
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    width: "80%",
+    height: "70%",
+    marginLeft: "5%",
+    marginRight: "5%",
+    border: "10px solid #4536b3"
+
   },
 
   locationContainer: {
@@ -85,11 +100,12 @@ const styles = {
   },
 
   newUserForm: {
-    backgroundColor: "#4536b3",
-    width: "50%",
-    height: "300px",
-    marginRight: "30%",
-    marginLeft: "30%", 
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    width: "60%",
+    height: "400px",
+    // marginRight: "20px",
+    marginLeft: "5%",
+    marginTop: "5%"
   },
 
   toolTip: {
@@ -133,30 +149,12 @@ interface locationColumn {
 }
 
 const locationcolumns: locationColumn[] = [
-  { id: 'lottoLocation', label: 'Lotto Location', minWidth: 150 },
-  { id: 'lottoAddress', label: 'Lotto Address', minWidth: 150 },
+  { id: 'lottoLocation', label: 'Lottery Location', minWidth: 150 },
+  { id: 'lottoAddress', label: 'Lottery Address', minWidth: 150 },
   { id: 'update', label: 'Update', minWidth: 150 },
   { id: 'delete', label: 'Delete', minWidth: 150 },
 
 ];
-// interface Data {
-//   username: string;
-//   password: string;
-//   firstName: string;
-//   lastName: string;
-  
-// }
-
-// function createData(username: string, password: string, firstName: string, lastName: string): Data {
-//   return { username, password, firstName, lastName };
-// }
-
-// const rows = [
-//   createData('India', 'IN', 'tiger', 'please'),
-//   createData('China', 'CN', 'tiger', 'tiger'),
-//   createData('Italy', 'IT', 'tiger', 'tiger'),
-//   createData('United States', 'US', 'tiger', 'tiger')
-// ];
 
 
 // ADMIN COMPONENT
@@ -203,21 +201,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
     this.setState({ SetUpdateActiveLoco: false });
   };
 
-  // MATERIAL UI TABLE PAGINATION
-
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  // handleChangePage = (event: unknown, newPage: number) => {
-  //   this.setState({setPage(newPage)});
-  // };
-
-  // handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   this.setState({setRowsPerPage(+event.target.value);
-  //     setPage(0)});
-  // };
-
-
+  
 
   //ADDS DELETE BUTTON TO USER TABLE
   deleteUser = (user: any) => {
@@ -329,7 +313,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Tooltip>
           </td>
           <td>
-          <Tooltip title="Delete User" >
+          <Tooltip id="tool-tip" title="Delete User" arrow placement="bottom" style={styles.toolTip}>
             <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteUser(user);
@@ -351,7 +335,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
-          <Tooltip title="Update Location Info" arrow placement="bottom">
+          <Tooltip id="tool-tip" title="Update Location Info" arrow placement="bottom">
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLocation(location);
@@ -361,7 +345,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Tooltip>    
           </td>
           <td>
-          <Tooltip title="Delete Location" >
+          <Tooltip id="tool-tip" title="Delete Location" arrow placement="bottom">
             <DeleteIcon fontSize="large"
               onClick={() => {
                 this.deleteLoco(location);
@@ -412,19 +396,20 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   render() {
     return (
       <div>
-        {/* <Row> */}
-          <h1 id="welcome-message">{this.Welcoming()}</h1>
-        {/* </Row> */}
-
+        <Row lg="12">
+          <div style={styles.welcome}>
+            <h1>{this.Welcoming()}</h1>
+          </div>
+        </Row>
 
         {/* {this.userInfoFetch()}
 
         {this.DestinationInfoFetch()} */}
-        <Row>
-          <Col>
+        {/* USER TABLE */}
+        <Row >
+        <Col md="8" id="col-one" style={styles.userRoot}>
             <h1 className="table-header">User Info</h1>
-            {/* MATERIAL UI FIXED TABLE */}
-            <Paper style={styles.userRoot}>
+            <Paper >
             <TableContainer style={styles.userContainer}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -442,40 +427,17 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
                   </TableRow>
                 </TableHead>
                 <TableBody >
-                  {this.userWrapper()}
-                  {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })} */}
+                  {this.userWrapper()}                 
                 </TableBody>
-
               </Table>
             </TableContainer>
-            {/* <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            /> */}
           </Paper>
           </Col>
-          <Col>
-          {/* ADD NEW USER FORM   */}
+
+          {/* ADD NEW USER FORM */}
+          <Col md="3" id="col-two" style={styles.newUserForm}>
           {/* <h1 id="signup-newuser">Sign up a New User</h1> */}
-          <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} style={styles.newUserForm}>
+          <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
             <div>
               <h1 id="add-newuser">Add a New User</h1>
               <Input id="newuser-input"
@@ -483,9 +445,6 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
                 type="text"
                 name="username"
                 placeholder="Username"
-                // label="Username"
-                // defaultValue="Username"
-                // variant="outlined"
                 onChange={(e) => this.setState({ username: e.target.value })}
                 value={this.state.username}
               />
@@ -493,10 +452,6 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
                 type="text"
                 name="username"
                 placeholder="Password"
-                // id="outlined-margin-normal"
-                // label="Password"
-                // defaultValue="Password"
-                // variant="outlined"
                 onChange={(e) => this.setState({ password: e.target.value })}
                 value={this.state.password}
               />
@@ -505,12 +460,12 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Form>
           </Col>
         </Row>
-        <Row>
         
-        <Col>
+        <Row md="9" >
+          {/* DESTINATION TABLE */}
+        <Col style={styles.locationRoot}>
         <h1 className="table-header">Location Info</h1>
-        {/* DESTINATION TABLE */}
-        <Paper style={styles.locationRoot}>
+        <Paper >
             <TableContainer style={styles.locationContainer}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -529,54 +484,14 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
                 </TableHead>
                 <TableBody >
                   {this.destinationWrapper()}
-                  {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })} */}
+                 
                 </TableBody>
               </Table>
             </TableContainer>
-            {/* <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            /> */}
+            
           </Paper>
         </Col>
-          {/* DESTINATION TABLE */}
-          {/* <Container id="destination-table">
-            <Row>
-              <Col md="11">
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Location</th>
-                      <th>Address</th>
-                      <th>Update</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.fetchUsers}</tbody>
-                  This will also be apart of what you need to do
-                  <tbody>{this.destinationWrapper()}</tbody>
-                </Table>
-              </Col>
-            </Row>
-          </Container> */}
+         
         </Row>
         {this.state.setUpdateActive ? (
           <UserEdit

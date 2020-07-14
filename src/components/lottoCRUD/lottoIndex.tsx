@@ -1,26 +1,3 @@
-// import React from 'react';
-// import "./lottoIndex.css";
-
-// // import Sitebar from "./components/lottoCRUD/Sitebar";
-
-
-// type AcceptedProps = {
-//     token: string | any;
-// }
-
-// export default class LottoIndex extends React.Component<AcceptedProps> { 
-//     constructor(props: AcceptedProps){
-//         super(props);
-//     }
-//     render(){
-//         return(
-//             <div>
-//                           {/* <Sitebar clickLogout={this.clearToken} /> */}
-
-//                 <h1>lotto</h1>
-//             </div>
-//         )
-//     }
 //Landing page for the rest of the lottoCRUD folder, GET, http://localhost:3000/lotto/
 import React from "react";
 import LottoCreate from "./lottoCreate";
@@ -65,14 +42,26 @@ type valueTypes = {
 
 //STYLING 
 const styles = {
+  welcome: {
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    fontFamily: "MOMCAKE-BOLD",
+    fontSize: "70px",
+    marginTop: "40px",
+    marginBottom: "40px",
+    marginLeft: "35%",
+    marginRight: "35%",
+    color: "#f2f2f2",
+    alignContent: "center",
+  },
+
   root: {
     width: "100%",
-    backgroundColor: "#f2f2f2",
-    border: "10px solid #4536b3"
+    backgroundColor: "rgba(69, 54, 179, 0.8)",
+    border: "10px solid rgba(69, 54, 179, 0.8)"
   },
 
   container: {
-    maxHeight: "500px",
+    maxHeight: "auto",
     backgroundColor: "#f2f2f2",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px"
@@ -89,7 +78,7 @@ const styles = {
   newLotto: {
     backgroundColor: "#4536b3",
     width: "100%",
-    // height: "500px",
+    // height: "700px",
     marginRight: "30%",
     marginLeft: "30%", 
   },
@@ -115,7 +104,7 @@ interface Column {
 const columns: Column[] = [
   { id: 'lottoNum', label: 'Lottery Number', minWidth: 100 },
   { id: 'nameOfLotto', label: 'Name of Lottery', minWidth: 100 },
-  { id: 'lottoPot', label: 'Lottery Pot', minWidth: 100 },
+  { id: 'lottoPot', label: 'Lottery Pot Amount', minWidth: 100 },
   { id: 'location', label: 'Lottery Location', minWidth: 100 },
   { id: 'update', label: 'Update', minWidth: 100 },
   { id: 'delete', label: 'Delete', minWidth: 100 },
@@ -237,7 +226,7 @@ class LottoIndex extends React.Component<
           <td>{lotto.lottoPot}</td>
           <td>{lotto.location}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" style={styles.toolTip}>
+          <Tooltip id="tool-tip" title="Update Lotto Info" arrow placement="bottom" style={styles.toolTip}>
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLotto(lotto);
@@ -247,7 +236,7 @@ class LottoIndex extends React.Component<
           </Tooltip>  
           </td>
           <td>
-          <Tooltip title="Delete User" >
+          <Tooltip id="tool-tip" title="Delete Lotto" arrow placement="bottom">
             <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteLotto(lotto);
@@ -274,11 +263,11 @@ class LottoIndex extends React.Component<
       </h1>
     ) : localStorage.getItem("message") === "user succesfully logged in" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome Back {localStorage.getItem("username")} to your Lotto Page
+        Welcome Back {localStorage.getItem("username")}!
       </h1>
     ) : localStorage.getItem("message") === "user created" ? (
       <h1 id="messages" style={{ textAlign: "center" }}>
-        Welcome {localStorage.getItem("username")} to your Lottery Page
+        Welcome {localStorage.getItem("username")} to your Lottery Profile!
       </h1>
     ) : (
       "null"
@@ -288,16 +277,13 @@ class LottoIndex extends React.Component<
   render() {
     return (
       <div>
-        {this.Welcoming()}
-        <LottoCreate
-          token={this.props.token}
-          fetchLottos={this.fetchLottos}
-          // destinations={this.fetchLocos}
-        />
-        {/* <button onClick={this.handleClick}>Click Me</button> */}
-        <h1>{this.state.random}</h1>
         <Row>
-          <Col>
+          <div style={styles.welcome}>
+            {this.Welcoming()}
+          </div>
+        </Row>
+        <Row>
+        <Col md="7">
           <h1 className="table-header">Your Lottery Numbers</h1>
           {/* MATERIAL UI FIXED TABLE */}
             <Paper style={styles.root}>
@@ -319,44 +305,22 @@ class LottoIndex extends React.Component<
                   </TableHead>
                   <TableBody>
                     {this.lottoMapper()}
-                    {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                      return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                          {columns.map((column) => {
-                            const value = row[column.id];
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })} */}
+                    
                   </TableBody>
                 </Table>
               </TableContainer>
-              {/* <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              /> */}
+              
             </Paper>
-            {/* <Table>
-              <thead>
-                <tr>
-                  <th>Lotto Number</th>
-                  <th>Name of Lottery</th>
-                  <th>Lottery Pot</th>
-                  <th>Lotto location</th>
-                </tr>
-              </thead>
-              <tbody>{this.lottoMapper()}</tbody>
-            </Table> */}
+            
+          </Col>
+          <Col md="5">
+            <LottoCreate 
+            token={this.props.token}
+            fetchLottos={this.fetchLottos}
+            // destinations={this.fetchLocos}
+          />
+          {/* <button onClick={this.handleClick}>Click Me</button> */}
+          <h1>{this.state.random}</h1>
           </Col>
         </Row>
 
