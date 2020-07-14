@@ -1,0 +1,54 @@
+/* #newlotto-input {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+} */
+
+#locos {
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+    margin-top: 20px;
+} 
+
+#form {
+    background-color: #4536b3;
+}
+
+.header {
+    color: #f2f2f2;
+    font-family: "MOMCAKE-BOLD";
+    font-size: 60px;
+}
+
+.generator-info {
+    color: #f2f2f2;
+    font-family: "MOMCAKE-BOLD";
+    font-size: 20px;
+}
+
+#newlotto-input {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+}
+
+
+#newlotto-input:focus {
+    background-color: rgba(69, 54, 179, 0.8);
+    /* background-color: rgba(169, 220, 190, 0.8); */
+    /* color: black; */
+}
+
+#newlotto-input[type="text"] {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+  }

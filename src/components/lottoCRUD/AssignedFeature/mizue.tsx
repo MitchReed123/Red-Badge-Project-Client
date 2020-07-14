@@ -1,76 +1,77 @@
 import React from "react";
 import { Button, notification } from "antd";
 
+
 type valueTypes = {
-  shell: string;
+  base_layer: string;
+  condiment: string;
   mixin: string;
   seasoning: string;
-  condiment: string;
-  baseLayer: string;
+  shell: string;
 };
+
+// STYLING
+const styles = {
+  navButton: {
+    backgroundColor: "#fdb20d",
+    border: "2px solid #fdb20d",
+    fontFamily: "MOMCAKE-BOLD",
+    color: "whitesmoke",
+    fontSize: "22px",
+    // text: "center"
+  }
+};
+
 
 export default class Taco extends React.Component<{}, valueTypes> {
   constructor(props: valueTypes) {
     super(props);
     this.state = {
-      shell: "",
+      base_layer: "",
+      condiment: "",
       mixin: "",
       seasoning: "",
-      condiment: "",
-      baseLayer: "",
+      shell: "",
     };
   }
-
-  //http://taco-randomizer.herokuapp.com/random/?full-taco=true
+  //http://taco-randomizer.herokuapp.com/random/
   //shell, mixin, seasoning, condiment, base_layer
-
-  fetchData = () => {
-    fetch("http://taco-randomizer.herokuapp.com/random/")
+  fetchTaco = () => {
+    fetch(`http://taco-randomizer.herokuapp.com/random/`)
       .then((res) => res.json())
-      .then((res) => {
-        console.log("TACOS", res);
+      .then((tacoData) => {
+        console.log("TACOS",tacoData);
         this.setState({
-          shell: res.shell.name,
-          mixin: res.mixin.name,
-          seasoning: res.seasoning.name,
-          condiment: res.condiment.name,
-          baseLayer: res.base_layer.name,
+          base_layer: tacoData.base_layer.name,
+          condiment: tacoData.condiment.name,
+          mixin: tacoData.mixin.name,
+          seasoning: tacoData.seasoning.name,
+          shell: tacoData.shell.name,  
         });
-        console.log(
-          "TACO STATE",
-          this.state.baseLayer,
-          this.state.mixin,
-          this.state.seasoning,
-          this.state.condiment,
-          this.state.shell
-        );
       });
   };
-
   openNotification = () => {
     notification.open({
       message: "Taco Recipes",
       description: (
         <div>
           <>
-            <p>{this.state.shell}</p>
-            <p>{this.state.mixin}</p>
-            <p>{this.state.seasoning}</p>
-            <p>{this.state.condiment}</p>
-            <p>{this.state.baseLayer}</p>
+            <p>Shell/ {this.state.shell}</p>
+            <p>Mixin/ {this.state.mixin}</p>
+            <p>Seasoning/ {this.state.seasoning}</p>
+            <p>Condiment/ {this.state.condiment}</p>
+            <p>Base Layer/ {this.state.base_layer}</p>
           </>
         </div>
       ),
     });
   };
-
   componentDidMount() {
-    this.fetchData();
+    this.fetchTaco();
   }
-
   render() {
     return (
-      <Button type="primary" onClick={this.openNotification}>
+      <Button onClick={this.openNotification} style={styles.navButton}>
         TACOS
       </Button>
     );

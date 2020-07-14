@@ -27,7 +27,7 @@ const sidebar = (props) => {
       ""
     ) : (
       <li>
-        <Link to="/Destination">Destinations</Link>
+        <Link to="/Destination">Lotto Locations</Link>
       </li>
     );
   }

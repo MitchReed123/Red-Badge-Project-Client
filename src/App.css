@@ -1,39 +1,31 @@
+/* ANTD */
 @import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* body {
+  background-color: #000240;
+} */
+ 
+
+body{
+  background-image: url(./assests/background_blue.png);
+  /* background-image: url(./assests/background.svg); */
+  /* transition: 1s linear;
+  transform: rotate(360deg); */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+@font-face {
+  font-family: MOMCAKE-BOLD;
+  src: url(./assests/MOMCAKE-Bold.otf);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: Klein-Condensed-ExtraBold-trial;
+  src: url(./assests/Klein-Condensed-ExtraBold-trial.ttf);
 }

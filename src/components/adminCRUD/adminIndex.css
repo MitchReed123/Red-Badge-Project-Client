@@ -1,0 +1,57 @@
+/* WELCOME MESSAGE */
+#messages {
+    color: #f2f2f2;
+    font-size: 60px;
+}
+
+/* TABLES */
+.table-header {
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
+    background-color: rgba(253, 178, 13, 0.9);
+}
+
+/* #user-table {
+    background-color: #a9dcbe;
+    width: 1000px;
+}
+
+#destination-table {
+    background-color: #fdb20d;
+} */
+
+/* ADD NEW USER FORM */
+#add-newuser {
+    color: #f2f2f2;
+    font-family: MOMCAKE-BOLD;
+}
+
+#newuser-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 70px;
+    border: 2px solid #f2f2f2;
+    border-radius: 1px;
+}
+
+/* EXTRAS */
+#tool-tip {
+    background-color: #fdb20d;
+}
+
+/* LAYOUT */
+#row-one {
+    background-color: #a9dcbe;
+}
+
+#col-one {
+    background-color: #fdb20d;
+}
+
+#col-two {
+    background-color: #f2f2f2;
+}
+
+#row-two {
+    background-color: #fa5a57;
+}

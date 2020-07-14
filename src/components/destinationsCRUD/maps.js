@@ -2,6 +2,18 @@ import React from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 //App
 
+const styles = {
+  map: {
+    backgroundColor: "#fdb20d",
+    width: "80%",
+    height: "70%",
+    marginLeft: "5%",
+    marginRight: "5%",
+    border: "10px solid #a9dcbe"
+    // marginTop: "150px",
+  }
+};
+
 class Maps extends React.Component {
   constructor(props) {
     super(props);
@@ -72,15 +84,15 @@ class Maps extends React.Component {
   };
   render() {
     return (
-      <Map
+      <Map style={styles.map}
         google={this.props.google}
         zoom={12}
-        style={{
-          height: "450px",
-          width: "450px",
-          marginLeft: "325px",
-          marginTop: "150px",
-        }}
+        // style={{
+        //   height: "450px",
+        //   width: "450px",
+        //   marginLeft: "325px",
+        //   marginTop: "150px",
+        // }}
         initialCenter={{ lat: 39.791, lng: -86.148003 }}
       >
         {this.displayMarkers()}
