@@ -2,11 +2,10 @@
 //normal imports
 import React from "react";
 import { Button, Row, Col, Container, Label, Form, Input } from "reactstrap";
-
+import APIURL from "../../helpers/environment";
 import UserEdit from "./userEdit";
 import DestinationEdit from "./destinationEdit";
 import "./adminIndex.css";
-
 
 //MATERIAL IMPORTS
 import TextField from "@material-ui/core/TextField";
@@ -19,12 +18,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import DeleteIcon from '@material-ui/icons/DeleteSharp';
-import EditSharpIcon from '@material-ui/icons/EditSharp';
+import DeleteIcon from "@material-ui/icons/DeleteSharp";
+import EditSharpIcon from "@material-ui/icons/EditSharp";
 
-import Tooltip from '@material-ui/core/Tooltip';
-
-
+import Tooltip from "@material-ui/core/Tooltip";
 
 type acceptedProps = {
   token: any;
@@ -44,7 +41,7 @@ type valueTypes = {
   SetUpdateActiveLoco: boolean;
 };
 
-//STYLING 
+//STYLING
 const styles = {
   welcome: {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
@@ -57,18 +54,18 @@ const styles = {
     color: "#f2f2f2",
     alignContent: "center",
   },
-  
+
   userRoot: {
     width: "100%",
     backgroundColor: "rgba(69, 54, 179, 0.8)",
-    border: "10px solid rgba(69, 54, 179, 0.8)"
+    border: "10px solid rgba(69, 54, 179, 0.8)",
   },
-  
+
   userContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
     fontFamily: "MOMCAKE-BOLD",
-    fontSize: "30px"
+    fontSize: "30px",
   },
 
   locationRoot: {
@@ -80,15 +77,14 @@ const styles = {
     height: "70%",
     marginLeft: "5%",
     marginRight: "5%",
-    border: "10px solid #4536b3"
-
+    border: "10px solid #4536b3",
   },
 
   locationContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
     fontFamily: "MOMCAKE-BOLD",
-    fontSize: "30px"
+    fontSize: "30px",
   },
 
   tableHeader: {
@@ -96,7 +92,7 @@ const styles = {
     backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
-    color: "#f2f2f2"
+    color: "#f2f2f2",
   },
 
   newUserForm: {
@@ -105,57 +101,60 @@ const styles = {
     height: "400px",
     // marginRight: "20px",
     marginLeft: "5%",
-    marginTop: "5%"
+    marginTop: "5%",
   },
 
   toolTip: {
     backgroundColor: "white",
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     // boxShadow: "shadows[1]",
-    fontSize: "11"
-  }
-
+    fontSize: "11",
+  },
 };
 
 // MATERIAL UI FIXED TABLES
 
 // USER TABLE
 interface userColumn {
-  id: 'username' | 'password' | 'firstName' | 'lastName' | 'userRole' | 'update' | 'delete';
+  id:
+    | "username"
+    | "password"
+    | "firstName"
+    | "lastName"
+    | "userRole"
+    | "update"
+    | "delete";
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: "right";
   format?: (value: number) => string;
 }
 
 const usercolumns: userColumn[] = [
-  { id: 'username', label: 'Username', minWidth: 150 },
+  { id: "username", label: "Username", minWidth: 150 },
   // { id: 'password', label: 'Password', minWidth: 100 },
-  { id: 'firstName', label: 'First Name', minWidth: 150 },
-  { id: 'lastName', label: 'Last Name', minWidth: 150 },
-  { id: 'userRole', label: 'User Role', minWidth: 150 },
-  { id: 'update', label: 'Update', minWidth: 150 },
-  { id: 'delete', label: 'Delete', minWidth: 150 },
-
+  { id: "firstName", label: "First Name", minWidth: 150 },
+  { id: "lastName", label: "Last Name", minWidth: 150 },
+  { id: "userRole", label: "User Role", minWidth: 150 },
+  { id: "update", label: "Update", minWidth: 150 },
+  { id: "delete", label: "Delete", minWidth: 150 },
 ];
 
 // LOCATION TABLE
 interface locationColumn {
-  id: 'lottoLocation' | 'lottoAddress' | 'update' | 'delete';
+  id: "lottoLocation" | "lottoAddress" | "update" | "delete";
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: "right";
   format?: (value: number) => string;
 }
 
 const locationcolumns: locationColumn[] = [
-  { id: 'lottoLocation', label: 'Lottery Location', minWidth: 150 },
-  { id: 'lottoAddress', label: 'Lottery Address', minWidth: 150 },
-  { id: 'update', label: 'Update', minWidth: 150 },
-  { id: 'delete', label: 'Delete', minWidth: 150 },
-
+  { id: "lottoLocation", label: "Lottery Location", minWidth: 150 },
+  { id: "lottoAddress", label: "Lottery Address", minWidth: 150 },
+  { id: "update", label: "Update", minWidth: 150 },
+  { id: "delete", label: "Delete", minWidth: 150 },
 ];
-
 
 // ADMIN COMPONENT
 
@@ -201,13 +200,11 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
     this.setState({ SetUpdateActiveLoco: false });
   };
 
-  
-
   //ADDS DELETE BUTTON TO USER TABLE
   deleteUser = (user: any) => {
     console.log("id", user.id);
 
-    fetch(`http://localhost:3000/user/${user.id}`, {
+    fetch(`${APIURL}/user/${user.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -218,7 +215,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   deleteLoco = (loco: any) => {
     console.log("id", loco.id);
 
-    fetch(`http://localhost:3000/destination/${loco.id}`, {
+    fetch(`${APIURL}/destination/${loco.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -228,7 +225,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   // FETCHING ALL USER TO DISPLAY ON TABLE
   // THIS SHOULD HELP YOU MIZUE
   fetchUsers = () => {
-    fetch("http://localhost:3000/user", {
+    fetch(`${APIURL}/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -246,7 +243,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
 
   //getting destination information
   fetchDestinations = () => {
-    fetch("http://localhost:3000/destination/", {
+    fetch(`${APIURL}/destination/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -266,7 +263,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
   handleSubmit = (event: any) => {
     console.log(this.state.username, this.state.password);
     event.preventDefault();
-    fetch("http://localhost:3000/user/AdminSignUp", {
+    fetch(`${APIURL}/user/AdminSignUp`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -289,7 +286,6 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
       });
   };
 
-
   // USER MAPPER/TABLE
 
   // can i do a turnary here where it checks for your id, localStorage.getItem("username") === this.state.editUsername ? ()
@@ -303,30 +299,44 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{user.lastName}</td>
           <td>{user.userRole}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" style={styles.toolTip}> 
-            <EditSharpIcon fontSize="large"
-              onClick={() => {
-                this.editUpdateUser(user);
-                this.updateOn();
-              }}
-            />
-          </Tooltip>
+            <Tooltip
+              id="tool-tip"
+              title="Update User Info"
+              arrow
+              placement="bottom"
+              style={styles.toolTip}
+            >
+              <EditSharpIcon
+                fontSize="large"
+                onClick={() => {
+                  this.editUpdateUser(user);
+                  this.updateOn();
+                }}
+              />
+            </Tooltip>
           </td>
           <td>
-          <Tooltip id="tool-tip" title="Delete User" arrow placement="bottom" style={styles.toolTip}>
-            <DeleteIcon fontSize="large" 
-              onClick={() => {
-                this.deleteUser(user);
-              }} 
-            />
-          </Tooltip>    
+            <Tooltip
+              id="tool-tip"
+              title="Delete User"
+              arrow
+              placement="bottom"
+              style={styles.toolTip}
+            >
+              <DeleteIcon
+                fontSize="large"
+                onClick={() => {
+                  this.deleteUser(user);
+                }}
+              />
+            </Tooltip>
           </td>
         </tr>
       );
     });
   };
 
-// LOCATION MAPPER/TABLE
+  // LOCATION MAPPER/TABLE
 
   destinationWrapper = () => {
     return this.state.destinationTable.map((location: any, index) => {
@@ -335,23 +345,35 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update Location Info" arrow placement="bottom">
-            <EditSharpIcon fontSize="large"
-              onClick={() => {
-                this.editUpdateLocation(location);
-                this.updateOnDest();
-              }}
-            />
-          </Tooltip>    
+            <Tooltip
+              id="tool-tip"
+              title="Update Location Info"
+              arrow
+              placement="bottom"
+            >
+              <EditSharpIcon
+                fontSize="large"
+                onClick={() => {
+                  this.editUpdateLocation(location);
+                  this.updateOnDest();
+                }}
+              />
+            </Tooltip>
           </td>
           <td>
-          <Tooltip id="tool-tip" title="Delete Location" arrow placement="bottom">
-            <DeleteIcon fontSize="large"
-              onClick={() => {
-                this.deleteLoco(location);
-              }}
-            />
-          </Tooltip>  
+            <Tooltip
+              id="tool-tip"
+              title="Delete Location"
+              arrow
+              placement="bottom"
+            >
+              <DeleteIcon
+                fontSize="large"
+                onClick={() => {
+                  this.deleteLoco(location);
+                }}
+              />
+            </Tooltip>
           </td>
         </tr>
       );
@@ -406,92 +428,87 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
 
         {this.DestinationInfoFetch()} */}
         {/* USER TABLE */}
-        <Row >
-        <Col md="8" id="col-one" style={styles.userRoot}>
+        <Row>
+          <Col md="8" id="col-one" style={styles.userRoot}>
             <h1 className="table-header">User Info</h1>
-            <Paper >
-            <TableContainer style={styles.userContainer}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {usercolumns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        // style={{ minWidth: column.minWidth }}
-                        style={styles.tableHeader}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody >
-                  {this.userWrapper()}                 
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+            <Paper>
+              <TableContainer style={styles.userContainer}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {usercolumns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          // style={{ minWidth: column.minWidth }}
+                          style={styles.tableHeader}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.userWrapper()}</TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
           </Col>
 
           {/* ADD NEW USER FORM */}
           <Col md="3" id="col-two" style={styles.newUserForm}>
-          {/* <h1 id="signup-newuser">Sign up a New User</h1> */}
-          <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
-            <div>
-              <h1 id="add-newuser">Add a New User</h1>
-              <Input id="newuser-input"
-                // id="outline-margin-normal"
-                type="text"
-                name="username"
-                placeholder="Username"
-                onChange={(e) => this.setState({ username: e.target.value })}
-                value={this.state.username}
-              />
-              <Input id="newuser-input"
-                type="text"
-                name="username"
-                placeholder="Password"
-                onChange={(e) => this.setState({ password: e.target.value })}
-                value={this.state.password}
-              />
-              <button type="submit">Add New User</button>
-            </div>
-          </Form>
+            {/* <h1 id="signup-newuser">Sign up a New User</h1> */}
+            <Form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+              <div>
+                <h1 id="add-newuser">Add a New User</h1>
+                <Input
+                  id="newuser-input"
+                  // id="outline-margin-normal"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={(e) => this.setState({ username: e.target.value })}
+                  value={this.state.username}
+                />
+                <Input
+                  id="newuser-input"
+                  type="text"
+                  name="username"
+                  placeholder="Password"
+                  onChange={(e) => this.setState({ password: e.target.value })}
+                  value={this.state.password}
+                />
+                <button type="submit">Add New User</button>
+              </div>
+            </Form>
           </Col>
         </Row>
-        
-        <Row md="9" >
+
+        <Row md="9">
           {/* DESTINATION TABLE */}
-        <Col style={styles.locationRoot}>
-        <h1 className="table-header">Location Info</h1>
-        <Paper >
-            <TableContainer style={styles.locationContainer}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {locationcolumns.map((column) => (
-                      <TableCell 
-                        key={column.id}
-                        align={column.align}
-                        // style={{ minWidth: column.minWidth }}
-                        style={styles.tableHeader}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody >
-                  {this.destinationWrapper()}
-                 
-                </TableBody>
-              </Table>
-            </TableContainer>
-            
-          </Paper>
-        </Col>
-         
+          <Col style={styles.locationRoot}>
+            <h1 className="table-header">Location Info</h1>
+            <Paper>
+              <TableContainer style={styles.locationContainer}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {locationcolumns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          // style={{ minWidth: column.minWidth }}
+                          style={styles.tableHeader}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.destinationWrapper()}</TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </Col>
         </Row>
         {this.state.setUpdateActive ? (
           <UserEdit
@@ -513,7 +530,6 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
         ) : (
           <></>
         )}
-
       </div>
     );
   }

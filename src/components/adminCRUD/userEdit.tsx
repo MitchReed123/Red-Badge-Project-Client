@@ -9,6 +9,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import APIURL from "../../helpers/environment";
 import * as bcrypt from "bcryptjs";
 import "./userEdit.css";
 
@@ -46,7 +47,7 @@ export default class userEdit extends React.Component<
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/user/${this.props.setUpdateUser.id}`, {
+    fetch(`${APIURL}/user/${this.props.setUpdateUser.id}`, {
       method: "PUT",
       body: JSON.stringify({
         user: {
@@ -79,7 +80,8 @@ export default class userEdit extends React.Component<
               <Label htmlFor="username" id="edit-text">
                 Edit Username
               </Label>
-              <Input id="edit-input"
+              <Input
+                id="edit-input"
                 name="username"
                 required
                 value={this.state.editUsername}
@@ -93,7 +95,8 @@ export default class userEdit extends React.Component<
               <Label htmlFor="password" id="edit-text">
                 Edit PassWord
               </Label>
-              <Input id="edit-input"
+              <Input
+                id="edit-input"
                 name="password"
                 placeholder="Enter New Password"
                 // value={this.state.editPassword}
@@ -111,7 +114,8 @@ export default class userEdit extends React.Component<
               <Label htmlFor="userRole" id="edit-text">
                 Edit User Role
               </Label>
-              <Input id="edit-input"
+              <Input
+                id="edit-input"
                 name="userRole"
                 value={this.state.userRole}
                 onChange={(e) => this.setState({ userRole: e.target.value })}
@@ -121,7 +125,8 @@ export default class userEdit extends React.Component<
               <Label htmlFor="firstName" id="edit-text">
                 Edit First Name
               </Label>
-              <Input id="edit-input"
+              <Input
+                id="edit-input"
                 name="firstName"
                 value={this.state.userFirstName}
                 onChange={(e) =>
@@ -133,7 +138,8 @@ export default class userEdit extends React.Component<
               <Label htmlFor="lastName" id="edit-text">
                 Edit Last Name
               </Label>
-              <Input id="edit-input"
+              <Input
+                id="edit-input"
                 name="lastName"
                 value={this.state.userLastName}
                 onChange={(e) =>
@@ -141,7 +147,9 @@ export default class userEdit extends React.Component<
                 }
               />
             </FormGroup>
-            <button id="edit-button" type="submit">Update User</button>
+            <button id="edit-button" type="submit">
+              Update User
+            </button>
           </Form>
         </ModalBody>
       </Modal>

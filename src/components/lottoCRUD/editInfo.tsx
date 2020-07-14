@@ -5,6 +5,7 @@ import { Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { withStyles } from "@material-ui/core/styles";
 import "./editInfo.css";
+import APIURL from "../../helpers/environment";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -118,7 +119,7 @@ class EditInfo extends React.Component<acceptedProps, valueTypes> {
   }
 
   handleSubmit = (event: any) => {
-    fetch(`http://localhost:3000/user/${this.props.setUpdateUser.id}`, {
+    fetch(`${APIURL}/user/${this.props.setUpdateUser.id}`, {
       method: "PUT",
       body: JSON.stringify({
         user: {
