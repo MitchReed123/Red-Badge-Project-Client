@@ -72,16 +72,16 @@ export default class userEdit extends React.Component<
 
   render() {
     return (
-      <Modal id="modal" isOpen={true}>
-        <ModalHeader id="edit-header">Edit a User</ModalHeader>
-        <ModalBody id="modal-body">
+      <Modal id="useredit-modal" isOpen={true}>
+        <ModalHeader id="useredit-edit-header">Edit a User</ModalHeader>
+        <ModalBody id="useredit-modal-body">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label htmlFor="username" id="edit-text">
+              <Label htmlFor="username" id="useredit-text">
                 Edit Username
               </Label>
-              <Input
-                id="edit-input"
+
+              <Input id="useredit-input"
                 name="username"
                 required
                 value={this.state.editUsername}
@@ -92,11 +92,11 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="password" id="edit-text">
+              <Label htmlFor="password" id="useredit-text">
                 Edit PassWord
               </Label>
-              <Input
-                id="edit-input"
+
+              <Input id="useredit-input"
                 name="password"
                 placeholder="Enter New Password"
                 // value={this.state.editPassword}
@@ -111,22 +111,22 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="userRole" id="edit-text">
+              <Label htmlFor="userRole" id="useredit-text">
                 Edit User Role
               </Label>
-              <Input
-                id="edit-input"
+
+              <Input id="useredit-input"
                 name="userRole"
                 value={this.state.userRole}
                 onChange={(e) => this.setState({ userRole: e.target.value })}
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="firstName" id="edit-text">
+              <Label htmlFor="firstName" id="useredit-text">
                 Edit First Name
               </Label>
-              <Input
-                id="edit-input"
+
+              <Input id="useredit-input"
                 name="firstName"
                 value={this.state.userFirstName}
                 onChange={(e) =>
@@ -135,11 +135,11 @@ export default class userEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="lastName" id="edit-text">
+              <Label htmlFor="lastName" id="useredit-text">
                 Edit Last Name
               </Label>
-              <Input
-                id="edit-input"
+
+              <Input id="useredit-input"
                 name="lastName"
                 value={this.state.userLastName}
                 onChange={(e) =>
@@ -147,9 +147,9 @@ export default class userEdit extends React.Component<
                 }
               />
             </FormGroup>
-            <button id="edit-button" type="submit">
-              Update User
-            </button>
+
+            <button id="useredit-button" type="submit">Update User</button>
+
           </Form>
         </ModalBody>
       </Modal>

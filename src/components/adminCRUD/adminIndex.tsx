@@ -64,6 +64,7 @@ const styles = {
   userContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
+    // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
   },
@@ -83,6 +84,7 @@ const styles = {
   locationContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
+    // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
   },
@@ -299,37 +301,24 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{user.lastName}</td>
           <td>{user.userRole}</td>
           <td>
-            <Tooltip
-              id="tool-tip"
-              title="Update User Info"
-              arrow
-              placement="bottom"
-              style={styles.toolTip}
-            >
-              <EditSharpIcon
-                fontSize="large"
-                onClick={() => {
-                  this.editUpdateUser(user);
-                  this.updateOn();
-                }}
-              />
-            </Tooltip>
+
+          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" > 
+            <EditSharpIcon fontSize="large"
+              onClick={() => {
+                this.editUpdateUser(user);
+                this.updateOn();
+              }}
+            />
+          </Tooltip>
           </td>
           <td>
-            <Tooltip
-              id="tool-tip"
-              title="Delete User"
-              arrow
-              placement="bottom"
-              style={styles.toolTip}
-            >
-              <DeleteIcon
-                fontSize="large"
-                onClick={() => {
-                  this.deleteUser(user);
-                }}
-              />
-            </Tooltip>
+          <Tooltip id="tool-tip" title="Delete User" arrow placement="bottom" >
+            <DeleteIcon fontSize="large" 
+              onClick={() => {
+                this.deleteUser(user);
+              }} 
+            />
+          </Tooltip>    
           </td>
         </tr>
       );
@@ -345,20 +334,15 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
-            <Tooltip
-              id="tool-tip"
-              title="Update Location Info"
-              arrow
-              placement="bottom"
-            >
-              <EditSharpIcon
-                fontSize="large"
-                onClick={() => {
-                  this.editUpdateLocation(location);
-                  this.updateOnDest();
-                }}
-              />
-            </Tooltip>
+
+          <Tooltip id="tool-tip" title="Update Location Info" arrow placement="bottom" >
+            <EditSharpIcon fontSize="large"
+              onClick={() => {
+                this.editUpdateLocation(location);
+                this.updateOnDest();
+              }}
+            />
+          </Tooltip>    
           </td>
           <td>
             <Tooltip
