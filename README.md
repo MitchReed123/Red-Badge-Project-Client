@@ -1,4 +1,22 @@
-Team Four -- The Daily Lotto
+The Daily Lotto
+  
+  Description:  
+
+Created by Team 4:
+  - Mitchell
+  - Mizue
+  - Brittany
+  
+  
+App Features
+
+
+App Endpoints
+
+
+Screenshots
+
+  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
