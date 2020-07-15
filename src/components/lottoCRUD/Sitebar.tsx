@@ -61,14 +61,15 @@ type valueTypes = {
 // MATERIAL STYLES 
 const styles = {
   root: {
-    // backgroundColor: "#231874",
+    // backgroundColor: "#f2f2f2",
     background: "url(./assests/background_blue.png)",
-    padding: "10px",
-    fontFamily: "MOMCAKE-BOLD"
+    // padding: "10px",
+    fontFamily: "MOMCAKE-BOLD",
+    marginBottom: "2%"
   },
 
   logoutButton: {
-    marginLeft: "600px",
+    marginLeft: "80%",
     backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
     marginTop: "1em",
@@ -231,22 +232,20 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
       <hr />
       <p style={styles.navDivider}>Check out these APIs!</p>
-      {/* <Divider orientation="left" dashed={true}>
-        Nav
-      </Divider> */}
-      <Menu.Item key="0" >
+      <Menu.Item key="0">
         <Apps />
       </Menu.Item>
       {/* <Menu.Divider /> */}
-      <Menu.Item key="1">
-        <Bored />
-      </Menu.Item>
       {/* <Menu.Divider /> */}
       <Menu.Item key="2">
         <Taco />
       </Menu.Item>
+      <Menu.Item key="1">
+        <Bored />
+      </Menu.Item>
     </Menu>
   );
+
   // menu = (
   //   <Menu>
   //     <Menu.Item key="0">
@@ -279,30 +278,60 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       // NAVBAR STYLING HERE
       <AppBar position="static" style={styles.root}>
         <Toolbar className="classes.color">
-          <Typography variant="h6" id="navTitle" style={styles.typography}>
-          <img width="100px" src={require('../../assests/DLlogo3.png')} alt="logo" />
-          </Typography>
-          {/* {this.viewPages()}
-          {this.viewPages3()}
-          {this.viewPages2()} */}
-          {/* {this.viewPages4()} */}
-          <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
-            <Button style={styles.menuButton}
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-              // style={{ color: "lightblue" }}
-            >
-              Menu <DownOutlined />
-            </Button>
-          </Dropdown>
-          {/* <button style={styles.updateButton}>{this.userMapper()}</button> */}
-          {this.userMapper()}
-          {/* <Button> {this.viewPages4()}TESTING </Button> */}
-          <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
-        </Toolbar>
-      </AppBar>
+            <Col md="1" id="one">
+              <Typography variant="h6" id="navTitle" style={styles.typography}>
+              <img width="100px" src={require('../../assests/DL-logo.png')} alt="logo" />
+              </Typography>
+            </Col>
+            <Col md="2" id="two">
+              <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
+                <Button style={styles.menuButton}
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                  // style={{ color: "lightblue" }}
+                >
+                  Menu <DownOutlined />
+                </Button>
+              </Dropdown>
+            </Col>
+            <Col md="2" id="col-three">
+              {this.userMapper()} 
+            </Col>
+            <Col md="6" id="col-four">
+              <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
+            </Col>
+          </Toolbar>
+       </AppBar>
     );
   }
+
+  // OLD NAV
+
+      // <AppBar position="static" style={styles.root}>
+      //   <Toolbar className="classes.color">
+      //     <Typography variant="h6" id="navTitle" style={styles.typography}>
+      //     <img width="100px" src={require('../../assests/DL-logo.png')} alt="logo" />
+      //     </Typography>
+      //     {/* {this.viewPages()}
+      //     {this.viewPages3()}
+      //     {this.viewPages2()} */}
+      //     {/* {this.viewPages4()} */}
+      //     <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
+      //       <Button style={styles.menuButton}
+      //         className="ant-dropdown-link"
+      //         onClick={(e) => e.preventDefault()}
+      //         // style={{ color: "lightblue" }}
+      //       >
+      //         Menu <DownOutlined />
+      //       </Button>
+      //     </Dropdown>
+      //     {/* <button style={styles.updateButton}>{this.userMapper()}</button> */}
+      //     {this.userMapper()}
+      //     {/* <Button> {this.viewPages4()}TESTING </Button> */}
+      //     <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
+      //   </Toolbar>
+      // </AppBar>
+  
 
   fetchUsers = () => {
     fetch(`http://localhost:3000/user/`, {
@@ -324,6 +353,8 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   userMapper = () => {
     return this.state.userTable.map((user: any, index) => {
       return user.username === localStorage.getItem("username") ? (
+
+        // UPDATE PROFILE BUTTON IN NAV
         <button style={styles.updateButton}
           // name="edit info"
           // defaultValue="Edit Info"

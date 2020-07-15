@@ -11,6 +11,8 @@ import {
   Button,
 } from "reactstrap";
 
+import "./lottoEdit.css";
+
 type acceptedProps = {
   updateOff: any;
   token: any;
@@ -59,13 +61,13 @@ export default class LottoEdit extends React.Component<
   };
   render() {
     return (
-      <Modal isOpen={true}>
-        <ModalHeader>Edit a Lotto</ModalHeader>
-        <ModalBody>
+      <Modal id="lottoedit-modal" isOpen={true}>
+        <ModalHeader id="lottoedit-edit-header">Edit Lottery Info</ModalHeader>
+        <ModalBody id="lottoedit-modal-body">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label htmlFor="nameOfLotto">Edit a Lotto Name</Label>
-              <Input
+              <Label htmlFor="nameOfLotto" id="lottoedit-text">Edit Lottery Name</Label>
+              <Input id="lottoedit-input"
                 name="nameOfLotto"
                 value={this.state.editLottoName}
                 onChange={(e) =>
@@ -74,8 +76,8 @@ export default class LottoEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="lottoPot">Edit a Lotto Pot</Label>
-              <Input
+              <Label htmlFor="lottoPot" id="lottoedit-text">Edit Lottery Pot</Label>
+              <Input id="lottoedit-input"
                 name="lottoPot"
                 value={this.state.editLottoPot}
                 onChange={(e) =>
@@ -84,8 +86,8 @@ export default class LottoEdit extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="location">Edit Lotto Location</Label>
-              <Input
+              <Label htmlFor="location" id="lottoedit-text">Edit Lottery Location</Label>
+              <Input id="lottoedit-input"
                 name="location"
                 value={this.state.editLottoLoco}
                 onChange={(e) =>
@@ -93,7 +95,7 @@ export default class LottoEdit extends React.Component<
                 }
               />
             </FormGroup>
-            <Button type="submit">Update Lotto</Button>
+            <button type="submit" id="lottoedit-button">Update Lotto</button>
           </Form>
         </ModalBody>
       </Modal>

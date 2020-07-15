@@ -63,6 +63,7 @@ const styles = {
   container: {
     maxHeight: "auto",
     backgroundColor: "#f2f2f2",
+    // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px"
   },
@@ -226,7 +227,7 @@ class LottoIndex extends React.Component<
           <td>{lotto.lottoPot}</td>
           <td>{lotto.location}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update Lotto Info" arrow placement="bottom" style={styles.toolTip}>
+          <Tooltip id="tool-tip" title="Update Lotto Info" arrow placement="bottom" >
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLotto(lotto);

@@ -67,6 +67,7 @@ const styles = {
   userContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
+    // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px"
   },
@@ -87,6 +88,7 @@ const styles = {
   locationContainer: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
+    // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px"
   },
@@ -303,7 +305,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{user.lastName}</td>
           <td>{user.userRole}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" style={styles.toolTip}> 
+          <Tooltip id="tool-tip" title="Update User Info" arrow placement="bottom" > 
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateUser(user);
@@ -313,7 +315,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           </Tooltip>
           </td>
           <td>
-          <Tooltip id="tool-tip" title="Delete User" arrow placement="bottom" style={styles.toolTip}>
+          <Tooltip id="tool-tip" title="Delete User" arrow placement="bottom" >
             <DeleteIcon fontSize="large" 
               onClick={() => {
                 this.deleteUser(user);
@@ -335,7 +337,7 @@ class Admin extends React.Component<acceptedProps, valueTypes> {
           <td>{location.lottoLocation}</td>
           <td>{location.lottoAddress}</td>
           <td>
-          <Tooltip id="tool-tip" title="Update Location Info" arrow placement="bottom">
+          <Tooltip id="tool-tip" title="Update Location Info" arrow placement="bottom" >
             <EditSharpIcon fontSize="large"
               onClick={() => {
                 this.editUpdateLocation(location);

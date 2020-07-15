@@ -31,7 +31,7 @@ const styles = {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "70px",
-    marginTop: "40px",
+    marginTop: "20px",
     marginBottom: "40px",
     marginLeft: "35%",
     marginRight: "35%",
@@ -39,26 +39,15 @@ const styles = {
     alignContent: "center",
   },
 
-  header: {
-    // backgroundColor: "#f2f2f2",
-    // fontFamily: "MOMCAKE-BOLD",
-    // fontSize: "70px",
-    marginTop: "40px",
-    marginBottom: "40px",
-    marginLeft: "400px",
-    marginRight: "400px",
-    // color: "#f2f2f2",
-    // alignContent: "center",
-  },
-
   form: {
       backgroundColor: "#4536b3",
       fontFamily: "MOMCAKE-BOLD",
-      height: "600px",
+      height: "auto",
+      width: "600px",
       // marginTop: "10px",
       marginBottom: "40px",
-      marginLeft: "25%",
-      marginRight: "25%",
+      marginLeft: "35%",
+      marginRight: "35%",
       // color: "#f2f2f2",
       // alignContent: "center",
     },
@@ -186,7 +175,7 @@ class EditInfo extends React.Component<
           onFinishFailed={this.onFinishFailed}
           // size="middle"
         >
-          <Col >
+          {/* <Col > */}
             {/* <Row justify="center"> */}
             <h1 id="form-header">Enter new username: </h1>
               <Form.Item 
@@ -206,37 +195,34 @@ class EditInfo extends React.Component<
                     this.setState({ editUsername: e.target.value })
                   }
                 />
-                <h1 id="form-header">Enter new password: </h1>
-                <Input.Password id="input"
-                  onChange={(e) =>
-                    this.setState({ editPassword: e.target.value })
-                  }
-                />
-              {/* </Form.Item> */}
+              </Form.Item>
             {/* </Row> */}
           {/* </Col>
-          <Col id="col-two" span={24}> */}
+          <Col id="col-two" > */}
             {/* <Row justify="center"> */}
-            {/* <h1>Enter new password: </h1> */}
-              {/* <Form.Item
+            <h1 id="form-header">Enter new password: </h1>
+              <Form.Item
                 // label="password"
                 // style={{ width: "250px" }}
                 // name="password"
                 // initialValue={this.props.setUpdateUser.password}
                 // help="Please enter a password"
                 rules={[{ required: true, message: "Please enter a password" }]}
-              > */}
-                {/* <Input.Password id="input"
+              >
+                <Input.Password id="input"
                   onChange={(e) =>
                     this.setState({ editPassword: e.target.value })
                   }
-                /> */}
+                />
+                {/* <Button  htmlType="submit" style={styles.updateButton}>
+                  Update
+                </Button> */}
               </Form.Item>
             {/* </Row> */}
           <Button  htmlType="submit" style={styles.updateButton}>
             Update
           </Button>
-          </Col>
+          {/* </Col> */}
         </Form>
       </Row>
     </div>

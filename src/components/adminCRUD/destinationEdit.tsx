@@ -7,7 +7,11 @@ import {
   Label,
   Input,
   Button,
+  ModalHeader,
 } from "reactstrap";
+
+import "./destinationEdit.css";
+
 type acceptedProps = {
   updateOff: any;
   token: any;
@@ -55,14 +59,15 @@ export default class DestinationUpdate extends React.Component<
   //if setUpdateActive is true then dont open the modal
   render() {
     return (
-      <Modal isOpen={true}>
-        <ModalBody>
+      <Modal id="locationedit-modal" isOpen={true}>
+        <ModalHeader id="locationedit-edit-header">Edit Location</ModalHeader>
+        <ModalBody id="locationedit-modal-body">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label htmlFor="lottoLocation" id="lottoLocation">
+              <Label htmlFor="lottoLocation" id="locationedit-text">
                 Edit Location Name
               </Label>
-              <Input
+              <Input id="locationedit-input"
                 name="lottoLocation"
                 value={this.state.editLocation}
                 onChange={(e) =>
@@ -71,16 +76,16 @@ export default class DestinationUpdate extends React.Component<
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="lottoAddress" id="lottoAddress">
+              <Label htmlFor="lottoAddress" id="locationedit-text">
                 Edit Address
               </Label>
-              <Input
+              <Input id="locationedit-input"
                 name="lottoAddress"
                 value={this.state.editAddress}
                 onChange={(e) => this.setState({ editAddress: e.target.value })}
               />
             </FormGroup>
-            <Button type="submit">Update Location</Button>
+            <button id="locationedit-button" type="submit">Update Location</button>
           </Form>
         </ModalBody>
       </Modal>
