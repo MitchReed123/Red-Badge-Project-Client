@@ -1,9 +1,9 @@
 // available to userRole = "user"
 // this is where you GET, http://localhost:3000/destination GET
 import React from "react";
-import { Row, Col, Container, Input, Label, Form} from "reactstrap";
+import { Row, Col, Container, Input, Label, Form } from "reactstrap";
 import "./destinationIndex.css";
-
+import APIURL from "../../helpers/environment";
 // import { Button, Row, Col, Container } from "reactstrap";
 import { TextField, FormLabel } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
@@ -14,8 +14,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
-
 
 import Maps from "./maps";
 import { findByLabelText } from "@testing-library/react";
@@ -35,8 +33,7 @@ type valueTypes = {
   setUpdateLoco: {};
 };
 
-
-//STYLING 
+//STYLING
 const styles = {
   welcome: {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
@@ -53,14 +50,14 @@ const styles = {
   root: {
     width: "100%",
     backgroundColor: "rgba(69, 54, 179, 0.8)",
-    border: "10px solid rgba(69, 54, 179, 0.8)"
+    border: "10px solid rgba(69, 54, 179, 0.8)",
   },
 
   container: {
     maxHeight: "500px",
     backgroundColor: "#f2f2f2",
     fontFamily: "MOMCAKE-BOLD",
-    fontSize: "30px"
+    fontSize: "30px",
   },
 
   tableHeader: {
@@ -68,7 +65,7 @@ const styles = {
     backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
-    color: "#f2f2f2"
+    color: "#f2f2f2",
   },
 
   newLocationForm: {
@@ -77,7 +74,7 @@ const styles = {
     height: "500px",
     // marginRight: "20px",
     marginLeft: "5%",
-    marginTop: "5%"
+    marginTop: "5%",
     // justifyContent: "center"
   },
 
@@ -91,25 +88,21 @@ const styles = {
 
 // MATERIAL UI FIXED TABLE
 interface Column {
-  id: 'lottoLocation' | 'lottoAddress';
+  id: "lottoLocation" | "lottoAddress";
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: "right";
   format?: (value: number) => string;
 }
 
 const columns: Column[] = [
-  { id: 'lottoLocation', label: 'Lottery Location', minWidth: 100 },
-  { id: 'lottoAddress', label: 'Lottery Address', minWidth: 100 },
+  { id: "lottoLocation", label: "Lottery Location", minWidth: 100 },
+  { id: "lottoAddress", label: "Lottery Address", minWidth: 100 },
   // { id: 'update', label: 'Update', minWidth: 100 },
   // { id: 'delete', label: 'Delete', minWidth: 100 },
-
 ];
 
-class Destinations extends React.Component<
-  acceptedProps,
-  valueTypes
-> {
+class Destinations extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
     this.state = {
@@ -132,7 +125,7 @@ class Destinations extends React.Component<
   };
   //fetching all destinations
   fetchDestinations = () => {
-    fetch("http://localhost:3000/destination/", {
+    fetch(`${APIURL}/destination/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +143,7 @@ class Destinations extends React.Component<
   };
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch("http://localhost:3000/destination/", {
+    fetch(`${APIURL}/destination/`, {
       method: "POST",
       body: JSON.stringify({
         lottoLocation: this.state.lottoLocation,
@@ -221,51 +214,48 @@ class Destinations extends React.Component<
   render() {
     return (
       <div>
-        <Row >
+        <Row>
           <div style={styles.welcome}>
             <h1>{this.Welcoming()}</h1>
           </div>
         </Row>
-        <Row xs="12" >
-        <Col md="7" id="col-one" style={styles.root}>
-          <h1 className="table-header">Places to Buy Lottery Tickets</h1>
-             {/* MATERIAL UI FIXED TABLE */}
-            <Paper >
-            <TableContainer style={styles.container}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        // style={{ minWidth: column.minWidth }}
-                        style={styles.tableHeader}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.destinationWrapper()}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            
-          </Paper>
-            
+        <Row xs="12">
+          <Col md="7" id="col-one" style={styles.root}>
+            <h1 className="table-header">Places to Buy Lottery Tickets</h1>
+            {/* MATERIAL UI FIXED TABLE */}
+            <Paper>
+              <TableContainer style={styles.container}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          // style={{ minWidth: column.minWidth }}
+                          style={styles.tableHeader}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.destinationWrapper()}</TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
           </Col>
           <Col md="4" id="col-two" style={styles.newLocationForm}>
-          {/* <Row> */}
+            {/* <Row> */}
 
-          <Container >
-              <Form noValidate autoComplete="off" onSubmit={this.handleSubmit} >
+            <Container>
+              <Form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
                 <Label id="add-newlocation">Add A Lotto Location!</Label>
-              {/* <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                {/* <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
                 <FormLabel>Add A Lotto Location!</FormLabel> */}
                 <div>
-                  <Input id="newlocation-input"
+                  <Input
+                    id="newlocation-input"
                     type="text"
                     name="Lotto Location Name"
                     placeholder="Location"
@@ -275,7 +265,8 @@ class Destinations extends React.Component<
                     value={this.state.lottoLocation}
                   />
                   {/* <br /> */}
-                  <Input id="newlocation-input"
+                  <Input
+                    id="newlocation-input"
                     type="text"
                     name="Lotto Location Address"
                     placeholder="Location Address"
@@ -284,24 +275,24 @@ class Destinations extends React.Component<
                     }
                     value={this.state.lottoAddress}
                   />
-                  <button id="newLocation-button" type="submit">Add New Location!</button>
+                  <button id="newLocation-button" type="submit">
+                    Add New Location!
+                  </button>
                 </div>
               </Form>
-              </Container>
-          {/* </Row> */}
-            </Col>
+            </Container>
+            {/* </Row> */}
+          </Col>
         </Row>
-        
-        <Row md="9" >
+
+        <Row md="9">
           {/* <Col style={styles.map}> */}
-              {/* <Container > */}
-                <Maps />
-                {/* this displays all of our locations on a google map, still working on it tho */}
-              {/* </Container> */}
-            {/* </Col>          */}
-          </Row>
-       
-       
+          {/* <Container > */}
+          <Maps />
+          {/* this displays all of our locations on a google map, still working on it tho */}
+          {/* </Container> */}
+          {/* </Col>          */}
+        </Row>
       </div>
     );
   }

@@ -5,8 +5,7 @@ import LottoCreate from "./lottoCreate";
 import LottoEdit from "./lottoEdit";
 import { Container, Row, Col, Button } from "reactstrap";
 import "./lottoIndex.css";
-
-
+import APIURL from "../../helpers/environment";
 
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -17,11 +16,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import DeleteIcon from '@material-ui/icons/DeleteSharp';
-import EditSharpIcon from '@material-ui/icons/EditSharp';
+import DeleteIcon from "@material-ui/icons/DeleteSharp";
+import EditSharpIcon from "@material-ui/icons/EditSharp";
 
-import Tooltip from '@material-ui/core/Tooltip';
-
+import Tooltip from "@material-ui/core/Tooltip";
 
 type acceptedProps = {
   token: string | any;
@@ -40,7 +38,7 @@ type valueTypes = {
   hyphen: string;
 };
 
-//STYLING 
+//STYLING
 const styles = {
   welcome: {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
@@ -57,7 +55,7 @@ const styles = {
   root: {
     width: "100%",
     backgroundColor: "rgba(69, 54, 179, 0.8)",
-    border: "10px solid rgba(69, 54, 179, 0.8)"
+    border: "10px solid rgba(69, 54, 179, 0.8)",
   },
 
   container: {
@@ -65,7 +63,7 @@ const styles = {
     backgroundColor: "#f2f2f2",
     // backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
-    fontSize: "30px"
+    fontSize: "30px",
   },
 
   tableHeader: {
@@ -73,7 +71,7 @@ const styles = {
     backgroundColor: "#4536b3",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
-    color: "#f2f2f2"
+    color: "#f2f2f2",
   },
 
   newLotto: {
@@ -81,42 +79,42 @@ const styles = {
     width: "100%",
     // height: "700px",
     marginRight: "30%",
-    marginLeft: "30%", 
+    marginLeft: "30%",
   },
 
   toolTip: {
     backgroundColor: "white",
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     // boxShadow: "shadows[1]",
-    fontSize: "11"
-  }
-
+    fontSize: "11",
+  },
 };
 
 // MATERIAL UI FIXED TABLE
 interface Column {
-  id: 'lottoNum' | 'nameOfLotto' | 'lottoPot' | 'location' | 'update' | 'delete';
+  id:
+    | "lottoNum"
+    | "nameOfLotto"
+    | "lottoPot"
+    | "location"
+    | "update"
+    | "delete";
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: "right";
   format?: (value: number) => string;
 }
 
 const columns: Column[] = [
-  { id: 'lottoNum', label: 'Lottery Number', minWidth: 100 },
-  { id: 'nameOfLotto', label: 'Name of Lottery', minWidth: 100 },
-  { id: 'lottoPot', label: 'Lottery Pot Amount', minWidth: 100 },
-  { id: 'location', label: 'Lottery Location', minWidth: 100 },
-  { id: 'update', label: 'Update', minWidth: 100 },
-  { id: 'delete', label: 'Delete', minWidth: 100 },
-
+  { id: "lottoNum", label: "Lottery Number", minWidth: 100 },
+  { id: "nameOfLotto", label: "Name of Lottery", minWidth: 100 },
+  { id: "lottoPot", label: "Lottery Pot Amount", minWidth: 100 },
+  { id: "location", label: "Lottery Location", minWidth: 100 },
+  { id: "update", label: "Update", minWidth: 100 },
+  { id: "delete", label: "Delete", minWidth: 100 },
 ];
 
-
-class LottoIndex extends React.Component<
-  acceptedProps,
-  valueTypes
-> {
+class LottoIndex extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
     this.state = {
@@ -150,7 +148,7 @@ class LottoIndex extends React.Component<
   };
 
   fetchLottos = () => {
-    fetch("http://localhost:3000/lotto/", {
+    fetch(`${APIURL}/lotto/`, {
       method: "GET",
       headers: {
         "content-Type": "application/json",
@@ -168,7 +166,7 @@ class LottoIndex extends React.Component<
   };
   //this needs to be fixed, it wont work at all
   deleteLotto = (lotto: any) => {
-    fetch(`http://localhost:3000/lotto/${lotto.id}`, {
+    fetch(`${APIURL}/lotto/${lotto.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-type": "application/json",
@@ -227,6 +225,7 @@ class LottoIndex extends React.Component<
           <td>{lotto.lottoPot}</td>
           <td>{lotto.location}</td>
           <td>
+
           <Tooltip id="tool-tip" title="Update Lotto Info" arrow placement="bottom" >
             <EditSharpIcon fontSize="large"
               onClick={() => {
@@ -235,15 +234,22 @@ class LottoIndex extends React.Component<
               }}
             />
           </Tooltip>  
+
           </td>
           <td>
-          <Tooltip id="tool-tip" title="Delete Lotto" arrow placement="bottom">
-            <DeleteIcon fontSize="large" 
-              onClick={() => {
-                this.deleteLotto(lotto);
-              }}
-            />
-          </Tooltip>  
+            <Tooltip
+              id="tool-tip"
+              title="Delete Lotto"
+              arrow
+              placement="bottom"
+            >
+              <DeleteIcon
+                fontSize="large"
+                onClick={() => {
+                  this.deleteLotto(lotto);
+                }}
+              />
+            </Tooltip>
           </td>
         </tr>
       );
@@ -279,14 +285,12 @@ class LottoIndex extends React.Component<
     return (
       <div>
         <Row>
-          <div style={styles.welcome}>
-            {this.Welcoming()}
-          </div>
+          <div style={styles.welcome}>{this.Welcoming()}</div>
         </Row>
         <Row>
-        <Col md="7">
-          <h1 className="table-header">Your Lottery Numbers</h1>
-          {/* MATERIAL UI FIXED TABLE */}
+          <Col md="7">
+            <h1 className="table-header">Your Lottery Numbers</h1>
+            {/* MATERIAL UI FIXED TABLE */}
             <Paper style={styles.root}>
               <TableContainer style={styles.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -304,24 +308,19 @@ class LottoIndex extends React.Component<
                       ))}
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    {this.lottoMapper()}
-                    
-                  </TableBody>
+                  <TableBody>{this.lottoMapper()}</TableBody>
                 </Table>
               </TableContainer>
-              
             </Paper>
-            
           </Col>
           <Col md="5">
-            <LottoCreate 
-            token={this.props.token}
-            fetchLottos={this.fetchLottos}
-            // destinations={this.fetchLocos}
-          />
-          {/* <button onClick={this.handleClick}>Click Me</button> */}
-          <h1>{this.state.random}</h1>
+            <LottoCreate
+              token={this.props.token}
+              fetchLottos={this.fetchLottos}
+              // destinations={this.fetchLocos}
+            />
+            {/* <button onClick={this.handleClick}>Click Me</button> */}
+            <h1>{this.state.random}</h1>
           </Col>
         </Row>
 

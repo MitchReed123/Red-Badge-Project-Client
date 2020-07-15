@@ -9,6 +9,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import APIURL from "../../helpers/environment";
 import * as bcrypt from "bcryptjs";
 import "./userEdit.css";
 
@@ -46,7 +47,7 @@ export default class userEdit extends React.Component<
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/user/${this.props.setUpdateUser.id}`, {
+    fetch(`${APIURL}/user/${this.props.setUpdateUser.id}`, {
       method: "PUT",
       body: JSON.stringify({
         user: {
@@ -79,6 +80,7 @@ export default class userEdit extends React.Component<
               <Label htmlFor="username" id="useredit-text">
                 Edit Username
               </Label>
+
               <Input id="useredit-input"
                 name="username"
                 required
@@ -93,6 +95,7 @@ export default class userEdit extends React.Component<
               <Label htmlFor="password" id="useredit-text">
                 Edit PassWord
               </Label>
+
               <Input id="useredit-input"
                 name="password"
                 placeholder="Enter New Password"
@@ -111,6 +114,7 @@ export default class userEdit extends React.Component<
               <Label htmlFor="userRole" id="useredit-text">
                 Edit User Role
               </Label>
+
               <Input id="useredit-input"
                 name="userRole"
                 value={this.state.userRole}
@@ -121,6 +125,7 @@ export default class userEdit extends React.Component<
               <Label htmlFor="firstName" id="useredit-text">
                 Edit First Name
               </Label>
+
               <Input id="useredit-input"
                 name="firstName"
                 value={this.state.userFirstName}
@@ -133,6 +138,7 @@ export default class userEdit extends React.Component<
               <Label htmlFor="lastName" id="useredit-text">
                 Edit Last Name
               </Label>
+
               <Input id="useredit-input"
                 name="lastName"
                 value={this.state.userLastName}
@@ -141,7 +147,9 @@ export default class userEdit extends React.Component<
                 }
               />
             </FormGroup>
+
             <button id="useredit-button" type="submit">Update User</button>
+
           </Form>
         </ModalBody>
       </Modal>

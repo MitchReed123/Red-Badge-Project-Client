@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Row, Col} from 'reactstrap';
+import { Container, Row, Col } from "reactstrap";
 import "./Sitebar.css";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import { Route, Link, Switch } from "react-router-dom";
 import { Menu, Dropdown, Divider } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-
+import APIURL from "../../helpers/environment";
 import Apps from "./AssignedFeature/mitch";
 import Bored from "./AssignedFeature/brittany";
 import Taco from "./AssignedFeature/mizue";
@@ -58,7 +58,7 @@ type valueTypes = {
   setUpdateActive: boolean;
 };
 
-// MATERIAL STYLES 
+// MATERIAL STYLES
 const styles = {
   root: {
     // backgroundColor: "#f2f2f2",
@@ -66,7 +66,7 @@ const styles = {
     // padding: "10px",
     fontFamily: "MOMCAKE-BOLD",
     marginBottom: "2%"
-  },
+
 
   logoutButton: {
     marginLeft: "80%",
@@ -81,7 +81,7 @@ const styles = {
     boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
     cursor: "pointer",
     fontSize: "20px",
-  }, 
+  },
 
   updateButton: {
     backgroundColor: "#fa5a57",
@@ -95,7 +95,7 @@ const styles = {
     boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
     cursor: "pointer",
     fontSize: "20px",
-    marginLeft: "60px"
+    marginLeft: "60px",
   },
 
   menuButton: {
@@ -110,7 +110,7 @@ const styles = {
     boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
     cursor: "pointer",
     fontSize: "20px",
-    marginLeft: "60px"
+    marginLeft: "60px",
   },
 
   // menuText: {
@@ -121,30 +121,27 @@ const styles = {
     backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
     color: "whitesmoke",
-    fontSize: "20px"
+    fontSize: "20px",
   },
 
   navDivider: {
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
-    margin: "15px"
+    margin: "15px",
     // justifyContent: "center"
   },
 
   typography: {
     fontFamily: "MOMCAKE-BOLD",
-    fontSize: "20px"
-  }
-
+    fontSize: "20px",
+  },
 };
 
-
 class Sitebar extends React.Component<acceptedProps, valueTypes> {
-
-// export default class Sitebar extends React.Component<
-//   acceptedProps,
-//   valueTypes
-// > {
+  // export default class Sitebar extends React.Component<
+  //   acceptedProps,
+  //   valueTypes
+  // > {
   constructor(props: acceptedProps) {
     super(props);
 
@@ -171,7 +168,9 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       ""
     ) : (
       <Button style={styles.navButton}>
-        <Link style={{ textDecoration: 'none', color: 'white' }} to="/">Home</Link>
+        <Link style={{ textDecoration: "none", color: "white" }} to="/">
+          Home
+        </Link>
       </Button>
     );
   }
@@ -179,7 +178,9 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   viewPages2() {
     return localStorage.getItem("userRole") === "Admin" ? (
       <Button style={styles.navButton}>
-        <Link style={{ textDecoration: 'none', color: 'white' }} to="/Admin">Admin</Link>
+        <Link style={{ textDecoration: "none", color: "white" }} to="/Admin">
+          Admin
+        </Link>
       </Button>
     ) : (
       ""
@@ -191,7 +192,12 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       ""
     ) : (
       <Button style={styles.navButton}>
-        <Link style={{ textDecoration: 'none', color: 'white' }} to="/Destination">Lottery Ticket Locations</Link>
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          to="/Destination"
+        >
+          Lottery Ticket Locations
+        </Link>
       </Button>
     );
   }
@@ -199,7 +205,12 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   viewPages4() {
     return localStorage.getItem("userRole") === "user" ? (
       <Button style={styles.navButton}>
-        <Link style={{ textDecoration: 'none', color: 'white' }} to="/UpdateInfo">Edit Info</Link>
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          to="/UpdateInfo"
+        >
+          Edit Info
+        </Link>
       </Button>
     ) : (
       ""
@@ -232,6 +243,7 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
       <hr />
       <p style={styles.navDivider}>Check out these APIs!</p>
+
       <Menu.Item key="0">
         <Apps />
       </Menu.Item>
@@ -302,6 +314,7 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
             </Col>
           </Toolbar>
        </AppBar>
+
     );
   }
 
@@ -334,7 +347,7 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   
 
   fetchUsers = () => {
-    fetch(`http://localhost:3000/user/`, {
+    fetch(`${APIURL}/user/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -363,7 +376,12 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
             this.props.updateOn();
           }}
         >
-          <Link style={{ textDecoration: 'none', color: 'white' }} to="UpdateInfo"  >Update Profile</Link>
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            to="UpdateInfo"
+          >
+            Update Profile
+          </Link>
           {/* style={styles.updateButton} */}
         </button>
       ) : (
@@ -378,7 +396,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   }
 
   render() {
-
     return (
       // <div >
       //   <AppBar style={styles.root} position="static">

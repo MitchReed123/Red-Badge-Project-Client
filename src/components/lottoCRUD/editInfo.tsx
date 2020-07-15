@@ -5,7 +5,7 @@ import { Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { withStyles } from "@material-ui/core/styles";
 import "./editInfo.css";
-
+import APIURL from "../../helpers/environment";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -25,7 +25,7 @@ type valueTypes = {
   visible: boolean;
 };
 
-//STYLING 
+//STYLING
 const styles = {
   welcome: {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
@@ -95,10 +95,7 @@ const tests = {
   },
 };
 
-class EditInfo extends React.Component<
-  acceptedProps,
-  valueTypes
-> {
+class EditInfo extends React.Component<acceptedProps, valueTypes> {
   constructor(props: acceptedProps) {
     super(props);
     this.state = {
@@ -112,7 +109,7 @@ class EditInfo extends React.Component<
   }
 
   handleSubmit = (event: any) => {
-    fetch(`http://localhost:3000/user/${this.props.setUpdateUser.id}`, {
+    fetch(`${APIURL}/user/${this.props.setUpdateUser.id}`, {
       method: "PUT",
       body: JSON.stringify({
         user: {
@@ -161,13 +158,14 @@ class EditInfo extends React.Component<
 
   body = (
     <div>
-      <Row >
+      <Row>
         <div style={styles.welcome}>
-            <h1>{this.Welcoming()}</h1>
+          <h1>{this.Welcoming()}</h1>
         </div>
       </Row>
-      <Row >
-        <Form style={styles.form}
+      <Row>
+        <Form
+          style={styles.form}
           // {...layout}
           name="basic"
           initialValues={{ remember: true }}
@@ -175,6 +173,7 @@ class EditInfo extends React.Component<
           onFinishFailed={this.onFinishFailed}
           // size="middle"
         >
+
           {/* <Col > */}
             {/* <Row justify="center"> */}
             <h1 id="form-header">Enter new username: </h1>
@@ -223,6 +222,7 @@ class EditInfo extends React.Component<
             Update
           </Button>
           {/* </Col> */}
+
         </Form>
       </Row>
     </div>

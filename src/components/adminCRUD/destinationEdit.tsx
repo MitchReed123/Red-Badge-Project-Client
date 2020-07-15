@@ -10,7 +10,11 @@ import {
   ModalHeader,
 } from "reactstrap";
 
+
 import "./destinationEdit.css";
+
+
+import APIURL from "../../helpers/environment";
 
 type acceptedProps = {
   updateOff: any;
@@ -39,7 +43,7 @@ export default class DestinationUpdate extends React.Component<
   handleSubmit = (event: any) => {
     console.log(event);
     event.preventDefault();
-    fetch(`http://localhost:3000/destination/${this.props.setUpdateLoco.id}`, {
+    fetch(`${APIURL}/destination/${this.props.setUpdateLoco.id}`, {
       method: "PUT",
       body: JSON.stringify({
         destination: {

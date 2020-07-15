@@ -5,7 +5,7 @@ import { Container, Table, Button, Row, Col, Label, Input } from "reactstrap";
 import { TextField, FormLabel, Select } from "@material-ui/core/";
 import { stringify } from "querystring";
 import "./lottoCreate.css";
-
+import APIURL from "../../helpers/environment";
 
 // import { Container, Col, Input } from "reactstrap";
 // import { TextField, FormLabel } from "@material-ui/core/";
@@ -69,7 +69,7 @@ export default class LottoCreate extends React.Component<
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch("http://localhost:3000/lotto/", {
+    fetch(`${APIURL}/lotto/`, {
       method: "POST",
       body: JSON.stringify({
         lottoNum: this.state.lottoNum,
@@ -144,38 +144,41 @@ export default class LottoCreate extends React.Component<
           <h1 className="header">Generate a Lotto Number!</h1>
           <Col>
             <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-              <p className="generator-info">Click the button to generate a new lotto number then fill in the form to add to your lottery numbers. </p>
+              <p className="generator-info">
+                Click the button to generate a new lotto number then fill in the
+                form to add to your lottery numbers.{" "}
+              </p>
               <div>
-                <Input id="newlotto-input"
+                <Input
+                  id="newlotto-input"
                   type="text"
                   name="Lotto Number"
                   placeholder="Generated Lottery Number"
-                
                   onChange={(e: any) =>
                     this.setState({ lottoNum: e.target.value })
                   }
                   value={this.state.lottoNum}
                 />
 
-                <Input id="newlotto-input"
+                <Input
+                  id="newlotto-input"
                   type="text"
                   name="Name of lotto"
                   placeholder="Name of Lottery"
-    
                   onChange={(e) =>
                     this.setState({ nameOfLotto: e.target.value })
                   }
                   value={this.state.nameOfLotto}
                 />
-                <Input id="newlotto-input"
+                <Input
+                  id="newlotto-input"
                   type="text"
                   name="Lotto Pot"
                   placeholder="Pot Amount"
-                  
                   onChange={(e) => this.setState({ lottoPot: e.target.value })}
                   value={this.state.lottoPot}
                 />
-                <Input 
+                <Input
                   id="locos"
                   defaultValue="Location"
                   onChange={(e) => this.setState({ location: e.target.value })}

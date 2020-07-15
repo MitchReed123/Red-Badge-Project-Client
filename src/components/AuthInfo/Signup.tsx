@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
-
+import APIURL from "../../helpers/environment";
 
 type valueType = {
   username: string;
@@ -17,7 +17,6 @@ type acceptedProps = {
   updateUserRole: string | any;
 };
 
-
 export default class Signup extends React.Component<acceptedProps, valueType> {
   constructor(props: acceptedProps) {
     super(props);
@@ -33,7 +32,7 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
   handleSubmit = (event: any) => {
     console.log(this.state.username, this.state.password);
     event.preventDefault();
-    fetch("http://localhost:3000/user/signup", {
+    fetch(`${APIURL}/user/signup`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -64,7 +63,8 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
               Username
             </Label>
             <br />
-            <Input id="auth-input"
+            <Input
+              id="auth-input"
               onChange={(e) => this.setState({ username: e.target.value })}
               value={this.state.username}
               type="text"
@@ -80,7 +80,8 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
             <Label htmlFor="password" id="password">
               Password
             </Label>
-            <Input id="auth-input"
+            <Input
+              id="auth-input"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
               name="password"
@@ -95,7 +96,8 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
             <Label htmlFor="firstName" id="firstName">
               First Name
             </Label>
-            <Input id="auth-input"
+            <Input
+              id="auth-input"
               onChange={(e) => this.setState({ firstNAme: e.target.value })}
               value={this.state.firstNAme}
               name="firstName"
@@ -108,7 +110,8 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
             <Label htmlFor="lastName" id="lastName">
               Last Name
             </Label>
-            <Input id="auth-input"
+            <Input
+              id="auth-input"
               onChange={(e) => this.setState({ lastName: e.target.value })}
               value={this.state.lastName}
               name="lastName"

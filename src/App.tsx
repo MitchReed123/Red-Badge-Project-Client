@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { HashRouter as Router } from "react-router-dom";
-import { Button } from "antd";
+// import { Button } from "antd";
 import Admin from "./components/adminCRUD/adminIndex";
 import LottoIndex from "./components/lottoCRUD/lottoIndex";
 import DestinationIndex from "./components/destinationsCRUD/destinationIndex";
