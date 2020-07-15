@@ -17,13 +17,20 @@ body{
   transform: rotate(360deg); */
 }
 
+/* .ball {
+  transition: 1s linear;
+  transform: rotate(360deg);
+} */
 
 @font-face {
   font-family: MOMCAKE-BOLD;
   src: url(./assests/MOMCAKE-Bold.otf);
 }
 
-
+@font-face {
+  font-family: LexendGiga-Regular;
+  src: url(./assests/LexendGiga-Regular.ttf);
+}
 
 @font-face {
   font-family: Klein-Condensed-ExtraBold-trial;

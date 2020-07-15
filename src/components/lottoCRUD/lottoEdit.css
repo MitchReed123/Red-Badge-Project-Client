@@ -1,15 +1,15 @@
 /* MODAL */
 
-#useredit-modal {
+#lottoedit-modal {
     background-color: #231874;
 }
 
-#useredit-modal-body {
+#lottoedit-modal-body {
     /* background-color: #4536b3; */
     background-color: rgba(69, 54, 179, 0.9);
 }
 
-#useredit-edit-header {
+#lottoedit-edit-header {
     font-family: "MOMCAKE-BOLD";
     font-size: 70px;
     color: #231874;
@@ -18,7 +18,7 @@
 
 /* TEXT */
 
-#useredit-text {
+#lottoedit-text {
     font-family: "MOMCAKE-BOLD";
     font-size: 20px;
     color: #f2f2f2;
@@ -27,7 +27,7 @@
 
 /* INPUT */
 
-#useredit-input {
+#lottoedit-input {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 70px;
@@ -35,26 +35,23 @@
     border-radius: 1px;
 }
 
-#useredit-input:focus {
+#lottoedit-input:focus {
     /* background-color: rgba(69, 54, 179, 0.8); */
     background-color: rgba(69, 54, 179, 0.8);
     /* color: black; */
 }
 
-#useredit-input[type="text"] {
+#lottoedit-input[type="text"] {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     color: black;
     padding-left: 20px;
   }
 
-  #useredit-button {
+  #lottoedit-button {
     margin-top: 40px;
     margin-left: 65px;
     margin-bottom: 20px;
     /* display: flex;
     justify-content: center; */
   }
-  /* button {
-      margin-top: 10px;
-  } */

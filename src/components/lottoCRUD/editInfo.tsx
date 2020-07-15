@@ -31,7 +31,7 @@ const styles = {
     backgroundColor: "rgba(69, 54, 179, 0.8)",
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "70px",
-    marginTop: "40px",
+    marginTop: "20px",
     marginBottom: "40px",
     marginLeft: "35%",
     marginRight: "35%",
@@ -39,43 +39,33 @@ const styles = {
     alignContent: "center",
   },
 
-  header: {
-    // backgroundColor: "#f2f2f2",
-    // fontFamily: "MOMCAKE-BOLD",
-    // fontSize: "70px",
-    marginTop: "40px",
-    marginBottom: "40px",
-    marginLeft: "400px",
-    marginRight: "400px",
-    // color: "#f2f2f2",
-    // alignContent: "center",
-  },
-
   form: {
-    backgroundColor: "#4536b3",
-    fontFamily: "MOMCAKE-BOLD",
-    height: "600px",
-    // marginTop: "10px",
-    marginBottom: "40px",
-    marginLeft: "25%",
-    marginRight: "25%",
-    // color: "#f2f2f2",
-    // alignContent: "center",
-  },
+      backgroundColor: "#4536b3",
+      fontFamily: "MOMCAKE-BOLD",
+      height: "auto",
+      width: "600px",
+      // marginTop: "10px",
+      marginBottom: "40px",
+      marginLeft: "35%",
+      marginRight: "35%",
+      // color: "#f2f2f2",
+      // alignContent: "center",
+    },
 
-  updateButton: {
-    // marginLeft: "600px",
-    backgroundColor: "#fa5a57",
-    fontFamily: "MOMCAKE-BOLD",
-    border: "2px solid #fa5a57",
-    borderRadius: "2px",
-    height: "70px",
-    width: "250px",
-    color: "whitesmoke",
-    boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
-    cursor: "pointer",
-    fontSize: "20px",
-  },
+    updateButton: {
+      // marginLeft: "600px",
+      backgroundColor: "#fa5a57",
+      fontFamily: "MOMCAKE-BOLD",
+      border: "2px solid #fa5a57",
+      borderRadius: "2px",
+      height: "70px",
+      width: "250px",
+      color: "whitesmoke",
+      boxShadow: "10px 5px 7px 0px rgba(184, 182, 182, 0.75)",
+      cursor: "pointer",
+      fontSize: "20px",
+    }, 
+
 };
 
 const layout = {
@@ -183,60 +173,56 @@ class EditInfo extends React.Component<acceptedProps, valueTypes> {
           onFinishFailed={this.onFinishFailed}
           // size="middle"
         >
-          <Col>
+
+          {/* <Col > */}
             {/* <Row justify="center"> */}
             <h1 id="form-header">Enter new username: </h1>
-            <Form.Item
-              // style={{
-              //   width: "250px",
-              //   alignContent: "center",
-              //   alignItems: "center",
-              // }}
-              // label="username"
-              // name="username"
-              // help="Please enter a username"
-              initialValue={this.props.setUpdateUser.username}
-              rules={[{ required: true, message: "please input a username" }]}
-            >
-              <Input
-                value={this.props.setUpdateUser.username}
-                id="input"
-                onChange={(e) =>
-                  this.setState({ editUsername: e.target.value })
-                }
-              />
-              <h1 id="form-header">Enter new password: </h1>
-              <Input.Password
-                id="input"
-                onChange={(e) =>
-                  this.setState({ editPassword: e.target.value })
-                }
-              />
-              {/* </Form.Item> */}
-              {/* </Row> */}
-              {/* </Col>
-          <Col id="col-two" span={24}> */}
-              {/* <Row justify="center"> */}
-              {/* <h1>Enter new password: </h1> */}
-              {/* <Form.Item
+              <Form.Item 
+                // style={{
+                //   width: "250px",
+                //   alignContent: "center",
+                //   alignItems: "center",
+                // }}
+                // label="username"
+                // name="username"
+                // help="Please enter a username"
+                initialValue={this.props.setUpdateUser.username}
+                rules={[{ required: true, message: "please input a username" }]}
+              >
+                <Input id="input"
+                  onChange={(e) =>
+                    this.setState({ editUsername: e.target.value })
+                  }
+                />
+              </Form.Item>
+            {/* </Row> */}
+          {/* </Col>
+          <Col id="col-two" > */}
+            {/* <Row justify="center"> */}
+            <h1 id="form-header">Enter new password: </h1>
+              <Form.Item
                 // label="password"
                 // style={{ width: "250px" }}
                 // name="password"
                 // initialValue={this.props.setUpdateUser.password}
                 // help="Please enter a password"
                 rules={[{ required: true, message: "Please enter a password" }]}
-              > */}
-              {/* <Input.Password id="input"
+              >
+                <Input.Password id="input"
                   onChange={(e) =>
                     this.setState({ editPassword: e.target.value })
                   }
-                /> */}
-            </Form.Item>
+                />
+                {/* <Button  htmlType="submit" style={styles.updateButton}>
+                  Update
+                </Button> */}
+              </Form.Item>
             {/* </Row> */}
-            <Button htmlType="submit" style={styles.updateButton}>
-              Update
-            </Button>
-          </Col>
+          <Button  htmlType="submit" style={styles.updateButton}>
+            Update
+          </Button>
+          {/* </Col> */}
+
         </Form>
       </Row>
     </div>

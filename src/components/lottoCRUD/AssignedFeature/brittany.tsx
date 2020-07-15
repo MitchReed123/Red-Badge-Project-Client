@@ -90,16 +90,18 @@ export default class Bored extends React.Component<acceptedProps, valueTypes> {
 
   render() {
     return (
-      <div>
+      
         <Button onClick={this.openNotification} style={styles.navButton}>BORED?</Button>
-       {/* <h1 style={styles.header}>BORED API</h1>
-                <SnackbarContent action={action} style={styles.root}
-                    message={this.state.activity}
-                    
-                /> */}
-      </div>
+      
     );
   }
 }
 
+
 // export default withStyles(styles)(Bored);
+
+{/* <h1 style={styles.header}>BORED API</h1>
+                <SnackbarContent action={action} style={styles.root}
+                    message={this.state.activity}
+                    
+                /> */}
