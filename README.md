@@ -53,11 +53,28 @@
         DELETE/:id      => Allows the Admin user to delete a location that is on the DB       
 
 
-## Screenshots
+## Take a look at The Daily Lotto
 
-* adding soon
+### Login/Signup
 
-  
+
+### User Profile
+
+
+### Location Search
+
+
+### User Username/Password Reset
+
+
+### Admin Panel
+
+
+### Navbar/Dropdown Menu
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
