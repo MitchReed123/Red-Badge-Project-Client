@@ -56,23 +56,31 @@
 ## Take a look at The Daily Lotto
 
 ### Login/Signup
-
+![Login:Signup](https://user-images.githubusercontent.com/12259461/87594167-883ae800-c6ba-11ea-90c7-787f92365541.png)
 
 ### User Profile
-
+![User Profile](https://user-images.githubusercontent.com/12259461/87594192-94bf4080-c6ba-11ea-9b73-6ddf06cf24fa.png)
 
 ### Location Search
+![Locations Search](https://user-images.githubusercontent.com/12259461/87594220-a1439900-c6ba-11ea-9284-2c98c5bd8b2b.png)
+
+
+![Locations Map](https://user-images.githubusercontent.com/12259461/87594251-adc7f180-c6ba-11ea-9b94-72304032fd20.png)
 
 
 ### User Username/Password Reset
 
+![User Update Username:Password](https://user-images.githubusercontent.com/12259461/87594274-b7e9f000-c6ba-11ea-9b84-29828a5b9132.png)
 
 ### Admin Panel
 
+![Admin Panel 1](https://user-images.githubusercontent.com/12259461/87594303-c2a48500-c6ba-11ea-9fc2-8770672a6d3c.png)
+
+![Admin Panel 2](https://user-images.githubusercontent.com/12259461/87594345-ccc68380-c6ba-11ea-9bcf-fef5b88f2aee.png)
 
 ### Navbar/Dropdown Menu
 
-
+![Navbar:Dropdown Menu](https://user-images.githubusercontent.com/12259461/87594363-d64feb80-c6ba-11ea-9c12-dcbcfbf1dcbb.png)
 
 
 
