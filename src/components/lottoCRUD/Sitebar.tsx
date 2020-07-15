@@ -1,17 +1,14 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "./Sitebar.css";
-
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
 import { Route, Link, Switch } from "react-router-dom";
 import { Menu, Dropdown, Divider } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import APIURL from "../../helpers/environment";
 import Apps from "./AssignedFeature/mitch";
 import Bored from "./AssignedFeature/brittany";
 import Taco from "./AssignedFeature/mizue";
@@ -31,7 +28,6 @@ import Taco from "./AssignedFeature/mizue";
 // import * as bcrypt from "bcryptjs";
 import EditUser from "./editInfo";
 // const salt = bcrypt.genSaltSync(10);
-
 type acceptedProps = {
   clickLogout: any;
   protectedViews: any;
@@ -48,7 +44,6 @@ type acceptedProps = {
   setUpdateUser: any;
   // userMapper: any;
 };
-
 type valueTypes = {
   key: string;
   nextDraw1: string;
@@ -57,7 +52,6 @@ type valueTypes = {
   userTable: [];
   setUpdateActive: boolean;
 };
-
 // MATERIAL STYLES
 const styles = {
   root: {
@@ -65,9 +59,8 @@ const styles = {
     background: "url(./assests/background_blue.png)",
     // padding: "10px",
     fontFamily: "MOMCAKE-BOLD",
-    marginBottom: "2%"
-
-
+    marginBottom: "2%",
+  },
   logoutButton: {
     marginLeft: "80%",
     backgroundColor: "#fa5a57",
@@ -82,7 +75,6 @@ const styles = {
     cursor: "pointer",
     fontSize: "20px",
   },
-
   updateButton: {
     backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
@@ -97,7 +89,6 @@ const styles = {
     fontSize: "20px",
     marginLeft: "60px",
   },
-
   menuButton: {
     backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
@@ -112,31 +103,26 @@ const styles = {
     fontSize: "20px",
     marginLeft: "60px",
   },
-
   // menuText: {
   //   fontFamily: "MOMCAKE-BOLD",
   // },
-
   navButton: {
     backgroundColor: "#fa5a57",
     fontFamily: "MOMCAKE-BOLD",
     color: "whitesmoke",
     fontSize: "20px",
   },
-
   navDivider: {
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "30px",
     margin: "15px",
     // justifyContent: "center"
   },
-
   typography: {
     fontFamily: "MOMCAKE-BOLD",
     fontSize: "20px",
   },
 };
-
 class Sitebar extends React.Component<acceptedProps, valueTypes> {
   // export default class Sitebar extends React.Component<
   //   acceptedProps,
@@ -144,7 +130,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   // > {
   constructor(props: acceptedProps) {
     super(props);
-
     this.state = {
       key: "xtrxaWwnzMXjbuU2SD",
       nextDraw1: "",
@@ -154,15 +139,12 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       setUpdateActive: false,
     };
   }
-
   handleClickOpen = () => {
     this.setState({ setOpen: true });
   };
-
   handleClose = () => {
     this.setState({ setOpen: false });
   };
-
   viewPages() {
     return localStorage.getItem("token") === null ? (
       ""
@@ -174,7 +156,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       </Button>
     );
   }
-
   viewPages2() {
     return localStorage.getItem("userRole") === "Admin" ? (
       <Button style={styles.navButton}>
@@ -186,7 +167,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       ""
     );
   }
-
   viewPages3() {
     return localStorage.getItem("token") === null ? (
       ""
@@ -201,7 +181,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       </Button>
     );
   }
-
   viewPages4() {
     return localStorage.getItem("userRole") === "user" ? (
       <Button style={styles.navButton}>
@@ -216,7 +195,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       ""
     );
   }
-
   validationComparison() {
     return localStorage.getItem("userRole") === "Admin" ? (
       <Menu.Item key="5">{this.viewPages2()}</Menu.Item>
@@ -231,7 +209,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       ""
     );
   }
-
   // DROPDOWN MENU
   menu = (
     <Menu>
@@ -243,7 +220,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
       <hr />
       <p style={styles.navDivider}>Check out these APIs!</p>
-
       <Menu.Item key="0">
         <Apps />
       </Menu.Item>
@@ -257,7 +233,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       </Menu.Item>
     </Menu>
   );
-
   // menu = (
   //   <Menu>
   //     <Menu.Item key="0">
@@ -282,7 +257,6 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
   //     <Menu.Item key="6">{this.viewPages4()}</Menu.Item>
   //   </Menu>
   // );
-
   logoutBtn() {
     return localStorage.getItem("token") === null ? (
       ""
@@ -290,64 +264,69 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       // NAVBAR STYLING HERE
       <AppBar position="static" style={styles.root}>
         <Toolbar className="classes.color">
-            <Col md="1" id="one">
-              <Typography variant="h6" id="navTitle" style={styles.typography}>
-              <img width="100px" src={require('../../assests/DL-logo.png')} alt="logo" />
-              </Typography>
-            </Col>
-            <Col md="2" id="two">
-              <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
-                <Button style={styles.menuButton}
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-                  // style={{ color: "lightblue" }}
-                >
-                  Menu <DownOutlined />
-                </Button>
-              </Dropdown>
-            </Col>
-            <Col md="2" id="col-three">
-              {this.userMapper()} 
-            </Col>
-            <Col md="6" id="col-four">
-              <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
-            </Col>
-          </Toolbar>
-       </AppBar>
-
+          <Col md="1" id="one">
+            <Typography variant="h6" id="navTitle" style={styles.typography}>
+              <img
+                width="100px"
+                src={require("../../assests/DL-logo.png")}
+                alt="logo"
+              />
+            </Typography>
+          </Col>
+          <Col md="2" id="two">
+            <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
+              <Button
+                style={styles.menuButton}
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+                // style={{ color: "lightblue" }}
+              >
+                Menu <DownOutlined />
+              </Button>
+            </Dropdown>
+          </Col>
+          <Col md="2" id="col-three">
+            {this.userMapper()}
+          </Col>
+          <Col md="6" id="col-four">
+            <button
+              onClick={this.props.clickLogout}
+              style={styles.logoutButton}
+            >
+              Logout
+            </button>
+          </Col>
+        </Toolbar>
+      </AppBar>
     );
   }
-
   // OLD NAV
-
-      // <AppBar position="static" style={styles.root}>
-      //   <Toolbar className="classes.color">
-      //     <Typography variant="h6" id="navTitle" style={styles.typography}>
-      //     <img width="100px" src={require('../../assests/DL-logo.png')} alt="logo" />
-      //     </Typography>
-      //     {/* {this.viewPages()}
-      //     {this.viewPages3()}
-      //     {this.viewPages2()} */}
-      //     {/* {this.viewPages4()} */}
-      //     <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
-      //       <Button style={styles.menuButton}
-      //         className="ant-dropdown-link"
-      //         onClick={(e) => e.preventDefault()}
-      //         // style={{ color: "lightblue" }}
-      //       >
-      //         Menu <DownOutlined />
-      //       </Button>
-      //     </Dropdown>
-      //     {/* <button style={styles.updateButton}>{this.userMapper()}</button> */}
-      //     {this.userMapper()}
-      //     {/* <Button> {this.viewPages4()}TESTING </Button> */}
-      //     <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
-      //   </Toolbar>
-      // </AppBar>
-  
-
+  // <AppBar position="static" style={styles.root}>
+  //   <Toolbar className="classes.color">
+  //     <Typography variant="h6" id="navTitle" style={styles.typography}>
+  //     <img width="100px" src={require('../../assests/DL-logo.png')} alt="logo" />
+  //     </Typography>
+  //     {/* {this.viewPages()}
+  //     {this.viewPages3()}
+  //     {this.viewPages2()} */}
+  //     {/* {this.viewPages4()} */}
+  //     <Dropdown className="menu" overlay={this.menu} trigger={["click"]}>
+  //       <Button style={styles.menuButton}
+  //         className="ant-dropdown-link"
+  //         onClick={(e) => e.preventDefault()}
+  //         // style={{ color: "lightblue" }}
+  //       >
+  //         Menu <DownOutlined />
+  //       </Button>
+  //     </Dropdown>
+  //     {/* <button style={styles.updateButton}>{this.userMapper()}</button> */}
+  //     {this.userMapper()}
+  //     {/* <Button> {this.viewPages4()}TESTING </Button> */}
+  //     <button onClick={this.props.clickLogout} style={styles.logoutButton}>Logout</button>
+  //   </Toolbar>
+  // </AppBar>
   fetchUsers = () => {
-    fetch(`${APIURL}/user/`, {
+    fetch(`http://localhost:3000/user/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -362,13 +341,12 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
         console.log("State Variable Data 15", this.state.userTable);
       });
   };
-
   userMapper = () => {
     return this.state.userTable.map((user: any, index) => {
       return user.username === localStorage.getItem("username") ? (
-
         // UPDATE PROFILE BUTTON IN NAV
-        <button style={styles.updateButton}
+        <button
+          style={styles.updateButton}
           // name="edit info"
           // defaultValue="Edit Info"
           onClick={() => {
@@ -389,12 +367,10 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
       );
     });
   };
-
   componentDidMount() {
     this.fetchUsers();
     this.userMapper();
   }
-
   render() {
     return (
       // <div >
@@ -432,5 +408,4 @@ class Sitebar extends React.Component<acceptedProps, valueTypes> {
     );
   }
 }
-
 export default withStyles(styles)(Sitebar);
