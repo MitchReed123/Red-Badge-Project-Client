@@ -1,7 +1,15 @@
 //grabbing from lotto table, and the http://localhost:3000/lotto/, POST
 import React from "react";
-import { Container, Col, Input } from "reactstrap";
-import { TextField, FormLabel } from "@material-ui/core/";
+
+import { Container, Table, Button, Row, Col, Label, Input } from "reactstrap";
+import { TextField, FormLabel, Select } from "@material-ui/core/";
+import { stringify } from "querystring";
+import "./lottoCreate.css";
+import APIURL from "../../helpers/environment";
+
+// import { Container, Col, Input } from "reactstrap";
+// import { TextField, FormLabel } from "@material-ui/core/";
+
 type acceptedProps = {
   token: string | any;
   fetchLottos: any;
@@ -61,7 +69,7 @@ export default class LottoCreate extends React.Component<
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch("http://localhost:3000/lotto/", {
+    fetch(`${APIURL}/lotto/`, {
       method: "POST",
       body: JSON.stringify({
         lottoNum: this.state.lottoNum,
@@ -103,7 +111,7 @@ export default class LottoCreate extends React.Component<
     this.fetchLocos();
   }
   fetchLocos = () => {
-    fetch("http://localhost:3000/destination/", {
+    fetch(`${APIURL}/destination/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -132,41 +140,41 @@ export default class LottoCreate extends React.Component<
   render() {
     return (
       <div>
-        <Container>
+        <Container id="form">
+          <h1 className="header">Generate a Lotto Number!</h1>
           <Col>
             <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-              <FormLabel>Create a Lotto</FormLabel>
+              <p className="generator-info">
+                Click the button to generate a new lotto number then fill in the
+                form to add to your lottery numbers.{" "}
+              </p>
               <div>
-                <TextField
-                  label="Lotto Number"
-                  id="outlined-margin-normal"
-                  defaultValue="Lotto Num"
-                  margin="normal"
-                  variant="outlined"
-                  // disabled
+                <Input
+                  id="newlotto-input"
+                  type="text"
+                  name="Lotto Number"
+                  placeholder="Generated Lottery Number"
                   onChange={(e: any) =>
                     this.setState({ lottoNum: e.target.value })
                   }
                   value={this.state.lottoNum}
                 />
 
-                <TextField
-                  label="Name of lotto"
-                  id="outlined-margin-normal"
-                  defaultValue="Name of Lotto"
-                  margin="normal"
-                  variant="outlined"
+                <Input
+                  id="newlotto-input"
+                  type="text"
+                  name="Name of lotto"
+                  placeholder="Name of Lottery"
                   onChange={(e) =>
                     this.setState({ nameOfLotto: e.target.value })
                   }
                   value={this.state.nameOfLotto}
                 />
-                <TextField
-                  label="Lotto Pot"
-                  id="outlined-margin-normal"
-                  defaultValue="Lotto Pot"
-                  margin="normal"
-                  variant="outlined"
+                <Input
+                  id="newlotto-input"
+                  type="text"
+                  name="Lotto Pot"
+                  placeholder="Pot Amount"
                   onChange={(e) => this.setState({ lottoPot: e.target.value })}
                   value={this.state.lottoPot}
                 />
@@ -177,7 +185,7 @@ export default class LottoCreate extends React.Component<
                   value={this.state.location}
                   type="select"
                 >
-                  <option>Select a Location!</option>
+                  <option>Select a Lottery Ticket Location!</option>
                   {this.state.destinationTable.map((loco: any, index: any) => (
                     <option key={index}>
                       {loco.lottoLocation}, {loco.lottoAddress}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, notification } from "antd";
 
+
 type valueTypes = {
   base_layer: string;
   condiment: string;
@@ -8,6 +9,19 @@ type valueTypes = {
   seasoning: string;
   shell: string;
 };
+
+// STYLING
+const styles = {
+  navButton: {
+    backgroundColor: "#fdb20d",
+    border: "2px solid #fdb20d",
+    fontFamily: "MOMCAKE-BOLD",
+    color: "whitesmoke",
+    fontSize: "22px",
+    // text: "center"
+  }
+};
+
 
 export default class Taco extends React.Component<{}, valueTypes> {
   constructor(props: valueTypes) {
@@ -38,7 +52,6 @@ export default class Taco extends React.Component<{}, valueTypes> {
         });
       });
   };
-
   openNotification = () => {
     notification.open({
       message: "Taco Recipes",
@@ -55,15 +68,13 @@ export default class Taco extends React.Component<{}, valueTypes> {
       ),
     });
   };
-
   componentDidMount() {
     this.fetchTaco();
   }
-
   render() {
     return (
-      <Button type="primary" onClick={this.openNotification}>
-        TACO TACOS 
+      <Button onClick={this.openNotification} style={styles.navButton}>
+        TACOS
       </Button>
     );
   }

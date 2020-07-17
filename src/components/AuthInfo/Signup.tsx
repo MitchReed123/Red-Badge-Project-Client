@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
+import APIURL from "../../helpers/environment";
+
 type valueType = {
   username: string;
   setUsername: string | any;
@@ -8,7 +10,6 @@ type valueType = {
   firstNAme: string;
   lastName: string;
 };
-
 type acceptedProps = {
   token: string | any;
   updateUsername: string | any;
@@ -28,11 +29,10 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
       lastName: "",
     };
   }
-
   handleSubmit = (event: any) => {
     console.log(this.state.username, this.state.password);
     event.preventDefault();
-    fetch("http://localhost:3000/user/signup", {
+    fetch(`${APIURL}/user/signup`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -53,27 +53,27 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
         console.log(data);
       });
   };
-
   render() {
     return (
       <div>
-        <h1>Signup</h1>
-        <Form onSubmit={this.handleSubmit}>
+        <h1 className="auth-header">Signup</h1>
+        <Form id="signup-form" onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label htmlFor="username" id="username">
               Username
             </Label>
             <br />
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ username: e.target.value })}
               value={this.state.username}
               type="text"
               name="username"
-              placeholder="Username(Required)"
+              placeholder="Username"
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
               title="Must contain atleast one number and one uppercase and lowercase letter, and at least 4 or more characters"
               required
-              style={{ textAlign: "center" }}
+              // style={{ textAlign: "center" }}
             />
           </FormGroup>
           <FormGroup>
@@ -81,11 +81,12 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
               Password
             </Label>
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
               name="password"
               type="password"
-              placeholder="Password(Required)"
+              placeholder="Password"
               required
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
               title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"
@@ -96,6 +97,7 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
               First Name
             </Label>
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ firstNAme: e.target.value })}
               value={this.state.firstNAme}
               name="firstName"
@@ -109,6 +111,7 @@ export default class Signup extends React.Component<acceptedProps, valueType> {
               Last Name
             </Label>
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ lastName: e.target.value })}
               value={this.state.lastName}
               name="lastName"

@@ -10,7 +10,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
-
+import APIURL from "../../helpers/environment";
 type acceptedProps = {
   updateOff: any;
   token: any;
@@ -39,7 +39,7 @@ export default class LottoEdit extends React.Component<
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/lotto/${this.props.setUpdateLotto.id}`, {
+    fetch(`${APIURL}/lotto/${this.props.setUpdateLotto.id}`, {
       method: "PUT",
       body: JSON.stringify({
         lottery: {

@@ -1,6 +1,6 @@
 import React from "react";
-import { Form, FormGroup, Input } from "reactstrap";
-
+import { Form, FormGroup, Input, Label } from "reactstrap";
+import APIURL from "../../helpers/environment";
 type acceptedProps = {
   token: any;
   updateUsername: any;
@@ -29,7 +29,7 @@ export default class Login extends React.Component<acceptedProps, valueType> {
   handleSubmit = (event: any) => {
     console.log(this.state.username, this.state.password);
     event.preventDefault();
-    fetch("http://localhost:3000/user/login", {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -51,21 +51,29 @@ export default class Login extends React.Component<acceptedProps, valueType> {
   render() {
     return (
       <div>
-        <h1>Login Page </h1>
+        <h1 className="auth-header">Login</h1>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
+            <Label htmlFor="username" id="username">
+              Username
+            </Label>
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ username: e.target.value })}
               value={this.state.username}
             />
           </FormGroup>
           <FormGroup>
+            <Label htmlFor="password" id="password">
+              Password
+            </Label>
             <Input
+              id="auth-input"
               onChange={(e) => this.setState({ password: e.target.value })}
               value={this.state.password}
             />
           </FormGroup>
-          <button type="submit">login</button>
+          <button type="submit">Login</button>
         </Form>
       </div>
     );
